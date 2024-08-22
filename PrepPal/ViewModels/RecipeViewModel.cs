@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using PrepPal.Models;
@@ -11,7 +12,22 @@ namespace PrepPal.ViewModels
 {
     public class RecipeViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Recipe> Recipes { get; set; } = new ObservableCollection<Recipe>();
+        private Recipe _selectedRecipe;
+
+        public ObservableCollection<Recipe> Recipes { get; set; }
+
+        public Recipe SelectedRecipe
+        {
+            get => _selectedRecipe;
+            set
+            {
+                if (_selectedRecipe != value)
+                {
+                    _selectedRecipe = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public RecipeViewModel()
         {
@@ -20,6 +36,7 @@ namespace PrepPal.ViewModels
 
         private void LoadRecipes()
         {
+            Recipes = new ObservableCollection<Recipe>();
             Recipes.Add(new Recipe
             {
                 Name = "Chicken Alfredo",
@@ -51,11 +68,45 @@ namespace PrepPal.ViewModels
                 Source = "Mom",
                 SourceURL = "example.com"
             });
+            Recipes.Add(new Recipe
+            {
+                Name = "Chocolate Chip Cookies",
+                Ingredients = new List<string>
+                {
+                    "2 1/4 cups flour",
+                    "1 tsp. baking soda",
+                    "1 tsp. salt",
+                    "1 cup butter, softened",
+                    "3/4 cup sugar",
+                    "3/4 cup brown sugar",
+                    "1 tsp. vanilla",
+                    "2 eggs",
+                    "2 cups chocolate chips"
+                },
+                Instructions = new List<string> 
+                {
+                    "Preheat oven to 375°F.",
+                    "In a small bowl, combine flour, baking soda, and salt.",
+                    "In a large bowl, cream butter, sugar, brown sugar, and vanilla.",
+                    "Add eggs one at a time, beating well after each addition.",
+                    "Gradually add flour mixture.",
+                    "Stir in chocolate chips.",
+                    "Drop by rounded tablespoonfuls onto ungreased cookie sheet.",
+                    "Bake for 9-11 minutes or until golden brown."
+                },
+                Category = "Dessert",
+                Servings = 4,
+                PrepTime = 10,
+                CookTime = 10,
+                TotalTime = 20,
+                Source = "Grandma",
+                SourceURL = "example.com"
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

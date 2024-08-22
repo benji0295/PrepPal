@@ -4,17 +4,18 @@ namespace PrepPal.Views;
 
 public partial class RecipeDetailPage : ContentPage
 {
-	public RecipeDetailPage(Recipe selectedRecipe)
-	{
-		InitializeComponent();
-		BindingContext = selectedRecipe;
-	}
-	private void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
-	{
-		var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Recipe;
-		if (selectedRecipe == null)
-		{
-			Navigation.PushAsync(new RecipeDetailPage(selectedRecipe));
-		}
-	}
+    public Recipe SelectedRecipe { get; set; }
+    public string InstructionsText { get; set; }
+    public string IngredientsText { get; set; }
+
+    public RecipeDetailPage(Recipe selectedRecipe)
+    {
+        InitializeComponent();
+
+        SelectedRecipe = selectedRecipe;
+        InstructionsText = string.Join("\n", selectedRecipe.Instructions);
+        IngredientsText = string.Join("\n", selectedRecipe.Ingredients);
+
+        BindingContext = this;
+    }
 }

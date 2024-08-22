@@ -2,20 +2,35 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PrepPal"
-             x:Class="PrepPal.RecipePage"
-             Title="RecipePage">
-    
-    <CollectionView ItemsSource="{Binding Recipes}"
-                    SelectionMode="Single"
-                    SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" />
-                    <Label Text="{Binding Category}" FontSize="Small" />
-                    <Label Text="{Binding Servings}" FontSize="Small" />
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+             x:Class="PrepPal.RecipePage">
+
+    <StackLayout>
+        <Label Text="Recipes"
+               FontSize="Large"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+
+        <CollectionView ItemsSource="{Binding Recipes}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}"
+                        SelectionChanged="OnRecipeSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="{Binding Category}" FontSize="Small" />
+                            <Label FontSize="Small">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Serving size: " />
+                                        <Span Text="{Binding Servings}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                    </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+    </StackLayout>
 </ContentPage>
