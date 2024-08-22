@@ -15,7 +15,25 @@ public partial class GroceryListPage : ContentPage
 		_viewModel = BindingContext as GroceryListViewModel; 
 	}
 
-	private async void OnAddItemClicked(object sender, EventArgs e)
+	private async void OnMenuButtonClicked(object sender, EventArgs e)
+	{
+		var action = await DisplayActionSheet("Option", "Cancel", null, "Add Item", "Clear Grocery List",
+			"Clear Selected Groceries");
+		switch (action)
+		{
+			case "Add Item":
+				OnAddItemClicked();
+				break;
+			case "Clear Grocery List":
+				OnClearListClicked();
+				break;
+			case "Clear Selected Groceries":
+				OnDeleteSelectedClicked();
+				break;
+		}
+	}
+
+	private async Task OnAddItemClicked()
 	{
 		string result = await DisplayPromptAsync("Add Item", "Enter the name of the grocery item:");
 
@@ -25,7 +43,7 @@ public partial class GroceryListPage : ContentPage
 		}
 	}
 
-	private async void OnClearListClicked(object sender, EventArgs e)
+	private async Task OnClearListClicked()
 	{
 		bool confirm = await DisplayAlert("Clear List", "Are you sure you want to clear the list?", "Yes", "No");
 		if (confirm)
@@ -33,7 +51,7 @@ public partial class GroceryListPage : ContentPage
 			_viewModel.GroceryItems.Clear();
 		}
 	}
-	private async void OnDeleteSelectedClicked(object sender, EventArgs e)
+	private async Task OnDeleteSelectedClicked()
 	{
 		bool confirm = await DisplayAlert("Delete Selected", "Are you sure you want to delete the selected items?", "Yes", "No");
 

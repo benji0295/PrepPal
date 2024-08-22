@@ -6,9 +6,7 @@
              Title="Grocery List">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Item" Clicked="OnAddItemClicked" />
-        <ToolbarItem Text="Clear Grocery List" Clicked="OnClearListClicked"/>
-        <ToolbarItem Text="Clear Selected Groceries" Clicked="OnDeleteSelectedClicked"/>
+        <ToolbarItem Text="Options" Clicked="OnMenuButtonClicked" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.BindingContext>

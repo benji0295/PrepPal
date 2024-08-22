@@ -14,10 +14,28 @@ public partial class FridgeListPage : ContentPage
 		InitializeComponent();
         _viewModel = BindingContext as FridgeListViewModel;
 	}
-
-    private async void OnAddItemClicked(object sender, EventArgs e)
+    
+    private async void OnMenuButtonClicked(object sender, EventArgs e)
     {
-        string result = await DisplayPromptAsync("Add Item", "Enter the name of the grocery item:");
+        var action = await DisplayActionSheet("Option", "Cancel", null, "Add Item", "Clear Fridge",
+            "Clear Selected Items");
+        switch (action)
+        {
+            case "Add Item":
+                OnAddItemClicked();
+                break;
+            case "Clear Fridge":
+                OnClearListClicked();
+                break;
+            case "Clear Selected Items":
+                OnDeleteSelectedClicked();
+                break;
+        }
+    }
+
+    private async Task OnAddItemClicked()
+    {
+        string result = await DisplayPromptAsync("Add Item", "Enter the name of the item:");
 
         if (!string.IsNullOrWhiteSpace(result))
         {
@@ -25,15 +43,15 @@ public partial class FridgeListPage : ContentPage
         }
     }
 
-    private async void OnClearListClicked(object sender, EventArgs e)
+    private async Task OnClearListClicked()
     {
-        bool confirm = await DisplayAlert("Clear List", "Are you sure you want to clear the list?", "Yes", "No");
+        bool confirm = await DisplayAlert("Clear List", "Are you sure you want to clear your fridge?", "Yes", "No");
         if (confirm)
         {
             _viewModel.FridgeItems.Clear();
         }
     }
-    private async void OnDeleteSelectedClicked(object sender, EventArgs e)
+    private async Task OnDeleteSelectedClicked()
     {
         bool confirm = await DisplayAlert("Delete Selected", "Are you sure you want to delete the selected items?", "Yes", "No");
 
