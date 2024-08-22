@@ -2,7 +2,7 @@ using PrepPal.ViewModels;
 using PrepPal.Models;
 using PrepPal.Views;
 
-namespace PrepPal;
+namespace PrepPal.Views;
 
 public partial class RecipePage : ContentPage
 {
