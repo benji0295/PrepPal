@@ -4,6 +4,13 @@
              xmlns:viewModels="clr-namespace:PrepPal.ViewModels"
              x:Class="PrepPal.Views.GroceryListPage"
              Title="Grocery List">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Item" Clicked="OnAddItemClicked" />
+        <ToolbarItem Text="Clear Grocery List" Clicked="OnClearListClicked"/>
+        <ToolbarItem Text="Clear Selected Groceries" Clicked="OnDeleteSelectedClicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.BindingContext>
         <viewModels:GroceryListViewModel />
     </ContentPage.BindingContext>

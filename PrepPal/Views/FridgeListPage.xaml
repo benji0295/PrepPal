@@ -4,6 +4,12 @@
              xmlns:viewModels="clr-namespace:PrepPal.ViewModels"
              x:Class="PrepPal.Views.FridgeListPage"
              Title="Fridge List">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Item" Clicked="OnAddItemClicked"/>
+        <ToolbarItem Text="Clear Fridge" Clicked="OnClearListClicked"/>
+        <ToolbarItem Text="Clear Selected Items" Clicked="OnDeleteSelectedClicked"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.BindingContext>
         <viewModels:FridgeListViewModel />
     </ContentPage.BindingContext>
