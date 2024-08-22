@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:PrepPal.ViewModels"
+             x:Class="PrepPal.Views.FridgeListPage"
+             Title="Fridge List">
+    <ContentPage.BindingContext>
+        <viewModels:FridgeListViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding FridgeItems}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                        <CheckBox IsChecked="{Binding IsUsed}" VerticalOptions="Center" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

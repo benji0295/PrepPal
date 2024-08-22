@@ -14,4 +14,12 @@
         <ShellContent ContentTemplate="{DataTemplate local:MealPlanPage}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Grocery List">
+        <ShellContent ContentTemplate="{DataTemplate local:GroceryListPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Fridge List">
+        <ShellContent ContentTemplate="{DataTemplate local:FridgeListPage}" />
+    </FlyoutItem>
+
 </Shell>
