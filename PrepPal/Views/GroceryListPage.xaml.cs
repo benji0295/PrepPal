@@ -14,6 +14,7 @@ public partial class GroceryListPage : ContentPage
 		InitializeComponent();
 		_viewModel = BindingContext as GroceryListViewModel; 
 	}
+	
 
 	private async void OnMenuButtonClicked(object sender, EventArgs e)
 	{
