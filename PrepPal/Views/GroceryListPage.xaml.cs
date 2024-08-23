@@ -9,10 +9,10 @@ namespace PrepPal.Views;
 public partial class GroceryListPage : ContentPage
 {
 	private GroceryListViewModel _groceryListViewModel;
-	public GroceryListPage(GroceryListViewModel groceryListViewModel)
+	public GroceryListPage()
 	{
 		InitializeComponent();
-		_groceryListViewModel = groceryListViewModel;
+		_groceryListViewModel = App.GroceryListViewModel;
 		BindingContext = _groceryListViewModel;
 	}
 

@@ -29,6 +29,24 @@ public partial class RecipeDetailPage : ContentPage
 
     private void OnAddToGroceryListClicked(object sender, EventArgs e)
     {
+        if (SelectedRecipe == null)
+        {
+            DisplayAlert("Error", "No recipe selected.", "OK");
+            return;
+        }
+
+        if (SelectedRecipe.Ingredients == null || !SelectedRecipe.Ingredients.Any())
+        {
+            DisplayAlert("Error", "No ingredients found.", "OK");
+            return;
+        }
+
+        if (_groceryListViewModel == null)
+        {
+            DisplayAlert("Error", "Grocery list view model not initialized.", "OK");
+            return;
+        }
+
         foreach (var ingredient in SelectedRecipe.Ingredients)
         {
             if (!_groceryListViewModel.GroceryItems.Any(item => item.Name == ingredient))
