@@ -25,8 +25,12 @@
 
         <!-- Instructions List -->
         <Label Text="{Binding InstructionsText}" />
-
+        
         <Button Text="Add Ingredients To Grocery List"
-                Clicked="OnAddIngredientsToGroceryListClicked" />
+                BackgroundColor="Black"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnAddToGroceryListClicked" />
+        
     </StackLayout>
 </ContentPage>
