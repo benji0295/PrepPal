@@ -6,9 +6,13 @@ namespace PrepPal.Views;
 
 public partial class RecipePage : ContentPage
 {
+	private GroceryListViewModel _groceryListViewModel;
+	
 	public RecipePage()
 	{
 		InitializeComponent();
+
+		_groceryListViewModel = new GroceryListViewModel();
 		BindingContext = new RecipeViewModel();
 	}
     private void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
@@ -23,7 +27,7 @@ public partial class RecipePage : ContentPage
             ((CollectionView)sender).SelectedItem = null;
 
             // Navigate to the RecipeDetailPage with the selected recipe
-            Navigation.PushAsync(new RecipeDetailPage(selectedRecipe));
+            Navigation.PushAsync(new RecipeDetailPage(selectedRecipe, _groceryListViewModel));
         }
     }
 }

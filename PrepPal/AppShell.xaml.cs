@@ -1,4 +1,5 @@
-﻿using PrepPal.Views;
+﻿
+using PrepPal.Views;
 
 namespace PrepPal
 {
@@ -8,6 +9,7 @@ namespace PrepPal
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(RecipeDetailPage), typeof(RecipeDetailPage));
+            Routing.RegisterRoute(nameof(GroceryListPage), typeof(GroceryListPage));
         }
     }
 }

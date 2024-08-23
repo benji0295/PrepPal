@@ -29,7 +29,8 @@
         <Button Text="Add Ingredients To Grocery List"
                 BackgroundColor="Black"
                 VerticalOptions="EndAndExpand"
-                HorizontalOptions="FillAndExpand" />
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnAddToGroceryListClicked" />
         
     </StackLayout>
 </ContentPage>
