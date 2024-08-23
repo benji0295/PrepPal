@@ -1,36 +1,104 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PrepPal.Views.RecipeDetailPage">
+             x:Class="PrepPal.Views.RecipeDetailPage"
+             Title="{Binding Name}">
 
-    <StackLayout>
-        <!-- Recipe Name -->
-        <Label Text="{Binding SelectedRecipe.Name}" 
-               FontSize="Large" 
-               HorizontalOptions="Center" />
+    <ScrollView>
+        <StackLayout Padding="10">
+            <!-- Recipe Name -->
+            <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
 
-        <!-- Recipe Category -->
-        <Label Text="{Binding SelectedRecipe.Category}" 
-               FontSize="Medium" 
-               HorizontalOptions="Center" />
+            <!-- Recipe Category -->
+            <Label FontSize="Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Category: " />
+                        <Span Text="{Binding Category}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <!-- Ingredients Header -->
-        <Label Text="Ingredients:" FontSize="Medium" />
+            <!-- Recipe Serving Size -->
+            <Label FontSize="Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Serving Size: " />
+                        <Span Text="{Binding Servings}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <!-- Ingredients List -->
-        <Label Text="{Binding IngredientsText}" />
+            <!-- Recipe Prep Time -->
+            <Label FontSize="Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Prep Time: " />
+                        <Span Text="{Binding PrepTime}" />
+                        <Span Text=" minutes" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <!-- Instructions Header -->
-        <Label Text="Instructions:" FontSize="Medium" />
+            <!-- Recipe Cook Time -->
+            <Label FontSize="Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Cook Time: " />
+                        <Span Text="{Binding CookTime}" />
+                        <Span Text=" minutes" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <!-- Instructions List -->
-        <Label Text="{Binding InstructionsText}" />
-        
-        <Button Text="Add Ingredients To Grocery List"
-                BackgroundColor="Black"
-                VerticalOptions="EndAndExpand"
-                HorizontalOptions="FillAndExpand"
-                Clicked="OnAddToGroceryListClicked" />
-        
-    </StackLayout>
+            <!-- Recipe Total Time -->
+            <Label FontSize="Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Total Time: " />
+                        <Span Text="{Binding TotalTime}" />
+                        <Span Text=" minutes" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <!-- Ingredients Section -->
+            <Label Text="Ingredients" FontSize="Medium" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Ingredients}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Text="{Binding Name}" 
+                                   TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"
+                                   VerticalOptions="Center" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <!-- Add Ingredients to Grocery List Button -->
+            <Button Text=" Add Ingredients to Grocery List"
+                    BackgroundColor="Black"
+                    Margin="0, 10, 0 , 20"
+                    HorizontalOptions="Center" />
+
+            <!-- Instructions Section -->
+            <Label Text="Instructions" FontSize="Medium" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Instructions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <CheckBox IsChecked="{Binding IsCompleted}" />
+                            <Label Text="{Binding Step}"
+                                   LineBreakMode="WordWrap"
+                                   TextDecorations="{Binding IsCompleted, Converter={StaticResource StrikeThroughConverter}}"
+                                   VerticalOptions="Center" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+
 </ContentPage>

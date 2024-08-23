@@ -8,8 +8,6 @@ namespace PrepPal
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(RecipeDetailPage), typeof(RecipeDetailPage));
-            Routing.RegisterRoute(nameof(GroceryListPage), typeof(GroceryListPage));
         }
     }
 }
