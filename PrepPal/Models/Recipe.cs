@@ -43,7 +43,7 @@ namespace PrepPal.Models
         }
     }
 
-    public class Instruction
+    public class Instruction : INotifyPropertyChanged
     {
         private bool _isCompleted;
 

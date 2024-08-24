@@ -18,7 +18,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,0"/>
                             <Label Text="{Binding Category}" FontSize="Small" />
                             <Label FontSize="Small">
                                 <Label.FormattedText>

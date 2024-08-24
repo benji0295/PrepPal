@@ -6,11 +6,8 @@
 
     <ScrollView>
         <StackLayout Padding="10">
-            <!-- Recipe Name -->
-            <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
-
             <!-- Recipe Category -->
-            <Label FontSize="Medium">
+            <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Category: " />
@@ -20,7 +17,7 @@
             </Label>
 
             <!-- Recipe Serving Size -->
-            <Label FontSize="Medium">
+            <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Serving Size: " />
@@ -30,7 +27,7 @@
             </Label>
 
             <!-- Recipe Prep Time -->
-            <Label FontSize="Medium">
+            <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Prep Time: " />
@@ -41,7 +38,7 @@
             </Label>
 
             <!-- Recipe Cook Time -->
-            <Label FontSize="Medium">
+            <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Cook Time: " />
@@ -52,7 +49,7 @@
             </Label>
 
             <!-- Recipe Total Time -->
-            <Label FontSize="Medium">
+            <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Total Time: " />
@@ -63,11 +60,11 @@
             </Label>
 
             <!-- Ingredients Section -->
-            <Label Text="Ingredients" FontSize="Medium" FontAttributes="Bold" />
+            <Label Text="Ingredients" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,0"/>
             <CollectionView ItemsSource="{Binding Ingredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="10">
+                        <StackLayout Orientation="Horizontal" >
                             <CheckBox IsChecked="{Binding IsSelected}" />
                             <Label Text="{Binding Name}" 
                                    TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"
@@ -84,17 +81,19 @@
                     HorizontalOptions="Center" />
 
             <!-- Instructions Section -->
-            <Label Text="Instructions" FontSize="Medium" FontAttributes="Bold" />
+            <Label Text="Instructions" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,0"/>
             <CollectionView ItemsSource="{Binding Instructions}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="10">
+                        <StackLayout Orientation="Horizontal" >
                             <CheckBox IsChecked="{Binding IsCompleted}" />
                             <Label Text="{Binding Step}"
                                    LineBreakMode="WordWrap"
+                                   HorizontalOptions="FillAndExpand"
                                    TextDecorations="{Binding IsCompleted, Converter={StaticResource StrikeThroughConverter}}"
                                    VerticalOptions="Center" />
                         </StackLayout>
+                        
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
