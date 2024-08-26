@@ -78,7 +78,8 @@
             <Button Text=" Add Ingredients to Grocery List"
                     BackgroundColor="Black"
                     Margin="0, 10, 0 , 20"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Center"
+                    Clicked="OnAddIngredientsToGroceryListClicked"/>
 
             <!-- Instructions Section -->
             <Label Text="Instructions" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,0"/>

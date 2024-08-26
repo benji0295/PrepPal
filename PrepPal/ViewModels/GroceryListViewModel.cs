@@ -11,9 +11,20 @@ namespace PrepPal.ViewModels
 {
     public class GroceryListViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<GroceryItem> GroceryItems { get; set; }
+        private ObservableCollection<GroceryItem> _groceryItems;
 
-        public GroceryListViewModel()
+        public ObservableCollection<GroceryItem> GroceryItems
+        {
+            get => _groceryItems;
+            set
+            {
+                _groceryItems = value;
+                OnPropertyChanged(nameof(GroceryItems));
+            }
+        }
+
+
+    public GroceryListViewModel()
         {
             GroceryItems = new ObservableCollection<GroceryItem>()
             {
@@ -23,5 +34,10 @@ namespace PrepPal.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
