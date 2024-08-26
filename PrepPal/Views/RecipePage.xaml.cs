@@ -28,4 +28,9 @@ public partial class RecipePage : ContentPage
 	        ((CollectionView)sender).SelectedItem = null;
         }
     }
+
+    async void OnAddNewRecipeClicked(object sender, EventArgs e)
+    {
+	    await Navigation.PushAsync(new AddRecipePage { BindingContext = BindingContext });
+    }
 }

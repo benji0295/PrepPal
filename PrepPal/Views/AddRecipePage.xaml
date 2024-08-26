@@ -1,0 +1,98 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrepPal.Views.AddRecipePage"
+             Title="Add New Recipe">
+
+    <ScrollView>
+        <StackLayout Padding="10" Spacing="20">
+
+            <!-- Recipe Name -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry x:Name="recipeNameEntry" Placeholder="Recipe Name" />
+            </Border>
+
+            <!-- Category -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry x:Name="categoryEntry" Placeholder="Category" />
+            </Border>
+
+            <!-- Servings -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry x:Name="servingsEntry" Placeholder="Servings" Keyboard="Numeric" />
+            </Border>
+
+            <!-- Prep Time -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry x:Name="prepTimeEntry" Placeholder="Prep Time (minutes)" Keyboard="Numeric" />
+            </Border>
+
+            <!-- Cook Time -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry x:Name="cookTimeEntry" Placeholder="Cook Time (minutes)" Keyboard="Numeric" />
+            </Border>
+
+            <!-- Source -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0" >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry x:Name="sourceEntry" Placeholder="Source" />
+            </Border>
+
+            <!-- Source URL -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Entry x:Name="sourceUrlEntry" Placeholder="Source URL" />
+            </Border>
+
+            <!-- Ingredients -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Editor x:Name="ingredientsEditor" Placeholder="Ingredients (one per line)" HeightRequest="150"/>
+            </Border>
+
+            <!-- Instructions -->
+            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Editor x:Name="instructionsEditor" Placeholder="Instructions (one per line)" HeightRequest="150"/>
+            </Border>
+
+            <!-- Horizontal StackLayout for Buttons -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+
+                <!-- Add Recipe Button -->
+                <Button Text="Add Recipe" 
+                        BackgroundColor="Black"
+                        Clicked="OnAddRecipeClicked" />
+
+                <!-- Cancel Button -->
+                <Button Text="Cancel"
+                        BackgroundColor="Black"
+                        Clicked="OnCancelClicked" />
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
