@@ -22,14 +22,27 @@
         <CollectionView ItemsSource="{Binding FridgeItems}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label Text="{Binding Name}" 
-                               VerticalOptions="Center" 
-                               HorizontalOptions="StartAndExpand"
-                               TextDecorations="{Binding IsUsed, Converter={StaticResource StrikeThroughConverter}}" />
-                        <CheckBox IsChecked="{Binding IsUsed}" 
-                                  VerticalOptions="Center" />
-                    </StackLayout>
+                    <ContentView>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Red"
+                                               Command="{Binding Path = BindingContext.DeleteItemCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                               CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                        
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="{Binding Name}" 
+                                       VerticalOptions="Center" 
+                                       HorizontalOptions="StartAndExpand"
+                                       TextDecorations="{Binding IsUsed, Converter={StaticResource StrikeThroughConverter}}" />
+                                <CheckBox IsChecked="{Binding IsUsed}" 
+                                          VerticalOptions="Center" />
+                            </StackLayout>
+                        </SwipeView>
+                    </ContentView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
