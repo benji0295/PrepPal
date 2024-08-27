@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using PrepPal.Models;
 
 namespace PrepPal.ViewModels
@@ -12,6 +13,7 @@ namespace PrepPal.ViewModels
     public class GroceryListViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<GroceryItem> _groceryItems;
+        public ICommand DeleteItemCommand { get; set; }
 
         public ObservableCollection<GroceryItem> GroceryItems
         {
@@ -24,13 +26,24 @@ namespace PrepPal.ViewModels
         }
 
 
-    public GroceryListViewModel()
+        public GroceryListViewModel()
         {
             GroceryItems = new ObservableCollection<GroceryItem>()
             {
-                new GroceryItem { Name = "Milk", IsBought = false },
-                new GroceryItem { Name = "Eggs", IsBought = false },
+                new GroceryItem { Name = "Apples", IsBought = false },
+                new GroceryItem { Name = "Bananas", IsBought = false },
+                new GroceryItem { Name = "Carrots", IsBought = false },
             };
+
+            DeleteItemCommand = new Command<GroceryItem>(DeleteItem);
+        }
+
+        private void DeleteItem(GroceryItem item)
+        {
+            if (item != null && GroceryItems.Contains(item))
+            {
+                GroceryItems.Remove(item);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
