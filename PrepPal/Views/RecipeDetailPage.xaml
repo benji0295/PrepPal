@@ -108,7 +108,8 @@
                         <StackLayout Orientation="Horizontal" >
                             <CheckBox IsChecked="{Binding IsSelected}" />
                             <Label Text="{Binding Name}" 
-                                   TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"
+                                   TextDecorations="{Binding IsSelected, 
+                                   Converter={StaticResource StrikeThroughConverter}}"
                                    VerticalOptions="Center" />
                         </StackLayout>
                     </DataTemplate>

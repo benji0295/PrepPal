@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PrepPal.ViewModels"
+             xmlns:converters="clr-namespace:PrepPal.Converters"
              x:Class="PrepPal.Views.GroceryListPage"
              Title="Grocery List">
+    
+    <ContentPage.Resources>
+        <converters:StrikeThroughConverter x:Key="StrikeThroughConverter" />
+    </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Options" Clicked="OnMenuButtonClicked" />
@@ -18,8 +23,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
-                        <CheckBox IsChecked="{Binding IsBought}" VerticalOptions="Center" />
+                        <Label Text="{Binding Name}" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="StartAndExpand"
+                               TextDecorations="{Binding IsBought, Converter={StaticResource StrikeThroughConverter}}" />
+                        <CheckBox IsChecked="{Binding IsBought}" 
+                                  VerticalOptions="Center" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
