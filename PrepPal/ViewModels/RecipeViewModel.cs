@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using PrepPal.Models;
 
 namespace PrepPal.ViewModels
@@ -15,6 +16,8 @@ namespace PrepPal.ViewModels
         private Recipe _selectedRecipe;
 
         public ObservableCollection<Recipe> Recipes { get; set; }
+        public ICommand IncreaseServingsCommand { get; set; }
+        public ICommand DecreaseServingsCommand { get; set; }
 
         public Recipe SelectedRecipe
         {
@@ -25,11 +28,14 @@ namespace PrepPal.ViewModels
                 {
                     _selectedRecipe = value;
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(SelectedRecipe));
                 }
             }
         }
         public RecipeViewModel()
         {
+            IncreaseServingsCommand = new Command(IncreaseServings);
+            DecreaseServingsCommand = new Command(DecreaseServings);
             LoadRecipes();
         }
 
@@ -106,6 +112,23 @@ namespace PrepPal.ViewModels
                     SourceURL = "example.com"
                 },
             };
+        }
+
+        private void IncreaseServings()
+        {
+            if (SelectedRecipe != null)
+            {
+                SelectedRecipe.Servings++;
+                OnPropertyChanged(nameof(SelectedRecipe));
+            }
+        }
+        private void DecreaseServings()
+        {
+            if (SelectedRecipe != null && SelectedRecipe.Servings > 1)
+            {
+                SelectedRecipe.Servings--;
+                OnPropertyChanged(nameof(SelectedRecipe));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -13,7 +13,6 @@ public partial class RecipeDetailPage : ContentPage
     public RecipeDetailPage(Recipe selectedRecipe, GroceryListViewModel groceryListViewModel)
     {
         InitializeComponent();
-
         SelectedRecipe = selectedRecipe;
         _groceryListViewModel = groceryListViewModel;
 
