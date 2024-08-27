@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PrepPal.Views.RecipeDetailPage"
              Title="{Binding Name}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Clicked="OnDeleteRecipeClicked" />
+    </ContentPage.ToolbarItems>
 
     <ScrollView>
         <StackLayout Padding="10">

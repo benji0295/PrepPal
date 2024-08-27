@@ -2,21 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PrepPal"
-             x:Class="PrepPal.Views.RecipePage">
+             x:Class="PrepPal.Views.RecipePage"
+             Title="Recipes">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="OnAddNewRecipeClicked"/>
+    </ContentPage.ToolbarItems>
 
     <StackLayout Padding="20">
-        <Label Text="Recipes"
-               FontSize="Large"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"
-               VerticalOptions="Start" />
-        
-        <Button Text="Add A New Recipe"
-                BackgroundColor="Black"
-                Margin="0, 10, 0 , 20"
-                HorizontalOptions="Center"
-                Clicked="OnAddNewRecipeClicked" />
-
         <CollectionView ItemsSource="{Binding Recipes}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}"

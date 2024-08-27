@@ -24,7 +24,7 @@ public partial class RecipePage : ContentPage
         // If a recipe is selected, navigate to the RecipeDetailPage
         if (selectedRecipe != null)
         {
-	        await Navigation.PushAsync(new RecipeDetailPage(selectedRecipe, _groceryListViewModel));
+	        await Navigation.PushAsync(new RecipeDetailPage(selectedRecipe, BindingContext as RecipeViewModel, _groceryListViewModel));
 	        ((CollectionView)sender).SelectedItem = null;
         }
     }
