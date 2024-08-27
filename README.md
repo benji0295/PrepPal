@@ -10,6 +10,7 @@ The app utilizes ObservableCollection to automatically notify and update the UI 
 Features
 
 Recipe Management
+
 View a list of recipes with details such as name, category, servings, and instructions.
 Add new recipes to the list.
 Delete recipes.
@@ -17,14 +18,17 @@ Adjust the serving size for each recipe with + and - buttons.
 Ingredients can be added to the grocery list with a single button click.
 
 Meal Plan Management
+
 Add recipes to a weekly meal plan.
 
 Grocery List Management
+
 Add ingredients to the grocery list directly from a recipe.
 Mark grocery items as bought or not bought.
 Swipe to delete items from the grocery list.
 
 Fridge Item Management
+
 Monitor items in the fridge with an expiration date and whether they have been used.
 Strike-through effect on used items.
 Items are listed with a checkbox to indicate usage.
@@ -33,6 +37,7 @@ Items are listed with a checkbox to indicate usage.
 Architecture
 
 MVVM (Model-View-ViewModel)
+
 The app is structured using the MVVM pattern, which promotes clean separation between UI (View), business logic (ViewModel), and data (Model).
 
 
