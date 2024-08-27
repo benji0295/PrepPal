@@ -16,15 +16,12 @@ public partial class GroceryListPage : ContentPage
 		BindingContext = _groceryListViewModel;
 	}
 
-	private async void OnMenuButtonClicked(object sender, EventArgs e)
+	private async void OnDeleteButtonClicked(object sender, EventArgs e)
 	{
-		var action = await DisplayActionSheet("Option", "Cancel", null, "Add Item", "Clear Grocery List",
+		var action = await DisplayActionSheet("Option", "Cancel", null, "Clear Grocery List",
 			"Clear Selected Groceries");
 		switch (action)
 		{
-			case "Add Item":
-				OnAddItemClicked();
-				break;
 			case "Clear Grocery List":
 				OnClearListClicked();
 				break;
@@ -32,6 +29,11 @@ public partial class GroceryListPage : ContentPage
 				OnDeleteSelectedClicked();
 				break;
 		}
+	}
+
+	private async void OnAddButtonClicked(object sender, EventArgs e)
+	{
+		OnAddItemClicked();
 	}
 
 	private async Task OnAddItemClicked()

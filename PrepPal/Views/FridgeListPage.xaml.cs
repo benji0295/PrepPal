@@ -15,15 +15,12 @@ public partial class FridgeListPage : ContentPage
         _viewModel = BindingContext as FridgeListViewModel;
 	}
     
-    private async void OnMenuButtonClicked(object sender, EventArgs e)
+    private async void OnDeleteButtonClicked(object sender, EventArgs e)
     {
-        var action = await DisplayActionSheet("Option", "Cancel", null, "Add Item", "Clear Fridge",
+        var action = await DisplayActionSheet("Option", "Cancel", null, "Clear Fridge",
             "Clear Selected Items");
         switch (action)
         {
-            case "Add Item":
-                OnAddItemClicked();
-                break;
             case "Clear Fridge":
                 OnClearListClicked();
                 break;
@@ -31,6 +28,11 @@ public partial class FridgeListPage : ContentPage
                 OnDeleteSelectedClicked();
                 break;
         }
+    }
+
+    private async void OnAddButtonClicked(object sender, EventArgs e)
+    {
+        OnAddItemClicked();
     }
 
     private async Task OnAddItemClicked()

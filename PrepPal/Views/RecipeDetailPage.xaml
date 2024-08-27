@@ -10,7 +10,7 @@
             <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Category: " />
+                        <Span Text="Category: " FontAttributes="Bold"/>
                         <Span Text="{Binding Category}" />
                     </FormattedString>
                 </Label.FormattedText>
@@ -20,7 +20,7 @@
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="Start"
                          VerticalOptions="Center"
-                         Spacing="10"
+                         Spacing="1"
                          Padding="0,0,0,5">
                 
                 <!-- Serving Size Label -->
@@ -29,38 +29,38 @@
                        HorizontalOptions="Start">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Servings: " />
+                            <Span Text="Servings: " FontAttributes="Bold"/>
                             <Span Text="{Binding Servings}" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
                 <!-- Plus and Minus Buttons -->
-                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" >
                     <!-- Plus Button -->
                     <Button Text="+"
-                            FontSize="Medium"
+                            FontSize="Small"
                             BorderColor="Black"
                             BorderWidth="1"
-                            CornerRadius="20"
+                            CornerRadius="13"
                             BackgroundColor="Transparent"
                             TextColor="Black"
-                            Width="10"
-                            Height="10"
+                            MaximumWidthRequest="25"
+                            MaximumHeightRequest="25"
                             Padding="0"
                             Command="{Binding IncreaseServingsCommand}"
                             CommandParameter="{Binding .}" />
 
                     <!-- Minus Button -->
                     <Button Text="-"
-                            FontSize="Medium"
+                            FontSize="Small"
                             BorderColor="Black"
                             BorderWidth="1"
-                            CornerRadius="20"
+                            CornerRadius="13"
                             BackgroundColor="Transparent"
                             TextColor="Black"
-                            Width="10"
-                            Height="10"
+                            MaximumWidthRequest="25"
+                            MaximumHeightRequest="25"
                             Padding="0"
                             Command="{Binding DecreaseServingsCommand}"
                             CommandParameter="{Binding .}" />
@@ -71,7 +71,7 @@
             <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Prep Time: " />
+                        <Span Text="Prep Time: " FontAttributes="Bold" />
                         <Span Text="{Binding PrepTime}" />
                         <Span Text=" minutes" />
                     </FormattedString>
@@ -82,7 +82,7 @@
             <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Cook Time: " />
+                        <Span Text="Cook Time: " FontAttributes="Bold" />
                         <Span Text="{Binding CookTime}" />
                         <Span Text=" minutes" />
                     </FormattedString>
@@ -93,7 +93,7 @@
             <Label FontSize="Medium" Padding="0,0,0,5">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Total Time: " />
+                        <Span Text="Total Time: " FontAttributes="Bold" />
                         <Span Text="{Binding TotalTime}" />
                         <Span Text=" minutes" />
                     </FormattedString>

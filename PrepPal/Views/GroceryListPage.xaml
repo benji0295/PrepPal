@@ -11,40 +11,43 @@
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Options" Clicked="OnMenuButtonClicked" />
+        <ToolbarItem Text="Delete" Clicked="OnDeleteButtonClicked" />
+        <ToolbarItem Text="Add" Clicked="OnAddButtonClicked" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.BindingContext>
         <viewModels:GroceryListViewModel />
     </ContentPage.BindingContext>
+    
+    <ScrollView>
+        <VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding GroceryItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView> <!-- Ensure there's only one root element -->
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete"
+                                                   BackgroundColor="Red"
+                                                   Command="{Binding Path=BindingContext.DeleteItemCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                   CommandParameter="{Binding .}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
 
-    <VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding GroceryItems}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <ContentView> <!-- Ensure there's only one root element -->
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems>
-                                    <SwipeItem Text="Delete"
-                                               BackgroundColor="Red"
-                                               Command="{Binding Path=BindingContext.DeleteItemCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                               CommandParameter="{Binding .}" />
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="{Binding Name}" 
-                                       VerticalOptions="Center" 
-                                       HorizontalOptions="StartAndExpand"
-                                       TextDecorations="{Binding IsBought, Converter={StaticResource StrikeThroughConverter}}" />
-                                <CheckBox IsChecked="{Binding IsBought}" 
-                                          VerticalOptions="Center" />
-                            </StackLayout>
-                        </SwipeView>
-                    </ContentView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+                                <StackLayout Orientation="Horizontal" Padding="10">
+                                    <Label Text="{Binding Name}" 
+                                           VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand"
+                                           TextDecorations="{Binding IsBought, Converter={StaticResource StrikeThroughConverter}}" />
+                                    <CheckBox IsChecked="{Binding IsBought}" 
+                                              VerticalOptions="Center" />
+                                </StackLayout>
+                            </SwipeView>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
