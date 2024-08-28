@@ -6,7 +6,9 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete" Clicked="OnDeleteRecipeClicked" />
-        <ToolbarItem Text="FAV" Clicked="OnFavoriteClicked" />
+        <ToolbarItem x:Name="FavoriteToolbarItem" 
+                     IconImageSource="heart_icon.png" 
+                     Clicked="OnFavoriteClicked" />
     </ContentPage.ToolbarItems>
 
     <ScrollView>

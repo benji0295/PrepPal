@@ -20,6 +20,8 @@ public partial class RecipeDetailPage : ContentPage
         _groceryListViewModel = groceryListViewModel;
 
         BindingContext = SelectedRecipe;
+
+        UpdateFavoriteIcon();
     }
 
     private async void OnDeleteRecipeClicked(object sender, EventArgs e)
@@ -57,6 +59,7 @@ public partial class RecipeDetailPage : ContentPage
             // Add to favorites
             if (!App.FavoriteRecipesViewModel.FavoriteRecipes.Contains(SelectedRecipe))
             {
+                FavoriteToolbarItem.IconImageSource = "heart_icon_filled.png";
                 App.FavoriteRecipesViewModel.FavoriteRecipes.Add(SelectedRecipe);
             }
         }
@@ -65,10 +68,19 @@ public partial class RecipeDetailPage : ContentPage
             // Remove from favorites
             if (App.FavoriteRecipesViewModel.FavoriteRecipes.Contains(SelectedRecipe))
             {
+                FavoriteToolbarItem.IconImageSource = "heart_icon.png";
                 App.FavoriteRecipesViewModel.FavoriteRecipes.Remove(SelectedRecipe);
             }
         }
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        UpdateFavoriteIcon();
+    }
 
-        DisplayAlert("Favorite", SelectedRecipe.IsFavorite ? "Added to Favorites" : "Removed from Favorites", "OK");
+    private void UpdateFavoriteIcon()
+    {
+        FavoriteToolbarItem.IconImageSource = SelectedRecipe.IsFavorite ? "heart_icon_filled.png" : "heart_icon.png";
     }
 }
