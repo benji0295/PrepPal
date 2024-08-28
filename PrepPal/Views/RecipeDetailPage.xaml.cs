@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using PrepPal.Models;
 using PrepPal.ViewModels;
 using PrepPal.Views;
@@ -45,5 +46,29 @@ public partial class RecipeDetailPage : ContentPage
         }
 
         DisplayAlert("Success", "Ingredients added to your grocery list.", "OK");
+    }
+
+    private void OnFavoriteClicked(object sender, EventArgs e)
+    {
+        SelectedRecipe.IsFavorite = !SelectedRecipe.IsFavorite;
+
+        if (SelectedRecipe.IsFavorite)
+        {
+            // Add to favorites
+            if (!App.FavoriteRecipesViewModel.FavoriteRecipes.Contains(SelectedRecipe))
+            {
+                App.FavoriteRecipesViewModel.FavoriteRecipes.Add(SelectedRecipe);
+            }
+        }
+        else
+        {
+            // Remove from favorites
+            if (App.FavoriteRecipesViewModel.FavoriteRecipes.Contains(SelectedRecipe))
+            {
+                App.FavoriteRecipesViewModel.FavoriteRecipes.Remove(SelectedRecipe);
+            }
+        }
+
+        DisplayAlert("Favorite", SelectedRecipe.IsFavorite ? "Added to Favorites" : "Removed from Favorites", "OK");
     }
 }

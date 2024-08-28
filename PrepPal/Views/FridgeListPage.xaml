@@ -11,7 +11,7 @@
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" Clicked="OnDeleteButtonClicked" />
+        <ToolbarItem Text="Clear" Clicked="OnDeleteButtonClicked" />
         <ToolbarItem Text="Add" Clicked="OnAddButtonClicked" />
     </ContentPage.ToolbarItems>
 

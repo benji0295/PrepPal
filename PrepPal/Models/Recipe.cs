@@ -20,6 +20,8 @@ namespace PrepPal.Models
         public int TotalTime { get; set; }
         public string Source { get; set; }
         public string SourceURL { get; set; }
+        
+        public bool IsFavorite { get; set; }
     }
 
     public class Ingredient : INotifyPropertyChanged

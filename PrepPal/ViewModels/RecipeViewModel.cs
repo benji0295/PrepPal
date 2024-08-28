@@ -16,8 +16,17 @@ namespace PrepPal.ViewModels
         private Recipe _selectedRecipe;
 
         public ObservableCollection<Recipe> Recipes { get; set; }
+
+        public ObservableCollection<Recipe> FavoriteRecipes
+        {
+            get
+            {
+                return new ObservableCollection<Recipe>(Recipes.Where(r => r.IsFavorite));
+            }
+        }
         public ICommand IncreaseServingsCommand { get; set; }
         public ICommand DecreaseServingsCommand { get; set; }
+        public ICommand ToggleFavoriteCommand { get; set; }
 
         public Recipe SelectedRecipe
         {
@@ -34,6 +43,7 @@ namespace PrepPal.ViewModels
         }
         public RecipeViewModel()
         {
+            ToggleFavoriteCommand = new Command<Recipe>(ToggleFavorite);
             IncreaseServingsCommand = new Command(IncreaseServings);
             DecreaseServingsCommand = new Command(DecreaseServings);
             LoadRecipes();
@@ -112,6 +122,15 @@ namespace PrepPal.ViewModels
                     SourceURL = "example.com"
                 },
             };
+        }
+
+        private void ToggleFavorite(Recipe recipe)
+        {
+            if (recipe != null)
+            {
+                recipe.IsFavorite = !recipe.IsFavorite;
+                OnPropertyChanged(nameof(Recipes));
+            }
         }
 
         private void IncreaseServings()

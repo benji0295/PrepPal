@@ -6,6 +6,7 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete" Clicked="OnDeleteRecipeClicked" />
+        <ToolbarItem Text="FAV" Clicked="OnFavoriteClicked" />
     </ContentPage.ToolbarItems>
 
     <ScrollView>

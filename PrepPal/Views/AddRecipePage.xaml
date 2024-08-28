@@ -4,10 +4,11 @@
              Title="Add New Recipe">
 
     <ScrollView>
-        <StackLayout Padding="10" Spacing="20">
+        <StackLayout>
 
             <!-- Recipe Name -->
-            <Border Stroke="Black" StrokeThickness="1" Padding="0">
+            <Label Text="Recipe Name" Padding="0,10,0,0"/>
+            <Border Stroke="Black" StrokeThickness="1">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
                 </Border.StrokeShape>
@@ -15,6 +16,7 @@
             </Border>
 
             <!-- Category -->
+            <Label Text="Category" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
@@ -23,6 +25,7 @@
             </Border>
 
             <!-- Servings -->
+            <Label Text="Servings" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
@@ -31,6 +34,7 @@
             </Border>
 
             <!-- Prep Time -->
+            <Label Text="Prep Time" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
@@ -39,6 +43,7 @@
             </Border>
 
             <!-- Cook Time -->
+            <Label Text="Cook Time" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
@@ -47,6 +52,7 @@
             </Border>
 
             <!-- Source -->
+            <Label Text="Source" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0" >
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
@@ -55,6 +61,7 @@
             </Border>
 
             <!-- Source URL -->
+            <Label Text="Source URL" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
@@ -63,23 +70,25 @@
             </Border>
 
             <!-- Ingredients -->
+            <Label Text="Ingredients (one per line)" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
                 </Border.StrokeShape>
-                <Editor x:Name="ingredientsEditor" Placeholder="Ingredients (one per line)" HeightRequest="150"/>
+                <Editor x:Name="ingredientsEditor" Placeholder="Ingredients" HeightRequest="150"/>
             </Border>
 
             <!-- Instructions -->
+            <Label Text="Instructions (one per line)" Padding="0,10,0,0" />
             <Border Stroke="Black" StrokeThickness="1" Padding="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10" />
                 </Border.StrokeShape>
-                <Editor x:Name="instructionsEditor" Placeholder="Instructions (one per line)" HeightRequest="150"/>
+                <Editor x:Name="instructionsEditor" Placeholder="Instructions" HeightRequest="150"/>
             </Border>
 
             <!-- Horizontal StackLayout for Buttons -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" Padding="0,10,0,0">
 
                 <!-- Add Recipe Button -->
                 <Button Text="Add Recipe" 

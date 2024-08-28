@@ -9,6 +9,10 @@
     <FlyoutItem Title="Recipes">
         <ShellContent ContentTemplate="{DataTemplate local:RecipePage}" />
     </FlyoutItem>
+    
+    <FlyoutItem Title="Favorite Recipes">
+        <ShellContent ContentTemplate="{DataTemplate local:FavoriteRecipePage}" />
+    </FlyoutItem>
 
     <FlyoutItem Title="Meal Plan">
         <ShellContent ContentTemplate="{DataTemplate local:MealPlanPage}" />
