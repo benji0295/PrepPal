@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="108ad76c-0403-4c4d-9737-441b43a9b887" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/PrepPal/Data/RecipeContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepPal/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepPal/Models/Recipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/Models/Recipe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepPal/PrepPal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/PrepPal.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepPal/ViewModels/RecipeViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/ViewModels/RecipeViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepPal/Views/RecipeDetailPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/Views/RecipeDetailPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepPal/Views/RecipePage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/Views/RecipePage.xaml.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2lG129CjWPS1ulze7IcLexOmCph" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/bensmith/RiderProjects/PrepPal"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql",
+      "sqlserver",
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+</project>

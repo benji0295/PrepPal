@@ -8,9 +8,7 @@ namespace PrepPal
         public App()
         {
             InitializeComponent();
-
             GroceryListViewModel = new GroceryListViewModel();
-
             MainPage = new AppShell();
         }
     }

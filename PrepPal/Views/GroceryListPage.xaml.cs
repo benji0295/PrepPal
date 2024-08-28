@@ -8,12 +8,10 @@ namespace PrepPal.Views;
 
 public partial class GroceryListPage : ContentPage
 {
-	private GroceryListViewModel _groceryListViewModel;
 	public GroceryListPage()
 	{
 		InitializeComponent();
-		_groceryListViewModel = App.GroceryListViewModel;
-		BindingContext = _groceryListViewModel;
+		BindingContext = App.GroceryListViewModel;
 	}
 
 	private async void OnDeleteButtonClicked(object sender, EventArgs e)
@@ -42,7 +40,8 @@ public partial class GroceryListPage : ContentPage
 
 		if (!string.IsNullOrWhiteSpace(result))
 		{
-			_groceryListViewModel.GroceryItems.Add(new GroceryItem { Name = result, IsBought = false });
+			var viewModel = BindingContext as GroceryListViewModel;
+			viewModel?.GroceryItems.Add(new GroceryItem { Name = result, IsBought = false });
 		}
 	}
 
@@ -51,7 +50,8 @@ public partial class GroceryListPage : ContentPage
 		bool confirm = await DisplayAlert("Clear List", "Are you sure you want to clear the list?", "Yes", "No");
 		if (confirm)
 		{
-			_groceryListViewModel.GroceryItems.Clear();
+			var viewModel = BindingContext as GroceryListViewModel;
+			viewModel?.GroceryItems.Clear();
 		}
 	}
 	private async Task OnDeleteSelectedClicked()
@@ -60,10 +60,11 @@ public partial class GroceryListPage : ContentPage
 
 		if (confirm)
 		{
-			var itemsToRemove = _groceryListViewModel.GroceryItems.Where(item => item.IsBought).ToList();
+			var viewModel = BindingContext as GroceryListViewModel;
+			var itemsToRemove = viewModel?.GroceryItems.Where(item => item.IsBought).ToList();
 			foreach (var item in itemsToRemove)
 			{
-				_groceryListViewModel.GroceryItems.Remove(item);
+				viewModel.GroceryItems.Remove(item);
 			}
 		}
 	}
