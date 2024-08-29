@@ -13,7 +13,9 @@ namespace PrepPal.ViewModels
     public class GroceryListViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<GroceryItem> _groceryItems;
+        private readonly FridgeListViewModel _fridgeListViewModel;
         public ICommand DeleteItemCommand { get; set; }
+        public ICommand AddToFridgeCommand { get; }
 
         public ObservableCollection<GroceryItem> GroceryItems
         {
@@ -26,8 +28,10 @@ namespace PrepPal.ViewModels
         }
 
 
-        public GroceryListViewModel()
+        public GroceryListViewModel(FridgeListViewModel fridgeListViewModel)
         {
+            _fridgeListViewModel = fridgeListViewModel;
+            
             GroceryItems = new ObservableCollection<GroceryItem>()
             {
                 new GroceryItem { Name = "Apples", IsBought = false },
@@ -36,12 +40,30 @@ namespace PrepPal.ViewModels
             };
 
             DeleteItemCommand = new Command<GroceryItem>(DeleteItem);
+            AddToFridgeCommand = new Command(AddGroceriesToFridge);
         }
 
         private void DeleteItem(GroceryItem item)
         {
             if (item != null && GroceryItems.Contains(item))
             {
+                GroceryItems.Remove(item);
+            }
+        }
+
+        private void AddGroceriesToFridge()
+        {
+            var boughtItems = GroceryItems.Where(item => item.IsBought).ToList();
+
+            foreach (var item in boughtItems)
+            {
+                // Adding the bought grocery items to the fridge list
+                if (!_fridgeListViewModel.FridgeItems.Any(f => f.Name == item.Name))
+                {
+                    _fridgeListViewModel.FridgeItems.Add(new FridgeItem { Name = item.Name, IsUsed = false });
+                }
+
+                // Remove the item from the grocery list
                 GroceryItems.Remove(item);
             }
         }

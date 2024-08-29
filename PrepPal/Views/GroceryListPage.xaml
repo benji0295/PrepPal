@@ -19,10 +19,6 @@
                      Clicked="OnDeleteButtonClicked" />
     </ContentPage.ToolbarItems>
     
-    <ContentPage.BindingContext>
-        <viewModels:GroceryListViewModel />
-    </ContentPage.BindingContext>
-    
     <ScrollView>
         <VerticalStackLayout>
             <CollectionView ItemsSource="{Binding GroceryItems}">
@@ -52,6 +48,15 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
+            <Button Text="Add Bought Groceries to Fridge"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    Margin="10,20,10,10"
+                    Command="{Binding AddToFridgeCommand}"
+                    CommandParameter="{Binding .}" />
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

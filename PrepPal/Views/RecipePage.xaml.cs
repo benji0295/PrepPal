@@ -12,7 +12,7 @@ public partial class RecipePage : ContentPage
 	public RecipePage()
 	{
 		InitializeComponent();
-        _groceryListViewModel = new GroceryListViewModel();
+        _groceryListViewModel = new GroceryListViewModel(App.FridgeListViewModel);
         _recipeViewModel = new RecipeViewModel();
 		BindingContext = _recipeViewModel;
 	}

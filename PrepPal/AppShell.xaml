@@ -6,23 +6,23 @@
     xmlns:local="clr-namespace:PrepPal.Views"
     Title="PrepPal">
 
-    <FlyoutItem Title="Recipes">
+    <FlyoutItem Title="Recipes" FlyoutIcon="recipe_icon.png">
         <ShellContent ContentTemplate="{DataTemplate local:RecipePage}" />
     </FlyoutItem>
     
-    <FlyoutItem Title="Favorite Recipes">
+    <FlyoutItem Title="Favorite Recipes" FlyoutIcon="heart_icon_filled.png">
         <ShellContent ContentTemplate="{DataTemplate local:FavoriteRecipePage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Meal Plan">
+    <FlyoutItem Title="Meal Plan" FlyoutIcon="calendar_icon.png">
         <ShellContent ContentTemplate="{DataTemplate local:MealPlanPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Grocery List">
+    <FlyoutItem Title="Grocery List" FlyoutIcon="cart_icon.png">
         <ShellContent ContentTemplate="{DataTemplate local:GroceryListPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Fridge List">
+    <FlyoutItem Title="Fridge List" FlyoutIcon="fridge_icon.png">
         <ShellContent ContentTemplate="{DataTemplate local:FridgeListPage}" />
     </FlyoutItem>
 

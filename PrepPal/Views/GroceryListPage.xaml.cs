@@ -11,6 +11,7 @@ public partial class GroceryListPage : ContentPage
 	public GroceryListPage()
 	{
 		InitializeComponent();
+		
 		BindingContext = App.GroceryListViewModel;
 	}
 

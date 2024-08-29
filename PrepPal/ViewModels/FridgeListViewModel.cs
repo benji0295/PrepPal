@@ -10,9 +10,19 @@ using PrepPal.Models;
 
 namespace PrepPal.ViewModels
 {
-    internal class FridgeListViewModel : INotifyPropertyChanged
+    public class FridgeListViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<FridgeItem> FridgeItems { get; set; }
+        private ObservableCollection<FridgeItem> _fridgeItems;
+
+        public ObservableCollection<FridgeItem> FridgeItems
+        {
+            get => _fridgeItems;
+            set
+            {
+                _fridgeItems = value;
+                OnPropertyChanged(nameof(FridgeItems));
+            }
+        }
         public ICommand DeleteItemCommand { get; set; }
 
         public FridgeListViewModel()
