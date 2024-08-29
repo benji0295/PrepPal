@@ -8,6 +8,8 @@
     
     <ContentPage.Resources>
         <converters:StrikeThroughConverter x:Key="StrikeThroughConverter" />
+        <converters:DateToColorConverter x:Key="DateToColorConverter" />
+        <converters:DateToTextColorConverter x:Key="DateToTextColorConverter" />
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
@@ -44,6 +46,18 @@
                                            VerticalOptions="Center" 
                                            HorizontalOptions="StartAndExpand"
                                            TextDecorations="{Binding IsUsed, Converter={StaticResource StrikeThroughConverter}}" />
+                                    <Frame BackgroundColor="{Binding LastBoughtDate, Converter={StaticResource DateToColorConverter}}"
+                                           CornerRadius="10"
+                                           Padding="5"
+                                           Margin="5,0,0,0"
+                                           VerticalOptions="Center"
+                                           HasShadow="False">
+                                        <Label Text="{Binding LastBoughtDate, StringFormat='{0:MM/dd/yyyy}'}"
+                                               TextColor="{Binding LastBoughtDate, Converter={StaticResource DateToTextColorConverter}}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center" />
+                                    </Frame>
+                                    
                                     <CheckBox IsChecked="{Binding IsUsed}" 
                                               VerticalOptions="Center" />
                                 </StackLayout>

@@ -41,7 +41,7 @@ public partial class FridgeListPage : ContentPage
         if (!string.IsNullOrWhiteSpace(result))
         {
             var viewModel = BindingContext as FridgeListViewModel;
-            viewModel?.FridgeItems.Add(new FridgeItem { Name = result, IsUsed = false });
+            viewModel?.FridgeItems.Add(new FridgeItem { Name = result, LastBoughtDate = DateTime.Now, IsUsed = false });
         }
     }
 

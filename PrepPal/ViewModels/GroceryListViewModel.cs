@@ -60,7 +60,7 @@ namespace PrepPal.ViewModels
                 // Adding the bought grocery items to the fridge list
                 if (!_fridgeListViewModel.FridgeItems.Any(f => f.Name == item.Name))
                 {
-                    _fridgeListViewModel.FridgeItems.Add(new FridgeItem { Name = item.Name, IsUsed = false });
+                    _fridgeListViewModel.FridgeItems.Add(new FridgeItem { Name = item.Name, LastBoughtDate = DateTime.Now, IsUsed = false });
                 }
 
                 // Remove the item from the grocery list

@@ -29,8 +29,9 @@ namespace PrepPal.ViewModels
         {
             FridgeItems = new ObservableCollection<FridgeItem>()
             {
-                new FridgeItem { Name = "Milk", ExpirationDate = DateTime.Now.AddDays(7), IsExpired = false, IsUsed = false },
-                new FridgeItem { Name = "Eggs", ExpirationDate = DateTime.Now.AddDays(14), IsExpired = false, IsUsed = false },
+                new FridgeItem { Name = "Milk", LastBoughtDate = DateTime.Now.AddDays(-3), IsUsed = false },
+                new FridgeItem { Name = "Eggs", LastBoughtDate = DateTime.Now.AddDays(-10), IsUsed = false },
+                new FridgeItem { Name = "Apples", LastBoughtDate = DateTime.Now, IsUsed = false}
             };
 
             DeleteItemCommand = new Command<FridgeItem>(DeleteItem);
