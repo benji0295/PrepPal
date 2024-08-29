@@ -5,16 +5,18 @@
              Title="{Binding Name}">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" Clicked="OnDeleteRecipeClicked" />
         <ToolbarItem x:Name="FavoriteToolbarItem" 
                      IconImageSource="heart_icon.png" 
                      Clicked="OnFavoriteClicked" />
+        <ToolbarItem x:Name="DeleteToolbarItem" 
+                     IconImageSource="delete_icon.png"
+                     Clicked="OnDeleteRecipeClicked" />
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <StackLayout Padding="10">
+        <StackLayout Padding="0" Spacing="0">
             <!-- Recipe Category -->
-            <Label FontSize="Medium" Padding="0,0,0,5">
+            <Label FontSize="Medium" Padding="0,10,0,5">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Category: " FontAttributes="Bold"/>
@@ -43,39 +45,29 @@
                 </Label>
 
                 <!-- Plus and Minus Buttons -->
-                <StackLayout Orientation="Horizontal" VerticalOptions="Center" >
+                <StackLayout Orientation="Horizontal" Spacing="0" Padding="0" Margin="0" >
                     <!-- Plus Button -->
-                    <Button Text="+"
-                            FontSize="Small"
-                            BorderColor="Black"
-                            BorderWidth="1"
-                            CornerRadius="13"
+                    <Button x:Name="IncreaseServingsButton"
+                            ImageSource="add_icon_xsmall.png"
                             BackgroundColor="Transparent"
-                            TextColor="Black"
-                            MaximumWidthRequest="25"
-                            MaximumHeightRequest="25"
                             Padding="0"
+                            Margin="0"
                             Command="{Binding IncreaseServingsCommand}"
                             CommandParameter="{Binding .}" />
 
                     <!-- Minus Button -->
-                    <Button Text="-"
-                            FontSize="Small"
-                            BorderColor="Black"
-                            BorderWidth="1"
-                            CornerRadius="13"
+                    <Button x:Name="DecreaseServingsButton"
+                            ImageSource="minus_icon_xsmall.png"
                             BackgroundColor="Transparent"
-                            TextColor="Black"
-                            MaximumWidthRequest="25"
-                            MaximumHeightRequest="25"
                             Padding="0"
+                            Margin="0"
                             Command="{Binding DecreaseServingsCommand}"
                             CommandParameter="{Binding .}" />
                 </StackLayout>
             </StackLayout>
 
             <!-- Recipe Prep Time -->
-            <Label FontSize="Medium" Padding="0,0,0,5">
+            <Label FontSize="Medium" Padding="0,0,0,10">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Prep Time: " FontAttributes="Bold" />
@@ -86,7 +78,7 @@
             </Label>
 
             <!-- Recipe Cook Time -->
-            <Label FontSize="Medium" Padding="0,0,0,5">
+            <Label FontSize="Medium" Padding="0,0,0,10">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Cook Time: " FontAttributes="Bold" />
@@ -97,7 +89,7 @@
             </Label>
 
             <!-- Recipe Total Time -->
-            <Label FontSize="Medium" Padding="0,0,0,5">
+            <Label FontSize="Medium" Padding="0,0,0,10">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Total Time: " FontAttributes="Bold" />

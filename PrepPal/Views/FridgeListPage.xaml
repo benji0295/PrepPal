@@ -11,8 +11,12 @@
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Clear" Clicked="OnDeleteButtonClicked" />
-        <ToolbarItem Text="Add" Clicked="OnAddButtonClicked" />
+        <ToolbarItem x:Name="AddToolbarItem"
+                     IconImageSource="add_icon.png"
+                     Clicked="OnAddButtonClicked" />
+        <ToolbarItem x:Name="DeleteToolbarItem"
+                     IconImageSource="delete_icon.png"
+                     Clicked="OnDeleteButtonClicked" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.BindingContext>

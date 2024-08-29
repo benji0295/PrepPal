@@ -6,7 +6,9 @@
              Title="Recipes">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="OnAddNewRecipeClicked"/>
+        <ToolbarItem x:Name="AddToolbarItem"
+                     IconImageSource="add_icon.png"
+                     Clicked="OnAddNewRecipeClicked"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="20">
