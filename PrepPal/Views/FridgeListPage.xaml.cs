@@ -8,12 +8,11 @@ namespace PrepPal.Views;
 
 public partial class FridgeListPage : ContentPage
 {
-    private FridgeListViewModel _viewModel;
 	public FridgeListPage()
 	{
 		InitializeComponent();
-        _viewModel = BindingContext as FridgeListViewModel;
-	}
+        BindingContext = App.FridgeListViewModel;
+    }
     
     private async void OnDeleteButtonClicked(object sender, EventArgs e)
     {
@@ -41,7 +40,8 @@ public partial class FridgeListPage : ContentPage
 
         if (!string.IsNullOrWhiteSpace(result))
         {
-            _viewModel.FridgeItems.Add(new FridgeItem { Name = result, IsUsed = false });
+            var viewModel = BindingContext as FridgeListViewModel;
+            viewModel?.FridgeItems.Add(new FridgeItem { Name = result, IsUsed = false });
         }
     }
 
@@ -50,7 +50,8 @@ public partial class FridgeListPage : ContentPage
         bool confirm = await DisplayAlert("Clear List", "Are you sure you want to clear your fridge?", "Yes", "No");
         if (confirm)
         {
-            _viewModel.FridgeItems.Clear();
+            var viewModel = BindingContext as FridgeListViewModel;
+            viewModel?.FridgeItems.Clear();
         }
     }
     private async Task OnDeleteSelectedClicked()
@@ -59,10 +60,11 @@ public partial class FridgeListPage : ContentPage
 
         if (confirm)
         {
-            var itemsToRemove = _viewModel.FridgeItems.Where(item => item.IsUsed).ToList();
+            var viewModel = BindingContext as FridgeListViewModel;
+            var itemsToRemove = viewModel?.FridgeItems.Where(item => item.IsUsed).ToList();
             foreach (var item in itemsToRemove)
             {
-                _viewModel.FridgeItems.Remove(item);
+                viewModel?.FridgeItems.Remove(item);
             }
         }
     }
