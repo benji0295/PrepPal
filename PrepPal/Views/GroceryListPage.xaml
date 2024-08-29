@@ -8,6 +8,7 @@
     
     <ContentPage.Resources>
         <converters:StrikeThroughConverter x:Key="StrikeThroughConverter" />
+        <converters:DateToDaysAgoConverter x:Key="DateToDaysAgoConverter" />
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
@@ -24,7 +25,7 @@
             <CollectionView ItemsSource="{Binding GroceryItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ContentView> <!-- Ensure there's only one root element -->
+                        <ContentView>
                             <SwipeView>
                                 <SwipeView.RightItems>
                                     <SwipeItems>
@@ -40,6 +41,20 @@
                                            VerticalOptions="Center" 
                                            HorizontalOptions="StartAndExpand"
                                            TextDecorations="{Binding IsBought, Converter={StaticResource StrikeThroughConverter}}" />
+                                    
+                                    <Frame BackgroundColor="LightBlue"
+                                           CornerRadius="10"
+                                           Padding="5"
+                                           Margin="5,0,0,0"
+                                           VerticalOptions="Center"
+                                           HasShadow="False"
+                                           IsVisible="{Binding IsInGroceryList}">
+                                        <Label Text="{Binding LastBoughtDate, StringFormat='Bought {0}', Converter={StaticResource DateToDaysAgoConverter}}"
+                                               TextColor="Black"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center" />
+                                    </Frame>
+                                    
                                     <CheckBox IsChecked="{Binding IsBought}" 
                                               VerticalOptions="Center" />
                                 </StackLayout>

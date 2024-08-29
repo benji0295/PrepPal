@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using PrepPal.Models;
+using PrepPal.ViewModels;
 
 namespace PrepPal.ViewModels
 {
@@ -42,6 +43,46 @@ namespace PrepPal.ViewModels
             DeleteItemCommand = new Command<GroceryItem>(DeleteItem);
             AddToFridgeCommand = new Command(AddGroceriesToFridge);
         }
+        public void AddItemToGroceryList(string itemName)
+        {
+            // Check if the item is already in the grocery list
+            var groceryItem = GroceryItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+
+            if (groceryItem != null)
+            {
+                // If item exists in the grocery list, just update the IsInGroceryList property
+                var fridgeItem = _fridgeListViewModel.FridgeItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+                if (fridgeItem != null)
+                {
+                    groceryItem.IsInGroceryList = true;
+                    groceryItem.LastBoughtDate = fridgeItem.LastBoughtDate; // Update the date
+                }
+            }
+            else
+            {
+                // If item doesn't exist in the grocery list, create a new one
+                var fridgeItem = _fridgeListViewModel.FridgeItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+                if (fridgeItem != null)
+                {
+                    GroceryItems.Add(new GroceryItem
+                    {
+                        Name = itemName,
+                        IsBought = false,
+                        IsInGroceryList = true,
+                        LastBoughtDate = fridgeItem.LastBoughtDate // Set the date
+                    });
+                }
+                else
+                {
+                    GroceryItems.Add(new GroceryItem
+                    {
+                        Name = itemName,
+                        IsBought = false,
+                        IsInGroceryList = false
+                    });
+                }
+            }
+        }
 
         private void DeleteItem(GroceryItem item)
         {
@@ -57,10 +98,16 @@ namespace PrepPal.ViewModels
 
             foreach (var item in boughtItems)
             {
-                // Adding the bought grocery items to the fridge list
-                if (!_fridgeListViewModel.FridgeItems.Any(f => f.Name == item.Name))
+                var fridgeItem = _fridgeListViewModel.FridgeItems.FirstOrDefault(f => f.Name == item.Name);
+
+                if (fridgeItem == null)
                 {
                     _fridgeListViewModel.FridgeItems.Add(new FridgeItem { Name = item.Name, LastBoughtDate = DateTime.Now, IsUsed = false });
+                }
+                else
+                {
+                    // Update the LastBoughtDate if the item is already in the fridge
+                    fridgeItem.LastBoughtDate = DateTime.Now;
                 }
 
                 // Remove the item from the grocery list

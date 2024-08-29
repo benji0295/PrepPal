@@ -32,17 +32,12 @@ public partial class GroceryListPage : ContentPage
 
 	private async void OnAddButtonClicked(object sender, EventArgs e)
 	{
-		OnAddItemClicked();
-	}
-
-	private async Task OnAddItemClicked()
-	{
 		string result = await DisplayPromptAsync("Add Item", "Enter the name of the grocery item:");
 
 		if (!string.IsNullOrWhiteSpace(result))
 		{
 			var viewModel = BindingContext as GroceryListViewModel;
-			viewModel?.GroceryItems.Add(new GroceryItem { Name = result, IsBought = false });
+			viewModel?.AddItemToGroceryList(result); // Use the new method to add the item
 		}
 	}
 

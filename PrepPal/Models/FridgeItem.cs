@@ -13,7 +13,21 @@ namespace PrepPal.Models
         public DateTime LastBoughtDate { get; set; }
         public bool IsExpired { get; set; }
         private bool _isUsed;
+        private bool _isInGroceryList = false;
 
+        public bool IsInGroceryList
+        {
+            get => _isInGroceryList;
+            set
+            {
+                if (_isInGroceryList != value)
+                {
+                    _isInGroceryList = value;
+                    OnPropertyChanged(nameof(IsInGroceryList));
+                }
+            }
+        }
+        
         public bool IsUsed
         {
             get => _isUsed;
