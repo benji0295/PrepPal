@@ -3,21 +3,121 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PrepPal.Views.MealPlanPage"
              Title="Meal Plan">
-    <VerticalStackLayout>
-        <Label 
-            Text="Monday" FontSize="Medium" FontAttributes="Bold" Padding="0,10,0,10" />
-        <Label
-            Text="Tuesday" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,10" />
-        <Label
-            Text="Wednesday" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,10" />
-        <Label
-            Text="Thursday" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,10" />
-        <Label
-            Text="Friday" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,10" />
-        <Label
-            Text="Saturday" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,10" />
-        <Label
-            Text="Sunday" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,10" />
-        
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <!-- Monday -->
+            <VerticalStackLayout>
+                <Label 
+                    Text="Monday" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+                <Button x:Name="MondayAddMealPlanButton"
+                        ImageSource="add_icon_xsmall.png"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Start" />
+            </VerticalStackLayout>
+
+            <!-- Tuesday -->
+            <VerticalStackLayout >
+                <Label 
+                    Text="Tuesday" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+                <Button x:Name="TuesdayAddMealPlanButton"
+                        ImageSource="add_icon_xsmall.png"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Start" />
+            </VerticalStackLayout>
+
+            <!-- Wednesday -->
+            <VerticalStackLayout>
+                <Label 
+                    Text="Wednesday" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+                <Button x:Name="WednesdayAddMealPlanButton"
+                        ImageSource="add_icon_xsmall.png"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Start" />
+            </VerticalStackLayout>
+            
+            <!-- Thursday -->
+            <VerticalStackLayout>
+                <Label 
+                    Text="Thursday" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+                <Button x:Name="ThursdayAddMealPlanButton"
+                        ImageSource="add_icon_xsmall.png"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Start" />
+            </VerticalStackLayout>
+
+            <!-- Friday -->
+            <VerticalStackLayout>
+                <Label 
+                    Text="Friday" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+                <Button x:Name="FridayAddMealPlanButton"
+                        ImageSource="add_icon_xsmall.png"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Start" />
+            </VerticalStackLayout>
+
+            <!-- Saturday -->
+            <VerticalStackLayout>
+                <Label 
+                    Text="Saturday" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+                <Button x:Name="SaturdayAddMealPlanButton"
+                        ImageSource="add_icon_xsmall.png"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Start" />
+            </VerticalStackLayout>
+
+            <!-- Sunday -->
+            <VerticalStackLayout>
+                <Label 
+                    Text="Sunday" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+                <Button x:Name="SundayAddMealPlanButton"
+                        ImageSource="add_icon_xsmall.png"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Start" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
