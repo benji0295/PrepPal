@@ -19,11 +19,11 @@ public class DateToTextColorConverter : IValueConverter
             }
             else
             {
-                return Colors.White; // Text is white for green or red background
+                return Colors.Black; // Text is white for green or red background
             }
         }
 
-        return Colors.White; // Default color
+        return Colors.Black; // Default color
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

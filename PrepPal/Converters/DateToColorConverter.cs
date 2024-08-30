@@ -15,15 +15,15 @@ public class DateToColorConverter : IValueConverter
 
             if (daysAgo <= 2)
             {
-                return (Colors.Green); // Recently bought
+                return (Colors.LightGreen); // Recently bought
             }
             else if (daysAgo <= 7)
             {
-                return (Colors.Yellow); // A few days ago
+                return (Colors.LightYellow); // A few days ago
             }
             else
             {
-                return (Colors.Red); // Over a week ago
+                return (Colors.LightCoral); // Over a week ago
             }
         }
 

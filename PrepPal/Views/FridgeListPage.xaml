@@ -47,7 +47,7 @@
                                            HorizontalOptions="StartAndExpand"
                                            TextDecorations="{Binding IsUsed, Converter={StaticResource StrikeThroughConverter}}" />
                                     <Frame BackgroundColor="{Binding LastBoughtDate, Converter={StaticResource DateToColorConverter}}"
-                                           CornerRadius="10"
+                                           CornerRadius="12"
                                            Padding="5"
                                            Margin="5,0,0,0"
                                            VerticalOptions="Center"

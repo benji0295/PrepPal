@@ -43,7 +43,7 @@
                                            TextDecorations="{Binding IsBought, Converter={StaticResource StrikeThroughConverter}}" />
                                     
                                     <Frame BackgroundColor="LightBlue"
-                                           CornerRadius="10"
+                                           CornerRadius="12"
                                            Padding="5"
                                            Margin="5,0,0,0"
                                            VerticalOptions="Center"
