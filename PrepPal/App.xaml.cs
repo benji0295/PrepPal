@@ -1,4 +1,6 @@
 ﻿using PrepPal.ViewModels;
+using Npgsql;
+using System;
 
 namespace PrepPal
 {
@@ -7,15 +9,37 @@ namespace PrepPal
         public static GroceryListViewModel GroceryListViewModel { get; private set; }
         public static FridgeListViewModel FridgeListViewModel { get; private set; }
         public static FavoriteRecipesViewModel FavoriteRecipesViewModel { get; private set; }
+        private static NpgsqlConnection _connection;
         public App()
         {
             InitializeComponent();
+
+            InitializeDatabaseConnection();
             
             FridgeListViewModel = new FridgeListViewModel();
             GroceryListViewModel = new GroceryListViewModel(FridgeListViewModel);
             FavoriteRecipesViewModel = new FavoriteRecipesViewModel();
             
             MainPage = new AppShell();
+        }
+        private void InitializeDatabaseConnection()
+        {
+            string connectionString = "Host=localhost;Database=preppaldb";
+            _connection = new NpgsqlConnection(connectionString);
+            try
+            {
+                _connection.Open();
+                Console.WriteLine("Database connection established.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error connecting to the database: {ex.Message}");
+            }
+        }
+
+        public static NpgsqlConnection GetDatabaseConnection()
+        {
+            return _connection;
         }
     }
 }
