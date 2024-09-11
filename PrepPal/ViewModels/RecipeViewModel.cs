@@ -56,17 +56,17 @@ namespace PrepPal.ViewModels
                 new Recipe
                 {
                     Name = "Chicken Alfredo",
-                    Ingredients = new List<Ingredient>
+                    Ingredients = new List<RecipeIngredient>
                     {
-                        new Ingredient { Name = "1 lb. fettuccine" },
-                        new Ingredient { Name = "2 cups heavy cream" },
-                        new Ingredient { Name = "1 cup grated Parmesan" },
-                        new Ingredient { Name = "2 cloves garlic, minced" },
-                        new Ingredient { Name = "1/2 cup butter" },
-                        new Ingredient { Name = "1/2 tsp. salt" },
-                        new Ingredient { Name = "1/4 tsp. pepper" },
-                        new Ingredient { Name = "1/4 tsp. nutmeg" },
-                        new Ingredient { Name = "1 lb. chicken breast, cooked and sliced" }
+                        new RecipeIngredient { IngredientName = "1 lb. fettuccine" },
+                        new RecipeIngredient { IngredientName = "2 cups heavy cream" },
+                        new RecipeIngredient { IngredientName = "1 cup grated Parmesan" },
+                        new RecipeIngredient { IngredientName = "2 cloves garlic, minced" },
+                        new RecipeIngredient { IngredientName = "1/2 cup butter" },
+                        new RecipeIngredient { IngredientName = "1/2 tsp. salt" },
+                        new RecipeIngredient { IngredientName = "1/4 tsp. pepper" },
+                        new RecipeIngredient { IngredientName = "1/4 tsp. nutmeg" },
+                        new RecipeIngredient { IngredientName = "1 lb. chicken breast, cooked and sliced" }
                     },
                     Instructions = new List<Instruction>
                     {
@@ -90,17 +90,17 @@ namespace PrepPal.ViewModels
                 new Recipe
                 {
                     Name = "Chocolate Chip Cookies",
-                    Ingredients = new List<Ingredient>
+                    Ingredients = new List<RecipeIngredient>
                     {
-                        new Ingredient { Name = "2 1/4 cups flour" },
-                        new Ingredient { Name = "1 tsp. baking soda" },
-                        new Ingredient { Name = "1 tsp. salt" },
-                        new Ingredient { Name = "1 cup butter, softened" },
-                        new Ingredient { Name = "3/4 cup sugar" },
-                        new Ingredient { Name = "3/4 cup brown sugar" },
-                        new Ingredient { Name = "1 tsp. vanilla" },
-                        new Ingredient { Name = "2 eggs" },
-                        new Ingredient { Name = "2 cups chocolate chips" }
+                        new RecipeIngredient { IngredientName = "2 1/4 cups flour" },
+                        new RecipeIngredient { IngredientName = "1 tsp. baking soda" },
+                        new RecipeIngredient { IngredientName = "1 tsp. salt" },
+                        new RecipeIngredient { IngredientName = "1 cup butter, softened" },
+                        new RecipeIngredient { IngredientName = "3/4 cup sugar" },
+                        new RecipeIngredient { IngredientName = "3/4 cup brown sugar" },
+                        new RecipeIngredient { IngredientName = "1 tsp. vanilla" },
+                        new RecipeIngredient { IngredientName = "2 eggs" },
+                        new RecipeIngredient { IngredientName = "2 cups chocolate chips" }
                     },
                     Instructions = new List<Instruction>
                     {

@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="108ad76c-0403-4c4d-9737-441b43a9b887" name="Changes" comment="Creation of database">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PrepPal/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PrepPal/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PrepPal/Contexts/PrepPalDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrepPal/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/App.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrepPal/PrepPal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/PrepPal.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrepPal/Models/Recipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrepPal/Models/Recipe.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

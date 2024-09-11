@@ -10,8 +10,9 @@ namespace PrepPal.Models
 {
     public class Recipe
     {
+        public int RecipeId { get; set; }
         public string Name { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
+        public List<RecipeIngredient> Ingredients { get; set; }
         public List<Instruction> Instructions { get; set; }
         public string Category { get; set; }
         public int Servings { get; set; }
@@ -24,48 +25,4 @@ namespace PrepPal.Models
         public bool IsFavorite { get; set; }
     }
 
-    public class Ingredient : INotifyPropertyChanged
-    {
-        private bool _isSelected;
-        public string Name { get; set; }
-
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set
-            {
-                _isSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    public class Instruction : INotifyPropertyChanged
-    {
-        private bool _isCompleted;
-
-        public string Step { get; set; }
-
-        public bool IsCompleted
-        {
-            get => _isCompleted;
-            set
-            {
-                _isCompleted = value;
-                OnPropertyChanged(nameof(IsCompleted));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
 }
