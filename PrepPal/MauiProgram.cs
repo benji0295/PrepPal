@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using PrepPal.Contexts;
 
 namespace PrepPal
 {
@@ -14,6 +16,10 @@ namespace PrepPal
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            
+            builder.Services.AddDbContext<PrepPalDbContext>(options => 
+                options.UseNpgsql("Host=localhost;Database=preppaldb")
+            );
 
 #if DEBUG
     		builder.Logging.AddDebug();

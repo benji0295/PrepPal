@@ -8,7 +8,7 @@ public class Instruction : INotifyPropertyChanged
     public int RecipeId { get; set; }
     private bool _isCompleted;
 
-    public string Step { get; set; }
+    public int Step { get; set; }
     public string Description { get; set; }
     public Recipe Recipe { get; set; }
 
