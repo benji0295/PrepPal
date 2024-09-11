@@ -32,7 +32,7 @@ namespace PrepPal
         }
         private void InitializeDatabaseConnection()
         {
-            string connectionString = "Host=localhost;Database=preppaldb";
+            string connectionString = "Host=localhost;Database=preppaldb;Username=bensmith;Password=bensmith";
             _connection = new NpgsqlConnection(connectionString);
             try
             {

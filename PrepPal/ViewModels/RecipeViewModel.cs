@@ -161,9 +161,12 @@ namespace PrepPal.ViewModels
                     .Include(r => r.RecipeIngredients)
                     .Include(r => r.Instructions)
                     .ToListAsync();
+                
+                Console.WriteLine($"Database recipes count: {databaseRecipes.Count}");
 
                 foreach (var recipe in databaseRecipes)
                 {
+                    Console.WriteLine($"Recipe: {recipe.Name}");
                     Recipes.Add(recipe);
                 }
             }

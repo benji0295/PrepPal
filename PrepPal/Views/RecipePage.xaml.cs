@@ -17,10 +17,11 @@ public partial class RecipePage : ContentPage
 
 		// Use the same PostgreSQL configuration
 		var options = new DbContextOptionsBuilder<PrepPalDbContext>()
-			.UseNpgsql("Host=localhost;Database=preppaldb")
+			.UseNpgsql("Host=localhost;Database=preppaldb;Username=bensmith;Password=bensmith")
 			.Options;
 
 		var dbContext = new PrepPalDbContext(options);
+		
 		BindingContext = new RecipeViewModel(dbContext); 
 	}
     private async void OnRecipeSelected(object sender, SelectionChangedEventArgs e)

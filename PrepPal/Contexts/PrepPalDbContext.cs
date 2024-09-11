@@ -17,10 +17,4 @@ public class PrepPalDbContext : DbContext
     public PrepPalDbContext(DbContextOptions<PrepPalDbContext> options) : base(options)
     {
     }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        // Add any specific entity configurations or relationships here
-        base.OnModelCreating(modelBuilder);
-    }
 }

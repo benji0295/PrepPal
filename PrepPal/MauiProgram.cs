@@ -18,7 +18,7 @@ namespace PrepPal
                 });
             
             // Connection string for PostgreSQL
-            var connectionString = "Host=localhost;Database=preppaldb";
+            var connectionString = "Host=localhost;Database=preppaldb;Username=bensmith;Password=bensmith";
 
             // Register the DbContext with PostgreSQL
             builder.Services.AddDbContext<PrepPalDbContext>(options =>
