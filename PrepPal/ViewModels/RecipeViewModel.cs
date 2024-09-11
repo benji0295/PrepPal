@@ -17,6 +17,7 @@ namespace PrepPal.ViewModels
     {
         private Recipe _selectedRecipe;
         private readonly PrepPalDbContext _context;
+        public PrepPalDbContext DbContext => _context;
 
         public ObservableCollection<Recipe> Recipes { get; set; } = new ObservableCollection<Recipe>();
 

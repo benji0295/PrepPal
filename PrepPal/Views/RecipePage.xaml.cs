@@ -1,6 +1,8 @@
+using PrepPal.Contexts;
 using PrepPal.ViewModels;
 using PrepPal.Models;
 using PrepPal.Views;
+using PrepPal.Contexts;
 
 namespace PrepPal.Views;
 
@@ -9,11 +11,13 @@ public partial class RecipePage : ContentPage
 	private GroceryListViewModel _groceryListViewModel;
 	private RecipeViewModel _recipeViewModel;
 	
-	public RecipePage()
+	public RecipePage(PrepPalDbContext context)
 	{
 		InitializeComponent();
+		
         _groceryListViewModel = new GroceryListViewModel(App.FridgeListViewModel);
-        _recipeViewModel = new RecipeViewModel();
+        _recipeViewModel = new RecipeViewModel(context);
+        
 		BindingContext = _recipeViewModel;
 	}
     private async void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
@@ -31,6 +35,9 @@ public partial class RecipePage : ContentPage
 
     async void OnAddNewRecipeClicked(object sender, EventArgs e)
     {
-	    await Navigation.PushAsync(new AddRecipePage { BindingContext = BindingContext });
+	    var addRecipePage = new AddRecipePage(_recipeViewModel.DbContext);
+	    addRecipePage.BindingContext = _recipeViewModel;
+    
+	    await Navigation.PushAsync(addRecipePage);
     }
 }
