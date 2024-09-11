@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>849</IntrospectionStateNumber>
+      <IntrospectionStateNumber>885</IntrospectionStateNumber>
       <ServerVersion>14.13</ServerVersion>
       <StartupTime>1724792591</StartupTime>
       <TimeZones>true ACDT
@@ -806,7 +806,7 @@ false Zulu
 13722||10|C|G
 13722||-9223372036854775808|U|G
 13722||10|U|G</Grants>
-      <IntrospectionStateNumber>849</IntrospectionStateNumber>
+      <IntrospectionStateNumber>885</IntrospectionStateNumber>
       <ObjectId>16448</ObjectId>
       <OwnerName>bensmith</OwnerName>
     </database>
@@ -4231,8 +4231,8 @@ false Zulu
     <schema id="262" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>849</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-09-10.15:09:16</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>885</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-09-11.14:18:10</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>526</StateNumber>
       <OwnerName>bensmith</OwnerName>
@@ -4347,7 +4347,7 @@ false Zulu
     </table>
     <table id="278" parent="262" name="recipes">
       <ObjectId>16450</ObjectId>
-      <StateNumber>806</StateNumber>
+      <StateNumber>884</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>bensmith</OwnerName>
     </table>
@@ -4746,7 +4746,14 @@ false Zulu
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <index id="333" parent="278" name="recipes_pkey">
+    <column id="333" parent="278" name="isfavorite">
+      <DefaultExpression>false</DefaultExpression>
+      <Position>11</Position>
+      <StateNumber>884</StateNumber>
+      <StoredType>boolean|0s</StoredType>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="334" parent="278" name="recipes_pkey">
       <ColNames>recipeid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16456</ObjectId>
@@ -4755,14 +4762,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="334" parent="278" name="recipes_pkey">
+    <key id="335" parent="278" name="recipes_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16457</ObjectId>
       <Primary>1</Primary>
       <StateNumber>804</StateNumber>
       <UnderlyingIndexId>16456</UnderlyingIndexId>
     </key>
-    <column id="335" parent="279" name="storagelocationid">
+    <column id="336" parent="279" name="storagelocationid">
       <DefaultExpression>nextval(&apos;storagelocations_storagelocationid_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4771,14 +4778,14 @@ false Zulu
       <SequenceId>16534</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="336" parent="279" name="locationname">
+    <column id="337" parent="279" name="locationname">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>812</StateNumber>
       <StoredType>varchar(100)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <index id="337" parent="279" name="storagelocations_pkey">
+    <index id="338" parent="279" name="storagelocations_pkey">
       <ColNames>storagelocationid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16539</ObjectId>
@@ -4787,14 +4794,14 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="338" parent="279" name="storagelocations_pkey">
+    <key id="339" parent="279" name="storagelocations_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16540</ObjectId>
       <Primary>1</Primary>
       <StateNumber>812</StateNumber>
       <UnderlyingIndexId>16539</UnderlyingIndexId>
     </key>
-    <column id="339" parent="280" name="unitid">
+    <column id="340" parent="280" name="unitid">
       <DefaultExpression>nextval(&apos;unitsofmeasure_unitid_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4803,19 +4810,19 @@ false Zulu
       <SequenceId>16520</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="340" parent="280" name="unitname">
+    <column id="341" parent="280" name="unitname">
       <Position>2</Position>
       <StateNumber>810</StateNumber>
       <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="341" parent="280" name="abbreviation">
+    <column id="342" parent="280" name="abbreviation">
       <Position>3</Position>
       <StateNumber>826</StateNumber>
       <StoredType>varchar(10)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <index id="342" parent="280" name="unitsofmeasure_pkey">
+    <index id="343" parent="280" name="unitsofmeasure_pkey">
       <ColNames>unitid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16525</ObjectId>
@@ -4824,7 +4831,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="343" parent="280" name="unitsofmeasure_pkey">
+    <key id="344" parent="280" name="unitsofmeasure_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16526</ObjectId>
       <Primary>1</Primary>

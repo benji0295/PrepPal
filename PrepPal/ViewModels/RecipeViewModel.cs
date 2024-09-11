@@ -7,15 +7,18 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 using PrepPal.Models;
+using PrepPal.Contexts;
 
 namespace PrepPal.ViewModels
 {
     public class RecipeViewModel : INotifyPropertyChanged
     {
         private Recipe _selectedRecipe;
+        private readonly PrepPalDbContext _context;
 
-        public ObservableCollection<Recipe> Recipes { get; set; }
+        public ObservableCollection<Recipe> Recipes { get; set; } = new ObservableCollection<Recipe>();
 
         public ObservableCollection<Recipe> FavoriteRecipes
         {
@@ -41,95 +44,45 @@ namespace PrepPal.ViewModels
                 }
             }
         }
-        public RecipeViewModel()
+        public RecipeViewModel(PrepPalDbContext context)
         {
+            _context = context;
+            
             ToggleFavoriteCommand = new Command<Recipe>(ToggleFavorite);
             IncreaseServingsCommand = new Command(IncreaseServings);
             DecreaseServingsCommand = new Command(DecreaseServings);
+            
             LoadRecipes();
         }
 
-        private void LoadRecipes()
+        private async void LoadRecipes()
         {
-            Recipes = new ObservableCollection<Recipe>
+            var recipesFromDb = await _context.Recipes
+                .Include(r => r.Ingredients)
+                .Include(r => r.Instructions)
+                .ToListAsync();
+            
+            Recipes.Clear();
+            foreach (var recipe in recipesFromDb)
             {
-                new Recipe
-                {
-                    Name = "Chicken Alfredo",
-                    Ingredients = new List<RecipeIngredient>
-                    {
-                        new RecipeIngredient { IngredientName = "1 lb. fettuccine" },
-                        new RecipeIngredient { IngredientName = "2 cups heavy cream" },
-                        new RecipeIngredient { IngredientName = "1 cup grated Parmesan" },
-                        new RecipeIngredient { IngredientName = "2 cloves garlic, minced" },
-                        new RecipeIngredient { IngredientName = "1/2 cup butter" },
-                        new RecipeIngredient { IngredientName = "1/2 tsp. salt" },
-                        new RecipeIngredient { IngredientName = "1/4 tsp. pepper" },
-                        new RecipeIngredient { IngredientName = "1/4 tsp. nutmeg" },
-                        new RecipeIngredient { IngredientName = "1 lb. chicken breast, cooked and sliced" }
-                    },
-                    Instructions = new List<Instruction>
-                    {
-                        new Instruction { Step = "Cook fettuccine according to package directions." },
-                        new Instruction
-                        {
-                            Step = "In a saucepan, combine cream, Parmesan, garlic, butter, salt, pepper, and nutmeg."
-                        },
-                        new Instruction { Step = "Cook over medium heat until sauce thickens." },
-                        new Instruction { Step = "Add chicken and heat through." },
-                        new Instruction { Step = "Serve over fettuccine." }
-                    },
-                    Category = "Main Dish",
-                    Servings = 4,
-                    PrepTime = 10,
-                    CookTime = 20,
-                    TotalTime = 30,
-                    Source = "Mom",
-                    SourceURL = "example.com"
-                },
-                new Recipe
-                {
-                    Name = "Chocolate Chip Cookies",
-                    Ingredients = new List<RecipeIngredient>
-                    {
-                        new RecipeIngredient { IngredientName = "2 1/4 cups flour" },
-                        new RecipeIngredient { IngredientName = "1 tsp. baking soda" },
-                        new RecipeIngredient { IngredientName = "1 tsp. salt" },
-                        new RecipeIngredient { IngredientName = "1 cup butter, softened" },
-                        new RecipeIngredient { IngredientName = "3/4 cup sugar" },
-                        new RecipeIngredient { IngredientName = "3/4 cup brown sugar" },
-                        new RecipeIngredient { IngredientName = "1 tsp. vanilla" },
-                        new RecipeIngredient { IngredientName = "2 eggs" },
-                        new RecipeIngredient { IngredientName = "2 cups chocolate chips" }
-                    },
-                    Instructions = new List<Instruction>
-                    {
-                        new Instruction { Step = "Preheat oven to 375°F." },
-                        new Instruction { Step = "In a small bowl, combine flour, baking soda, and salt." },
-                        new Instruction { Step = "In a large bowl, cream butter, sugar, brown sugar, and vanilla." },
-                        new Instruction { Step = "Add eggs one at a time, beating well after each addition." },
-                        new Instruction { Step = "Gradually add flour mixture." },
-                        new Instruction { Step = "Stir in chocolate chips." },
-                        new Instruction { Step = "Drop by rounded tablespoonfuls onto ungreased cookie sheet." },
-                        new Instruction { Step = "Bake for 9-11 minutes or until golden brown." }
-                    },
-                    Category = "Dessert",
-                    Servings = 4,
-                    PrepTime = 10,
-                    CookTime = 10,
-                    TotalTime = 20,
-                    Source = "Grandma",
-                    SourceURL = "example.com"
-                },
-            };
+                Recipes.Add(recipe);
+            }
+            
+            OnPropertyChanged(nameof(Recipes));
+            OnPropertyChanged(nameof(FavoriteRecipes));
         }
 
-        private void ToggleFavorite(Recipe recipe)
+        private async void ToggleFavorite(Recipe recipe)
         {
             if (recipe != null)
             {
                 recipe.IsFavorite = !recipe.IsFavorite;
+
+                _context.Recipes.Update(recipe);
+                await _context.SaveChangesAsync();
+                
                 OnPropertyChanged(nameof(Recipes));
+                OnPropertyChanged(nameof(FavoriteRecipes));
             }
         }
 
