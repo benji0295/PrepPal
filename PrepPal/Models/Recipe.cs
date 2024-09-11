@@ -10,6 +10,7 @@ namespace PrepPal.Models
 {
     public class Recipe
     {
+        public int RecipeId { get; set; }
         public string Name { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         public List<Instruction> Instructions { get; set; }
