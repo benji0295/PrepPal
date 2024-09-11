@@ -15,7 +15,10 @@ public class RecipeRepository
 
     public async Task<List<Recipe>> GetAllRecipes()
     {
-        return await _context.Recipes.ToListAsync();
+        return await _context.Recipes
+            .Include(r => r.RecipeIngredients)
+            .Include(r => r.Instructions)
+            .ToListAsync();
     }
 
     public async Task AddRecipe(Recipe recipe)

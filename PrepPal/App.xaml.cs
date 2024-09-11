@@ -14,7 +14,15 @@ namespace PrepPal
         {
             InitializeComponent();
 
-            InitializeDatabaseConnection();
+            try
+            {
+                InitializeDatabaseConnection();
+            }
+            catch (Exception ex)
+            {
+                // Display the error or log it
+                Console.WriteLine($"Error during initialization: {ex.Message}");
+            }
             
             FridgeListViewModel = new FridgeListViewModel();
             GroceryListViewModel = new GroceryListViewModel(FridgeListViewModel);

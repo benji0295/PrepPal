@@ -30,8 +30,25 @@ public partial class AddRecipePage : ContentPage
                 TotalTime = int.Parse(prepTimeEntry.Text + cookTimeEntry.Text),
                 Source = sourceEntry.Text,
                 SourceURL = sourceUrlEntry.Text,
-                Ingredients = ingredientsEditor.Text.Split('\n').Select(line => new Ingredient { Name = line.Trim() }).ToList(),
-                Instructions = instructionsEditor.Text.Split('\n').Select(line => new Instruction { Step = line.Trim() }).ToList()
+                RecipeIngredients = ingredientsEditor.Text.Split('\n')
+                    .Where(line => !string.IsNullOrWhiteSpace(line))  // Filter out empty lines
+                    .Select(line => 
+                    {
+                        var parts = line.Split(' ');  // Assuming ingredients are input in "quantity unit name" format
+                        return new RecipeIngredient
+                        {
+                            Quantity = decimal.Parse(parts[0]),  // Parse quantity
+                            Unit = parts[1],                     // Unit (e.g., cups, tbsp, etc.)
+                            IngredientName = string.Join(" ", parts.Skip(2))  // Ingredient name (after quantity and unit)
+                        };
+                    }).ToList(),
+                Instructions = instructionsEditor.Text.Split('\n')
+                    .Where(line => !string.IsNullOrWhiteSpace(line))
+                    .Select((line, index) => new Instruction 
+                    { 
+                        StepNumber = index + 1, 
+                        Description = line.Trim() 
+                    }).ToList()
             };
 
             // Add recipe to the RecipeViewModel's Recipes collection

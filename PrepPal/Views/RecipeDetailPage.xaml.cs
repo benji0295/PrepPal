@@ -39,11 +39,11 @@ public partial class RecipeDetailPage : ContentPage
 
     private void OnAddIngredientsToGroceryListClicked(object sender, EventArgs e)
     {
-        foreach (var ingredient in SelectedRecipe.Ingredients)
+        foreach (var ingredient in SelectedRecipe.RecipeIngredients)
         {
-            if (!_groceryListViewModel.GroceryItems.Any((item => item.Name == ingredient.Name)))
+            if (!_groceryListViewModel.GroceryItems.Any((item => item.Name == ingredient.IngredientName)))
             {
-                _groceryListViewModel.GroceryItems.Add(new GroceryItem { Name = ingredient.Name, IsBought = false });
+                _groceryListViewModel.GroceryItems.Add(new GroceryItem { Name = ingredient.IngredientName, IsBought = false });
             }
         }
 

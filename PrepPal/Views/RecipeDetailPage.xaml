@@ -101,12 +101,12 @@
 
             <!-- Ingredients Section -->
             <Label Text="Ingredients" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,0"/>
-            <CollectionView ItemsSource="{Binding Ingredients}">
+            <CollectionView ItemsSource="{Binding RecipeIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal" >
                             <CheckBox IsChecked="{Binding IsSelected}" />
-                            <Label Text="{Binding Name}" 
+                            <Label Text="{Binding IngredientName}" 
                                    TextDecorations="{Binding IsSelected, 
                                    Converter={StaticResource StrikeThroughConverter}}"
                                    VerticalOptions="Center" />
@@ -129,7 +129,7 @@
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal" >
                             <CheckBox IsChecked="{Binding IsCompleted}" />
-                            <Label Text="{Binding Step}"
+                            <Label Text="{Binding Description}"
                                    LineBreakMode="WordWrap"
                                    HorizontalOptions="FillAndExpand"
                                    TextDecorations="{Binding IsCompleted, Converter={StaticResource StrikeThroughConverter}}"
