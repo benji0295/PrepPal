@@ -72,13 +72,15 @@
             <!-- Recipe Image -->
             <Label Text="Recipe Image" Padding="0,10,0,0" />
             <Button x:Name="selectImageButton" 
-                    Text="Select or Take a Picture"
-                    BackgroundColor="LightGray" 
+                    Text="Add Image"
+                    HorizontalOptions="Start"
+                    WidthRequest="100"
+                    BackgroundColor="Black" 
                     Clicked="OnSelectImageButtonClicked"/>
 
             <Image x:Name="recipeImagePreview" 
-                   HeightRequest="200" 
-                   WidthRequest="200" 
+                   HeightRequest="100" 
+                   WidthRequest="100" 
                    Aspect="AspectFill"
                    IsVisible="False"/>
 
