@@ -15,6 +15,20 @@
 
     <ScrollView>
         <StackLayout Padding="0" Spacing="0">
+            <Image x:Name="RecipeImage"
+                   Source="{Binding ImageURL}"
+                   HeightRequest="200"
+                   Aspect="AspectFill"
+                   HorizontalOptions="FillAndExpand">
+                <Image.WidthRequest>
+                    <OnIdiom x:TypeArguments="x:Double">
+                        <!-- Fixed width for desktop/webpage -->
+                        <OnIdiom.Desktop>
+                            200
+                        </OnIdiom.Desktop>
+                    </OnIdiom>
+                </Image.WidthRequest>
+            </Image>
             <!-- Recipe Category -->
             <Label FontSize="Medium" Padding="0,10,0,5">
                 <Label.FormattedText>

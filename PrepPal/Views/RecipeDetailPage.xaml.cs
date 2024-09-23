@@ -18,10 +18,19 @@ public partial class RecipeDetailPage : ContentPage
         SelectedRecipe = selectedRecipe;
         _recipeViewModel = recipeViewModel;
         _groceryListViewModel = groceryListViewModel;
+        AdjustImageWidth();
 
         BindingContext = SelectedRecipe;
 
         UpdateFavoriteIcon();
+    }
+
+    private void AdjustImageWidth()
+    {
+        if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+        {
+            RecipeImage.WidthRequest = Application.Current.MainPage.Width;
+        }
     }
 
     private async void OnDeleteRecipeClicked(object sender, EventArgs e)

@@ -20,16 +20,23 @@
                     <DataTemplate>
                         <Frame BorderColor="Black"
                                CornerRadius="15"
-                               Padding="5"
-                               Margin="5"
+                               Padding="1"
+                               Margin="1"
                                HasShadow="False"
-                               HeightRequest="150"
+                               HeightRequest="200"
                                WidthRequest="150" 
                                HorizontalOptions="Center"
                                VerticalOptions="Center">
                             <StackLayout HorizontalOptions="Center" 
                                          VerticalOptions="Center"
                                          Spacing="10">
+                                <Frame Padding="0" HasShadow="False" BorderColor="Transparent" CornerRadius="15">
+                                    <Image Source="{Binding ImageURL}" 
+                                           WidthRequest="150" 
+                                           HeightRequest="100" 
+                                           Aspect="AspectFill"/>
+                                </Frame>
+                                
                                 <Label Text="{Binding Name}" 
                                        FontSize="Medium" 
                                        FontAttributes="Bold" 

@@ -98,7 +98,8 @@ namespace PrepPal.ViewModels
                         CookTime = 20,
                         TotalTime = 30,
                         Source = "Mom",
-                        SourceURL = "example.com"
+                        SourceURL = "example.com",
+                        ImageURL = "chicken_alfredo.jpg"
                     },
                     new Recipe
                     {
@@ -148,7 +149,8 @@ namespace PrepPal.ViewModels
                         CookTime = 10,
                         TotalTime = 20,
                         Source = "Grandma",
-                        SourceURL = "example.com"
+                        SourceURL = "example.com",
+                        ImageURL = "cookies.jpg"
                     },
                 };
 
