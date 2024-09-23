@@ -1,7 +1,11 @@
+using System.ComponentModel;
+
 namespace PrepPal.Models;
 
-public class RecipeIngredient
+public class RecipeIngredient : INotifyPropertyChanged
 {
+    private bool _isSelected;
+    
     public int RecipeIngredientId { get; set; } 
     public int RecipeId { get; set; } 
     public Recipe Recipe { get; set; } 
@@ -9,5 +13,22 @@ public class RecipeIngredient
     public decimal Quantity { get; set; }
     public string Unit { get; set; }
     public string IngredientName { get; set; }
-    public bool IsSelected { get; set; }
+    
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set
+        {
+            if (_isSelected != value)
+            {
+                _isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+    }
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

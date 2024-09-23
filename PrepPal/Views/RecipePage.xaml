@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PrepPal"
              x:Class="PrepPal.Views.RecipePage"
+             BackgroundColor="#F0F0F0"
              Title="Recipes">
     
     <ContentPage.ToolbarItems>
@@ -25,16 +26,17 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="Black"
+                           BackgroundColor="#F9F6EE"
                            CornerRadius="15"
                            Padding="1"
                            Margin="1"
                            HasShadow="False"
-                           HeightRequest="200"
+                           HeightRequest="225"
                            WidthRequest="150" 
                            HorizontalOptions="Center"
                            VerticalOptions="Center">
                         <StackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
+                                     VerticalOptions="Start"
                                      Spacing="10">
                             <Frame Padding="0" HasShadow="False" BorderColor="Transparent" CornerRadius="15">
                                 <Image Source="{Binding ImageURL}" 

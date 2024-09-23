@@ -4,6 +4,7 @@
              xmlns:viewModels="clr-namespace:PrepPal.ViewModels"
              xmlns:converters="clr-namespace:PrepPal.Converters"
              x:Class="PrepPal.Views.GroceryListPage"
+             BackgroundColor="#F0F0F0"
              Title="Grocery List">
     
     <ContentPage.Resources>
@@ -55,7 +56,8 @@
                                                HorizontalOptions="Center" />
                                     </Frame>
                                     
-                                    <CheckBox IsChecked="{Binding IsBought}" 
+                                    <CheckBox IsChecked="{Binding IsBought}"
+                                              Color="Black"
                                               VerticalOptions="Center" />
                                 </StackLayout>
                             </SwipeView>

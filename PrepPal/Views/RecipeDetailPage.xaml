@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PrepPal.Views.RecipeDetailPage"
+             BackgroundColor="#F0F0F0"
              Title="{Binding Name}">
     
     <ContentPage.ToolbarItems>
@@ -119,7 +120,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal" >
-                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <CheckBox IsChecked="{Binding IsSelected}"
+                                      Color="Black"/>
                             <Label Text="{Binding IngredientName}" 
                                    TextDecorations="{Binding IsSelected, 
                                    Converter={StaticResource StrikeThroughConverter}}"
@@ -142,7 +144,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal" >
-                            <CheckBox IsChecked="{Binding IsCompleted}" />
+                            <CheckBox IsChecked="{Binding IsCompleted}"
+                                      Color="Black"/>
                             <Label Text="{Binding Description}"
                                    LineBreakMode="WordWrap"
                                    HorizontalOptions="FillAndExpand"

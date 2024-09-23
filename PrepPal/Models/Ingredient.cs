@@ -5,6 +5,7 @@ namespace PrepPal.Models;
 public class Ingredient : INotifyPropertyChanged
 {
     private bool _isSelected;
+    
     public string IngredientId { get; set; }
     public string Name { get; set; }
     public string Aisle { get; set; }
@@ -15,8 +16,11 @@ public class Ingredient : INotifyPropertyChanged
         get => _isSelected;
         set
         {
-            _isSelected = value;
-            OnPropertyChanged(nameof(IsSelected));
+            if (_isSelected != value)
+            {
+                _isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
         }
     }
     public event PropertyChangedEventHandler PropertyChanged;

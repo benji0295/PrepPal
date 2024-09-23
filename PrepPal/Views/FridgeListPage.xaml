@@ -4,6 +4,7 @@
              xmlns:viewModels="clr-namespace:PrepPal.ViewModels"
              xmlns:converters="clr-namespace:PrepPal.Converters"
              x:Class="PrepPal.Views.FridgeListPage"
+             BackgroundColor="#F0F0F0"
              Title="Fridge List">
     
     <ContentPage.Resources>
@@ -59,6 +60,7 @@
                                     </Frame>
                                     
                                     <CheckBox IsChecked="{Binding IsUsed}" 
+                                              Color="Black"
                                               VerticalOptions="Center" />
                                 </StackLayout>
                             </SwipeView>
