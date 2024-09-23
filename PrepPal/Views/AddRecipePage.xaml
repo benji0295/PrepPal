@@ -68,6 +68,19 @@
                 </Border.StrokeShape>
                 <Entry x:Name="sourceUrlEntry" Placeholder="Source URL" />
             </Border>
+            
+            <!-- Recipe Image -->
+            <Label Text="Recipe Image" Padding="0,10,0,0" />
+            <Button x:Name="selectImageButton" 
+                    Text="Select or Take a Picture"
+                    BackgroundColor="LightGray" 
+                    Clicked="OnSelectImageButtonClicked"/>
+
+            <Image x:Name="recipeImagePreview" 
+                   HeightRequest="200" 
+                   WidthRequest="200" 
+                   Aspect="AspectFill"
+                   IsVisible="False"/>
 
             <!-- Ingredients -->
             <Label Text="Ingredients (one per line)" Padding="0,10,0,0" />

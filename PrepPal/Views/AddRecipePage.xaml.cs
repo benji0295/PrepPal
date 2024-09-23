@@ -10,6 +10,7 @@ namespace PrepPal.Views;
 
 public partial class AddRecipePage : ContentPage
 {
+    private string _selectedImagePath;
     public AddRecipePage()
     {
         InitializeComponent();
@@ -61,6 +62,89 @@ public partial class AddRecipePage : ContentPage
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"Failed to add recipe: {ex.Message}", "OK");
+        }
+    }
+
+    private async void OnSelectImageButtonClicked(object sender, EventArgs e)
+    {
+        var action = await DisplayActionSheet("Select Image Source", "Cancel", null, "Take Photo", "Choose from Gallery", "Choose from Files");
+
+        switch (action)
+        {
+            case "Take Photo":
+                await TakePhotoAsync();
+                break;
+            case "Choose from Gallery":
+                await PickPhotoFromGalleryAsync();
+                break;
+            case "Choose from Files":
+                await PickPhotoFromFilesAsync();
+                break;
+        }
+    }
+    
+    // Take a photo using the camera
+    private async Task TakePhotoAsync()
+    {
+        try
+        {
+            var photo = await MediaPicker.CapturePhotoAsync();
+            if (photo != null)
+            {
+                var stream = await photo.OpenReadAsync();
+                _selectedImagePath = photo.FullPath;
+                recipeImagePreview.Source = ImageSource.FromStream(() => stream);
+                recipeImagePreview.IsVisible = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Unable to take photo: {ex.Message}", "OK");
+        }
+    }
+    
+    // Pick an image from the gallery
+    private async Task PickPhotoFromGalleryAsync()
+    {
+        try
+        {
+            var photo = await MediaPicker.PickPhotoAsync();
+            if (photo != null)
+            {
+                var stream = await photo.OpenReadAsync();
+                _selectedImagePath = photo.FullPath;
+                recipeImagePreview.Source = ImageSource.FromStream(() => stream);
+                recipeImagePreview.IsVisible = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Unable to pick photo: {ex.Message}", "OK");
+        }
+    }
+    
+    // Pick an image from the file system
+    private async Task PickPhotoFromFilesAsync()
+    {
+        try
+        {
+            var result = await FilePicker.PickAsync(new PickOptions
+            {
+                FileTypes = FilePickerFileType.Images,
+                PickerTitle = "Pick an image"
+            });
+
+            if (result != null)
+            {
+                var stream = await result.OpenReadAsync();
+                _selectedImagePath = result.FullPath;
+                recipeImagePreview.Source = ImageSource.FromStream(() => stream);
+                recipeImagePreview.IsVisible = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Unable to pick file: {ex.Message}", "OK");
         }
     }
 
