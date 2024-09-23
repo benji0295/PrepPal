@@ -86,6 +86,16 @@ public partial class RecipeDetailPage : ContentPage
     {
         base.OnAppearing();
         UpdateFavoriteIcon();
+
+        foreach (var ingredient in SelectedRecipe.RecipeIngredients)
+        {
+            ingredient.IsSelected = false;
+        }
+
+        foreach (var instruction in SelectedRecipe.Instructions)
+        {
+            instruction.IsCompleted = false;
+        }
     }
 
     private void UpdateFavoriteIcon()
