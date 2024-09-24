@@ -20,6 +20,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="Black"
+                               BackgroundColor="#F9F6EE"
                                CornerRadius="15"
                                Padding="1"
                                Margin="1"

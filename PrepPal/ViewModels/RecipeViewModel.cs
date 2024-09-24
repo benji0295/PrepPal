@@ -18,17 +18,12 @@ namespace PrepPal.ViewModels
         private Recipe _selectedRecipe;
         private readonly PrepPalDbContext _dbContext;
         private bool _isAllRecipesSelected = true;
+        
+        // Observable collections for the RecipeSelectionPage
+        public ObservableCollection<Recipe> AllRecipes { get; set; }
+        public ObservableCollection<Recipe> FilteredRecipes { get; set; }
 
         public bool IsFavoriteRecipesSelected => !IsAllRecipesSelected;
-        public ObservableCollection<Recipe> Recipes { get; set; }
-
-        public ObservableCollection<Recipe> FavoriteRecipes
-        {
-            get
-            {
-                return new ObservableCollection<Recipe>(Recipes.Where(r => r.IsFavorite));
-            }
-        }
         public bool IsAllRecipesSelected
         {
             get => _isAllRecipesSelected;
@@ -36,6 +31,16 @@ namespace PrepPal.ViewModels
             {
                 _isAllRecipesSelected = value;
                 OnPropertyChanged();
+                ApplyFilter();
+            }
+        }
+        public ObservableCollection<Recipe> Recipes { get; set; }
+
+        public ObservableCollection<Recipe> FavoriteRecipes
+        {
+            get
+            {
+                return new ObservableCollection<Recipe>(Recipes.Where(r => r.IsFavorite));
             }
         }
         
@@ -69,6 +74,9 @@ namespace PrepPal.ViewModels
             SwitchToFavoriteRecipesCommand = new Command(SwitchToFavoriteRecipes);
 
             Recipes = new ObservableCollection<Recipe>();
+            AllRecipes = new ObservableCollection<Recipe>();
+            FilteredRecipes = new ObservableCollection<Recipe>();
+            
             LoadRecipes();
         }
 
@@ -76,6 +84,8 @@ namespace PrepPal.ViewModels
         {
             try
             {
+                AllRecipes.Clear();
+                
                 var hardcodedRecipes = new ObservableCollection<Recipe>
                 {
                     new Recipe
@@ -173,6 +183,7 @@ namespace PrepPal.ViewModels
                 foreach (var recipe in hardcodedRecipes)
                 {
                     Recipes.Add(recipe);
+                    AllRecipes.Add(recipe);
                 }
 
                 var databaseRecipes = await _dbContext.Recipes
@@ -186,11 +197,34 @@ namespace PrepPal.ViewModels
                 {
                     Console.WriteLine($"Recipe: {recipe.Name}");
                     Recipes.Add(recipe);
+                    AllRecipes.Add(recipe);
                 }
+                
+                ApplyFilter();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error loading recipes: {ex.Message}");
+            }
+        }
+        
+        private void ApplyFilter()
+        {
+            FilteredRecipes.Clear();
+
+            if (IsAllRecipesSelected)
+            {
+                foreach (var recipe in AllRecipes)
+                {
+                    FilteredRecipes.Add(recipe);
+                }
+            }
+            else
+            {
+                foreach (var recipe in AllRecipes.Where(r => r.IsFavorite))
+                {
+                    FilteredRecipes.Add(recipe);
+                }
             }
         }
 
@@ -205,7 +239,6 @@ namespace PrepPal.ViewModels
         private void SwitchToAllRecipes()
         {
             IsAllRecipesSelected = true;
-            LoadRecipes();
         }
 
         private void SwitchToFavoriteRecipes()

@@ -30,7 +30,7 @@
 
         <!-- Grid to Display Recipe Cards -->
         <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Recipes}">
+                        ItemsSource="{Binding FilteredRecipes}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2" />
             </CollectionView.ItemsLayout>
