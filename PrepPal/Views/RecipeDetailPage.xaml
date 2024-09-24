@@ -6,6 +6,8 @@
              Title="{Binding Name}">
     
     <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="InfoToolbarItem"
+                     IconImageSource="info_icon.png" />
         <ToolbarItem x:Name="FavoriteToolbarItem" 
                      IconImageSource="heart_icon.png" 
                      Clicked="OnFavoriteClicked" />

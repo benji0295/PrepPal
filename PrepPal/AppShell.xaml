@@ -28,5 +28,8 @@
     <FlyoutItem Title="Fridge List" FlyoutIcon="fridge_icon.png">
         <ShellContent ContentTemplate="{DataTemplate local:FridgeListPage}" />
     </FlyoutItem>
+    
+    <ShellContent Route="MealPlanPage" ContentTemplate="{DataTemplate local:MealPlanPage}" />
+    <ShellContent Route="RecipeSelectionPage" ContentTemplate="{DataTemplate local:RecipeSelectionPage}" />
 
 </Shell>

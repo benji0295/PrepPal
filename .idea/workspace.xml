@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="108ad76c-0403-4c4d-9737-441b43a9b887" name="Changes" comment="Added first recipe">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e9ee4794-f9b1-4931-9f46-8d26467f14ef.xml" beforeDir="false" />
-    </list>
+    <list default="true" id="108ad76c-0403-4c4d-9737-441b43a9b887" name="Changes" comment="Added first recipe" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -88,6 +88,11 @@
 	  <MauiXaml Update="Views\RecipePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Remove="MainPage.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="MainPage.xaml.cs" />
 	</ItemGroup>
 
 </Project>

@@ -17,7 +17,9 @@ namespace PrepPal.ViewModels
     {
         private Recipe _selectedRecipe;
         private readonly PrepPalDbContext _dbContext;
+        private bool _isAllRecipesSelected = true;
 
+        public bool IsFavoriteRecipesSelected => !IsAllRecipesSelected;
         public ObservableCollection<Recipe> Recipes { get; set; }
 
         public ObservableCollection<Recipe> FavoriteRecipes
@@ -27,9 +29,21 @@ namespace PrepPal.ViewModels
                 return new ObservableCollection<Recipe>(Recipes.Where(r => r.IsFavorite));
             }
         }
+        public bool IsAllRecipesSelected
+        {
+            get => _isAllRecipesSelected;
+            set
+            {
+                _isAllRecipesSelected = value;
+                OnPropertyChanged();
+            }
+        }
+        
         public ICommand IncreaseServingsCommand { get; set; }
         public ICommand DecreaseServingsCommand { get; set; }
         public ICommand ToggleFavoriteCommand { get; set; }
+        public ICommand SwitchToAllRecipesCommand { get; }
+        public ICommand SwitchToFavoriteRecipesCommand { get; }
 
         public Recipe SelectedRecipe
         {
@@ -51,6 +65,8 @@ namespace PrepPal.ViewModels
             ToggleFavoriteCommand = new Command<Recipe>(ToggleFavorite);
             IncreaseServingsCommand = new Command(IncreaseServings);
             DecreaseServingsCommand = new Command(DecreaseServings);
+            SwitchToAllRecipesCommand = new Command(SwitchToAllRecipes);
+            SwitchToFavoriteRecipesCommand = new Command(SwitchToFavoriteRecipes);
 
             Recipes = new ObservableCollection<Recipe>();
             LoadRecipes();
@@ -185,6 +201,16 @@ namespace PrepPal.ViewModels
                 recipe.IsFavorite = !recipe.IsFavorite;
                 OnPropertyChanged(nameof(Recipes));
             }
+        }
+        private void SwitchToAllRecipes()
+        {
+            IsAllRecipesSelected = true;
+            LoadRecipes();
+        }
+
+        private void SwitchToFavoriteRecipes()
+        {
+            IsAllRecipesSelected = false;
         }
 
         private void IncreaseServings()
