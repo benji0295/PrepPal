@@ -62,25 +62,25 @@ public partial class MealPlanPage : ContentPage
 			switch (day)
 			{
 				case "Monday":
-					MondayStack?.Children.Insert(1, recipeLabel);
+					InsertRecipeAboveButton(MondayStack, recipeLabel);
 					break;
 				case "Tuesday":
-					TuesdayStack?.Children.Insert(1, recipeLabel);
+					InsertRecipeAboveButton(TuesdayStack, recipeLabel);
 					break;
 				case "Wednesday":
-					WednesdayStack?.Children.Insert(1, recipeLabel);
+					InsertRecipeAboveButton(WednesdayStack, recipeLabel);
 					break;
 				case "Thursday":
-					ThursdayStack?.Children.Insert(1, recipeLabel);
+					InsertRecipeAboveButton(ThursdayStack, recipeLabel);
 					break;
 				case "Friday":
-					FridayStack?.Children.Insert(1, recipeLabel);
+					InsertRecipeAboveButton(FridayStack, recipeLabel);
 					break;
 				case "Saturday":
-					SaturdayStack?.Children.Insert(1, recipeLabel);
+					InsertRecipeAboveButton(SaturdayStack, recipeLabel);
 					break;
 				case "Sunday":
-					SundayStack?.Children.Insert(1, recipeLabel);
+					InsertRecipeAboveButton(SundayStack, recipeLabel);
 					break;
 				default:
 					Console.WriteLine("Unknown day selected.");
@@ -92,5 +92,12 @@ public partial class MealPlanPage : ContentPage
 			Console.WriteLine($"Error adding recipe to meal plan: {ex.Message}");
 			DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
 		}
+	}
+
+	private void InsertRecipeAboveButton(VerticalStackLayout stack, Label recipeLabel)
+	{
+		var buttonIndex = stack.Children.Count - 1;
+		
+		stack.Children.Insert(buttonIndex, recipeLabel);
 	}
 }
