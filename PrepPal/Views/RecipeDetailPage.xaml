@@ -4,6 +4,11 @@
              x:Class="PrepPal.Views.RecipeDetailPage"
              BackgroundColor="#F0F0F0"
              Title="{Binding Name}">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IconOverride="back_icon.png"
+                            Command="{Binding NavigateBackCommand}"
+                            IsEnabled="True"/>
+    </Shell.BackButtonBehavior>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="InfoToolbarItem"
