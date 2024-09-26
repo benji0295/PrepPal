@@ -1,3 +1,6 @@
+using PrepPal.Views;
+using Microsoft.Maui.Controls;
+
 namespace PrepPal.Views;
 
 [QueryProperty(nameof(RecipeName), "recipe")]
@@ -10,6 +13,16 @@ public partial class MealPlanPage : ContentPage
 	public MealPlanPage()
 	{
 		InitializeComponent();
+	}
+
+	protected override async void OnAppearing()
+	{
+		base.OnAppearing();
+
+		if (!string.IsNullOrEmpty(RecipeName) && !string.IsNullOrEmpty(Day))
+		{
+			AddRecipeToMealPlan(RecipeName, Day);
+		}
 	}
 	
 	private async void OnAddMealClicked(object sender, EventArgs e)

@@ -38,11 +38,17 @@ public partial class RecipeSelectionPage : ContentPage
 
     private async void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
     {
+        Console.WriteLine("OneRecipeSelected method hit.");
         var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Recipe;
 
         if (selectedRecipe != null)
         {
+            Console.WriteLine($"Selected recipe: {selectedRecipe.Name}");
             await Shell.Current.GoToAsync($"///MealPlanPage?recipe={selectedRecipe.Name}&day={Day}");
+        }
+        else
+        {
+            Console.WriteLine("No recipe selected.");
         }
     }
 }

@@ -49,6 +49,7 @@ namespace PrepPal.ViewModels
         public ICommand ToggleFavoriteCommand { get; set; }
         public ICommand SwitchToAllRecipesCommand { get; }
         public ICommand SwitchToFavoriteRecipesCommand { get; }
+        public ICommand NavigateBackCommand { get; }
 
         public Recipe SelectedRecipe
         {
@@ -72,6 +73,7 @@ namespace PrepPal.ViewModels
             DecreaseServingsCommand = new Command(DecreaseServings);
             SwitchToAllRecipesCommand = new Command(SwitchToAllRecipes);
             SwitchToFavoriteRecipesCommand = new Command(SwitchToFavoriteRecipes);
+            NavigateBackCommand = new Command(NavigateBack);
 
             Recipes = new ObservableCollection<Recipe>();
             AllRecipes = new ObservableCollection<Recipe>();
@@ -261,6 +263,11 @@ namespace PrepPal.ViewModels
                 SelectedRecipe.Servings--;
                 OnPropertyChanged(nameof(SelectedRecipe));
             }
+        }
+
+        private async void NavigateBack()
+        {
+            await Shell.Current.GoToAsync("//MealPlanPage");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

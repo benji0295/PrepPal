@@ -18,7 +18,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Meal Plan" FlyoutIcon="calendar_icon.png">
-        <ShellContent ContentTemplate="{DataTemplate local:MealPlanPage}" />
+        <ShellContent Route="MealPlanPage" ContentTemplate="{DataTemplate local:MealPlanPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Grocery List" FlyoutIcon="cart_icon.png">
@@ -29,7 +29,8 @@
         <ShellContent ContentTemplate="{DataTemplate local:FridgeListPage}" />
     </FlyoutItem>
     
-    <ShellContent Route="MealPlanPage" ContentTemplate="{DataTemplate local:MealPlanPage}" />
-    <ShellContent Route="RecipeSelectionPage" ContentTemplate="{DataTemplate local:RecipeSelectionPage}" />
+    <ShellContent Route="RecipeSelectionPage" 
+                  ContentTemplate="{DataTemplate local:RecipeSelectionPage}"
+                  FlyoutItemIsVisible="False" />
 
 </Shell>
