@@ -10,7 +10,7 @@
     <Shell.FlyoutBackgroundColor>#F0F0F0</Shell.FlyoutBackgroundColor>
 
     <FlyoutItem Title="Recipes" FlyoutIcon="recipe_icon.png">
-        <ShellContent ContentTemplate="{DataTemplate local:RecipePage}" />
+        <ShellContent Route="RecipePage" ContentTemplate="{DataTemplate local:RecipePage}" />
     </FlyoutItem>
     
     <FlyoutItem Title="Favorite Recipes" FlyoutIcon="heart_icon_filled.png">
@@ -18,7 +18,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Meal Plan" FlyoutIcon="calendar_icon.png">
-        <ShellContent Route="MealPlanPage" ContentTemplate="{DataTemplate local:MealPlanPage}" />
+        <ShellContent ContentTemplate="{DataTemplate local:MealPlanPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Grocery List" FlyoutIcon="cart_icon.png">
@@ -31,6 +31,9 @@
     
     <ShellContent Route="RecipeSelectionPage" 
                   ContentTemplate="{DataTemplate local:RecipeSelectionPage}"
+                  FlyoutItemIsVisible="False" />
+    <ShellContent Route="AddRecipePage" 
+                  ContentTemplate="{DataTemplate local:AddRecipePage}"
                   FlyoutItemIsVisible="False" />
 
 </Shell>

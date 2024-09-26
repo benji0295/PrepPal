@@ -3,6 +3,12 @@
              x:Class="PrepPal.Views.AddRecipePage"
              BackgroundColor="#F0F0F0"
              Title="Add New Recipe">
+    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IconOverride="back_icon.png"
+                            Command="{Binding NavigateBackCommand}"
+                            IsEnabled="True"/>
+    </Shell.BackButtonBehavior>
 
     <ScrollView>
         <StackLayout>

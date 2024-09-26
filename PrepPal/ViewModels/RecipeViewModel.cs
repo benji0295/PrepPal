@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using PrepPal.Models;
 using PrepPal.Contexts;
+using PrepPal.Views;
 
 namespace PrepPal.ViewModels
 {
@@ -267,8 +268,44 @@ namespace PrepPal.ViewModels
 
         private async void NavigateBack()
         {
-            await Shell.Current.GoToAsync("//MealPlanPage");
+            try
+            {
+                var navigationStack = Shell.Current.Navigation.NavigationStack;
+
+                if (navigationStack.Count > 1)
+                {
+                    var previousPage = navigationStack[navigationStack.Count - 2];
+
+                    if (previousPage is RecipeDetailPage)
+                    {
+                        await Shell.Current.GoToAsync("//RecipePage");
+                    }
+                    else if (previousPage is RecipeSelectionPage)
+                    {
+                        await Shell.Current.GoToAsync("//MealPlanPage");
+                    }
+                    else if (previousPage is AddRecipePage)
+                    {
+                        await Shell.Current.GoToAsync("//RecipePage");
+                    }
+                    else
+                    {
+                        await Shell.Current.GoToAsync("//RecipePage");
+                    }
+                }
+                else
+                {
+                    await Shell.Current.GoToAsync("//RecipePage");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception to help debug crashes
+                Console.WriteLine($"NavigateBack exception: {ex.Message}");
+            }
+
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
