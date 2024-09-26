@@ -26,10 +26,8 @@ public partial class RecipePage : ContentPage
 	}
     private async void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
     {
-        // Get the selected recipe
         var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Recipe;
-
-        // If a recipe is selected, navigate to the RecipeDetailPage
+        
         if (selectedRecipe != null)
         {
 	        await Navigation.PushAsync(new RecipeDetailPage(selectedRecipe, BindingContext as RecipeViewModel, App.GroceryListViewModel));

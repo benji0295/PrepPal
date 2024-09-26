@@ -37,6 +37,7 @@
         <!-- Grid to Display Recipe Cards -->
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding FilteredRecipes}"
+                        SelectionMode="Single"
                         SelectionChanged="OnRecipeSelected">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2" />

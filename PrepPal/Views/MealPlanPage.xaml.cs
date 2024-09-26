@@ -23,6 +23,7 @@ public partial class MealPlanPage : ContentPage
 		{
 			AddRecipeToMealPlan(RecipeName, Day);
 		}
+		
 	}
 	
 	private async void OnAddMealClicked(object sender, EventArgs e)
@@ -34,24 +35,15 @@ public partial class MealPlanPage : ContentPage
 
 			if (!string.IsNullOrEmpty(day))
 			{
-				// Pass the day to the RecipeSelectionPage
-				await Shell.Current.GoToAsync($"///RecipeSelectionPage?day={day}");
+				Console.WriteLine($"Navigate to RecipeSelectionPage with day: {day}");
+				
+				await Shell.Current.GoToAsync($"//RecipeSelectionPage?day={day}");
 			}
 		}
 		catch (Exception ex)
 		{
 			Console.WriteLine($"Error navigating to RecipeSelectionPage: {ex.Message}");
 			await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
-		}
-	}
-	
-	protected override async void OnNavigatedTo(NavigatedToEventArgs args)
-	{
-		base.OnNavigatedTo(args);
-
-		if (!string.IsNullOrEmpty(RecipeName) && !string.IsNullOrEmpty(Day))
-		{
-			AddRecipeToMealPlan(RecipeName, Day);
 		}
 	}
 	

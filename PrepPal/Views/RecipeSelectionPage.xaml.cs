@@ -28,6 +28,11 @@ public partial class RecipeSelectionPage : ContentPage
         
         BindingContext = new RecipeViewModel(_dbContext);
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        Console.WriteLine($"Day passed to RecipeSelectionPage: {Day}");
+    }
     
     public RecipeSelectionPage(PrepPalDbContext dbContext)
     {
@@ -44,7 +49,7 @@ public partial class RecipeSelectionPage : ContentPage
         if (selectedRecipe != null)
         {
             Console.WriteLine($"Selected recipe: {selectedRecipe.Name}");
-            await Shell.Current.GoToAsync($"///MealPlanPage?recipe={selectedRecipe.Name}&day={Day}");
+            await Shell.Current.GoToAsync($"//MealPlanPage?recipe={selectedRecipe.Name}&day={Day}");
         }
         else
         {
