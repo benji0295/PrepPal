@@ -31,7 +31,8 @@ public partial class RecipeSelectionPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        Console.WriteLine($"Day passed to RecipeSelectionPage: {Day}");
+
+        recipeCollectionView.SelectedItem = null;
     }
     
     public RecipeSelectionPage(PrepPalDbContext dbContext)
@@ -43,17 +44,13 @@ public partial class RecipeSelectionPage : ContentPage
 
     private async void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
     {
-        Console.WriteLine("OneRecipeSelected method hit.");
         var selectedRecipe = e.CurrentSelection.FirstOrDefault() as Recipe;
 
         if (selectedRecipe != null)
         {
-            Console.WriteLine($"Selected recipe: {selectedRecipe.Name}");
-            await Shell.Current.GoToAsync($"//MealPlanPage?recipe={selectedRecipe.Name}&day={Day}");
-        }
-        else
-        {
-            Console.WriteLine("No recipe selected.");
+            (sender as CollectionView).SelectedItem = null;
+            
+            await Shell.Current.GoToAsync($"//MealPlanPage?recipe={selectedRecipe.Name}&day={Day}&image={selectedRecipe.ImageURL}");
         }
     }
 }

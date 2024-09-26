@@ -8,10 +8,10 @@
         <VerticalStackLayout>
 
             <!-- Monday -->
-            <VerticalStackLayout x:Name="MondayStack">
+            <Grid ColumnDefinitions="*, Auto" Padding="10,0,10,0">
                 <Label 
                     Text="Monday" 
-                    FontSize="Medium" 
+                    FontSize="Large"
                     FontAttributes="Bold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start" />
@@ -20,16 +20,17 @@
                         BackgroundColor="Transparent"
                         Padding="0"
                         Margin="0"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="End"
                         Clicked="OnAddMealClicked"
                         CommandParameter="Monday" />
-            </VerticalStackLayout>
+            </Grid>
+            <VerticalStackLayout x:Name="MondayStack" />
 
             <!-- Tuesday -->
-            <VerticalStackLayout x:Name="TuesdayStack">
+            <Grid ColumnDefinitions="*, Auto" Padding="10,10,10,0">
                 <Label 
                     Text="Tuesday" 
-                    FontSize="Medium" 
+                    FontSize="Large" 
                     FontAttributes="Bold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start" />
@@ -38,16 +39,17 @@
                         BackgroundColor="Transparent"
                         Padding="0"
                         Margin="0"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="End"
                         Clicked="OnAddMealClicked"
                         CommandParameter="Tuesday" />
-            </VerticalStackLayout>
+            </Grid>
+            <VerticalStackLayout x:Name="TuesdayStack" />
 
             <!-- Wednesday -->
-            <VerticalStackLayout x:Name="WednesdayStack">
+            <Grid ColumnDefinitions="*, Auto" Padding="10,10,10,0">
                 <Label 
                     Text="Wednesday" 
-                    FontSize="Medium" 
+                    FontSize="Large" 
                     FontAttributes="Bold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start" />
@@ -56,16 +58,17 @@
                         BackgroundColor="Transparent"
                         Padding="0"
                         Margin="0"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="End"
                         Clicked="OnAddMealClicked"
                         CommandParameter="Wednesday" />
-            </VerticalStackLayout>
-            
+            </Grid>
+            <VerticalStackLayout x:Name="WednesdayStack" />
+
             <!-- Thursday -->
-            <VerticalStackLayout x:Name="ThursdayStack">
+            <Grid ColumnDefinitions="*, Auto" Padding="10,10,10,0">
                 <Label 
                     Text="Thursday" 
-                    FontSize="Medium" 
+                    FontSize="Large" 
                     FontAttributes="Bold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start" />
@@ -74,16 +77,17 @@
                         BackgroundColor="Transparent"
                         Padding="0"
                         Margin="0"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="End"
                         Clicked="OnAddMealClicked"
                         CommandParameter="Thursday" />
-            </VerticalStackLayout>
+            </Grid>
+            <VerticalStackLayout x:Name="ThursdayStack" />
 
             <!-- Friday -->
-            <VerticalStackLayout x:Name="FridayStack">
+            <Grid ColumnDefinitions="*, Auto" Padding="10,10,10,0">
                 <Label 
                     Text="Friday" 
-                    FontSize="Medium" 
+                    FontSize="Large" 
                     FontAttributes="Bold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start" />
@@ -92,16 +96,17 @@
                         BackgroundColor="Transparent"
                         Padding="0"
                         Margin="0"
-                        HorizontalOptions="Start" 
+                        HorizontalOptions="End"
                         Clicked="OnAddMealClicked"
                         CommandParameter="Friday" />
-            </VerticalStackLayout>
+            </Grid>
+            <VerticalStackLayout x:Name="FridayStack" />
 
             <!-- Saturday -->
-            <VerticalStackLayout x:Name="SaturdayStack">
+            <Grid ColumnDefinitions="*, Auto" Padding="10,10,10,0">
                 <Label 
                     Text="Saturday" 
-                    FontSize="Medium" 
+                    FontSize="Large" 
                     FontAttributes="Bold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start" />
@@ -110,16 +115,17 @@
                         BackgroundColor="Transparent"
                         Padding="0"
                         Margin="0"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="End"
                         Clicked="OnAddMealClicked"
                         CommandParameter="Saturday" />
-            </VerticalStackLayout>
+            </Grid>
+            <VerticalStackLayout x:Name="SaturdayStack" />
 
             <!-- Sunday -->
-            <VerticalStackLayout x:Name="SundayStack">
+            <Grid ColumnDefinitions="*, Auto" Padding="10,10,10,0">
                 <Label 
                     Text="Sunday" 
-                    FontSize="Medium" 
+                    FontSize="Large" 
                     FontAttributes="Bold"
                     VerticalOptions="Center" 
                     HorizontalOptions="Start" />
@@ -128,10 +134,12 @@
                         BackgroundColor="Transparent"
                         Padding="0"
                         Margin="0"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="End"
                         Clicked="OnAddMealClicked"
                         CommandParameter="Sunday" />
-            </VerticalStackLayout>
+            </Grid>
+            <VerticalStackLayout x:Name="SundayStack" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

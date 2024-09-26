@@ -36,7 +36,7 @@
                                 <SwipeView.RightItems>
                                     <SwipeItems>
                                         <SwipeItem Text="Delete"
-                                                   BackgroundColor="Red"
+                                                   BackgroundColor="LightCoral"
                                                    Command="{Binding Path = BindingContext.DeleteItemCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                                    CommandParameter="{Binding .}"/>
                                     </SwipeItems>
