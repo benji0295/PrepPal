@@ -19,6 +19,8 @@ namespace PrepPal.ViewModels
         private readonly FridgeListViewModel _fridgeListViewModel;
         public ICommand DeleteItemCommand { get; set; }
         public ICommand AddToFridgeCommand { get; }
+        public ICommand ClearListCommand { get; }
+        public ICommand DeleteSelectedCommand { get; }
 
         public ObservableCollection<GroceryItem> GroceryItems
         {
@@ -49,6 +51,8 @@ namespace PrepPal.ViewModels
 
             DeleteItemCommand = new Command<GroceryItem>(DeleteItem);
             AddToFridgeCommand = new Command(AddGroceriesToFridge);
+            ClearListCommand = new Command(ClearList);
+            DeleteSelectedCommand = new Command(DeleteSelectedItems);
             
             GroupItems();
         }
@@ -100,12 +104,29 @@ namespace PrepPal.ViewModels
             OnPropertyChanged(nameof(GroupedGroceryItems));
         }
 
+        private void ClearList()
+        {
+            GroceryItems.Clear();
+            GroupItems();
+        }
+        private void DeleteSelectedItems()
+        {
+            var itemsToRemove = GroceryItems.Where(item => item.IsBought).ToList();
+            foreach (var item in itemsToRemove)
+            {
+                GroceryItems.Remove(item);
+            }
+
+            GroupItems();
+        }
+
         private void DeleteItem(GroceryItem item)
         {
             if (item != null && GroceryItems.Contains(item))
             {
                 GroceryItems.Remove(item);
             }
+            GroupItems();
         }
 
         private void AddGroceriesToFridge()

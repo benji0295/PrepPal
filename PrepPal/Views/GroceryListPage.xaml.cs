@@ -14,22 +14,6 @@ public partial class GroceryListPage : ContentPage
 		
 		BindingContext = new GroceryListViewModel(App.FridgeListViewModel);
 	}
-
-	private async void OnDeleteButtonClicked(object sender, EventArgs e)
-	{
-		var action = await DisplayActionSheet("Option", "Cancel", null, "Clear Grocery List",
-			"Clear Selected Groceries");
-		switch (action)
-		{
-			case "Clear Grocery List":
-				OnClearListClicked();
-				break;
-			case "Clear Selected Groceries":
-				OnDeleteSelectedClicked();
-				break;
-		}
-	}
-
 	private async void OnAddButtonClicked(object sender, EventArgs e)
 	{
 		string result = await DisplayPromptAsync("Add Item", "Enter the name of the grocery item:");
@@ -37,17 +21,23 @@ public partial class GroceryListPage : ContentPage
 		if (!string.IsNullOrWhiteSpace(result))
 		{
 			var viewModel = BindingContext as GroceryListViewModel;
-			viewModel?.AddItemToGroceryList(result); // Use the new method to add the item
+			viewModel?.AddItemToGroceryList(result);
 		}
 	}
-
-	private async Task OnClearListClicked()
+	private async void OnDeleteButtonClicked(object sender, EventArgs e)
 	{
-		bool confirm = await DisplayAlert("Clear List", "Are you sure you want to clear the list?", "Yes", "No");
-		if (confirm)
+		var action = await DisplayActionSheet("Option", "Cancel", null, "Clear Grocery List",
+			"Clear Selected Groceries");
+		var viewModel = BindingContext as GroceryListViewModel;
+		
+		switch (action)
 		{
-			var viewModel = BindingContext as GroceryListViewModel;
-			viewModel?.GroceryItems.Clear();
+			case "Clear Grocery List":
+				viewModel?.ClearListCommand.Execute(null);
+				break;
+			case "Clear Selected Groceries":
+				viewModel?.DeleteSelectedCommand.Execute(null);
+				break;
 		}
 	}
 	private async Task OnDeleteSelectedClicked()
@@ -62,6 +52,15 @@ public partial class GroceryListPage : ContentPage
 			{
 				viewModel.GroceryItems.Remove(item);
 			}
+		}
+	}
+	private async Task OnClearListClicked()
+	{
+		bool confirm = await DisplayAlert("Clear List", "Are you sure you want to clear the list?", "Yes", "No");
+		if (confirm)
+		{
+			var viewModel = BindingContext as GroceryListViewModel;
+			viewModel?.GroceryItems.Clear();
 		}
 	}
 }
