@@ -96,15 +96,15 @@ namespace PrepPal.ViewModels
                         Name = "Chicken Alfredo",
                         RecipeIngredients = new List<RecipeIngredient>
                         {
-                            new RecipeIngredient { IngredientName = "1 lb. fettuccine" },
-                            new RecipeIngredient { IngredientName = "2 cups heavy cream" },
-                            new RecipeIngredient { IngredientName = "1 cup grated Parmesan" },
-                            new RecipeIngredient { IngredientName = "2 cloves garlic, minced" },
-                            new RecipeIngredient { IngredientName = "1/2 cup butter" },
-                            new RecipeIngredient { IngredientName = "1/2 tsp. salt" },
-                            new RecipeIngredient { IngredientName = "1/4 tsp. pepper" },
-                            new RecipeIngredient { IngredientName = "1/4 tsp. nutmeg" },
-                            new RecipeIngredient { IngredientName = "1 lb. chicken breast, cooked and sliced" }
+                            new RecipeIngredient { IngredientName = "Fettuccine", Quantity = 1, Unit = "lb"  },
+                            new RecipeIngredient { IngredientName = "Heavy cream", Quantity = 2, Unit = "cups" },
+                            new RecipeIngredient { IngredientName = "Grated Parmesan", Quantity = 1, Unit = "cup" },
+                            new RecipeIngredient { IngredientName = "Garlic, minced", Quantity = 2, Unit = "cloves" },
+                            new RecipeIngredient { IngredientName = "Butter", Quantity = 0.5m, Unit = "cup" },
+                            new RecipeIngredient { IngredientName = "Salt", Quantity = 0.5m, Unit = "tsp" },
+                            new RecipeIngredient { IngredientName = "Pepper", Quantity = 0.25m, Unit = "tsp" },
+                            new RecipeIngredient { IngredientName = "Nutmeg", Quantity = 0.25m, Unit = "tsp" },
+                            new RecipeIngredient { IngredientName = "Chicken breast, cooked and sliced", Quantity = 1, Unit = "lb" }
                         },
                         Instructions = new List<Instruction>
                         {
@@ -135,15 +135,15 @@ namespace PrepPal.ViewModels
                         Name = "Chocolate Chip Cookies",
                         RecipeIngredients = new List<RecipeIngredient>
                         {
-                            new RecipeIngredient { IngredientName = "2 1/4 cups flour" },
-                            new RecipeIngredient { IngredientName = "1 tsp. baking soda" },
-                            new RecipeIngredient { IngredientName = "1 tsp. salt" },
-                            new RecipeIngredient { IngredientName = "1 cup butter, softened" },
-                            new RecipeIngredient { IngredientName = "3/4 cup sugar" },
-                            new RecipeIngredient { IngredientName = "3/4 cup brown sugar" },
-                            new RecipeIngredient { IngredientName = "1 tsp. vanilla" },
-                            new RecipeIngredient { IngredientName = "2 eggs" },
-                            new RecipeIngredient { IngredientName = "2 cups chocolate chips" }
+                            new RecipeIngredient { IngredientName = "Flour", Quantity = 2.25m, Unit = "cups" },
+                            new RecipeIngredient { IngredientName = "Baking soda", Quantity = 1, Unit = "tsp" },
+                            new RecipeIngredient { IngredientName = "Salt", Quantity = 1, Unit = "tsp" },
+                            new RecipeIngredient { IngredientName = "Butter, softened", Quantity = 1, Unit = "cup" },
+                            new RecipeIngredient { IngredientName = "Sugar", Quantity = 0.75m, Unit = "cup" },
+                            new RecipeIngredient { IngredientName = "Brown sugar", Quantity = 0.75m, Unit = "cup" },
+                            new RecipeIngredient { IngredientName = "Vanilla", Quantity = 1, Unit = "tsp" },
+                            new RecipeIngredient { IngredientName = "Eggs", Quantity = 2 },
+                            new RecipeIngredient { IngredientName = "Chocolate chips", Quantity = 2, Unit = "cups" }
                         },
                         Instructions = new List<Instruction>
                         {

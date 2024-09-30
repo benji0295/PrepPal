@@ -120,23 +120,36 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-
-            <!-- Ingredients Section -->
+            
             <Label Text="Ingredients" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,0"/>
             <CollectionView ItemsSource="{Binding RecipeIngredients}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Horizontal" >
+                        <StackLayout Orientation="Horizontal">
                             <CheckBox IsChecked="{Binding IsSelected}"
                                       Color="Black"/>
-                            <Label Text="{Binding IngredientName}" 
-                                   TextDecorations="{Binding IsSelected, 
-                                   Converter={StaticResource StrikeThroughConverter}}"
-                                   VerticalOptions="Center" />
+                            <Label VerticalOptions="Center"
+                                   TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Quantity}"
+                                              TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"/>
+                                        <Span Text=" "
+                                              TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"/>
+                                        <Span Text="{Binding Unit}"
+                                              TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"/>
+                                        <Span Text=" "
+                                              TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"/>
+                                        <Span Text="{Binding IngredientName}"
+                                              TextDecorations="{Binding IsSelected, Converter={StaticResource StrikeThroughConverter}}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
             
             <!-- Add Ingredients to Grocery List Button -->
             <Button Text=" Add Ingredients to Grocery List"
