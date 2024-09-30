@@ -31,6 +31,13 @@ public partial class RecipeSelectionPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        
+        var viewModel = BindingContext as RecipeViewModel;
+        if (viewModel != null)
+        {
+            viewModel.IsAllRecipesSelected = true;
+            viewModel.UpdatedFilteredRecipes();
+        }
 
         recipeCollectionView.SelectedItem = null;
     }

@@ -25,12 +25,12 @@
                                Padding="1"
                                Margin="1"
                                HasShadow="False"
-                               HeightRequest="200"
+                               HeightRequest="225"
                                WidthRequest="150" 
                                HorizontalOptions="Center"
                                VerticalOptions="Center">
                             <StackLayout HorizontalOptions="Center" 
-                                         VerticalOptions="Center"
+                                         VerticalOptions="Start"
                                          Spacing="10">
                                 <Frame Padding="0" HasShadow="False" BorderColor="Transparent" CornerRadius="15">
                                     <Image Source="{Binding ImageURL}" 

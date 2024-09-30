@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace PrepPal.Models
 {
-    public class Recipe
+    public class Recipe : INotifyPropertyChanged
     {
+        private bool _isFavorite;
         public int RecipeId { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
@@ -21,8 +22,24 @@ namespace PrepPal.Models
         public string Source { get; set; }
         public string SourceURL { get; set; }
         public string ImageURL { get; set; }
-        public bool IsFavorite { get; set; }
+
+        public bool IsFavorite
+        {
+            get => _isFavorite;
+            set
+            {
+                _isFavorite = value;
+                OnPropertyChanged();
+            }
+        }
         public List<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
         public List<Instruction> Instructions { get; set; } = new List<Instruction>();
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

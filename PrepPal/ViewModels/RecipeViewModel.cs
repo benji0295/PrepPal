@@ -229,6 +229,12 @@ namespace PrepPal.ViewModels
                     FilteredRecipes.Add(recipe);
                 }
             }
+            OnPropertyChanged(nameof(FilteredRecipes));
+        }
+
+        public void UpdatedFilteredRecipes()
+        {
+            ApplyFilter();
         }
 
         private void ToggleFavorite(Recipe recipe)
@@ -237,16 +243,19 @@ namespace PrepPal.ViewModels
             {
                 recipe.IsFavorite = !recipe.IsFavorite;
                 OnPropertyChanged(nameof(Recipes));
+                ApplyFilter();
             }
         }
         private void SwitchToAllRecipes()
         {
             IsAllRecipesSelected = true;
+            ApplyFilter();
         }
 
         private void SwitchToFavoriteRecipes()
         {
             IsAllRecipesSelected = false;
+            ApplyFilter();
         }
 
         private void IncreaseServings()
@@ -270,29 +279,25 @@ namespace PrepPal.ViewModels
         {
             try
             {
-                var navigationStack = Shell.Current.Navigation.NavigationStack;
-
-                if (navigationStack.Count > 1)
+                // Check the current page route
+                var currentRoute = Shell.Current.CurrentState.Location.ToString();
+        
+                // If the current route is RecipeSelectionPage, go back to MealPlanPage
+                if (currentRoute.Contains("RecipeSelectionPage"))
                 {
-                    var previousPage = navigationStack[navigationStack.Count - 2];
-
-                    if (previousPage is RecipeDetailPage)
-                    {
-                        await Shell.Current.GoToAsync("//RecipePage");
-                    }
-                    else if (previousPage is RecipeSelectionPage)
-                    {
-                        await Shell.Current.GoToAsync("//MealPlanPage");
-                    }
-                    else if (previousPage is AddRecipePage)
-                    {
-                        await Shell.Current.GoToAsync("//RecipePage");
-                    }
-                    else
-                    {
-                        await Shell.Current.GoToAsync("//RecipePage");
-                    }
+                    await Shell.Current.GoToAsync("//MealPlanPage");
                 }
+                // If the current route is RecipeDetailPage, go back to RecipePage
+                else if (currentRoute.Contains("RecipeDetailPage"))
+                {
+                    await Shell.Current.GoToAsync("//RecipePage");
+                }
+                // If the current route is AddRecipePage, go back to RecipePage
+                else if (currentRoute.Contains("AddRecipePage"))
+                {
+                    await Shell.Current.GoToAsync("//RecipePage");
+                }
+                // Fallback to default (RecipePage) if no conditions are met
                 else
                 {
                     await Shell.Current.GoToAsync("//RecipePage");
@@ -300,12 +305,10 @@ namespace PrepPal.ViewModels
             }
             catch (Exception ex)
             {
-                // Log the exception to help debug crashes
+                // Log the exception for debugging purposes
                 Console.WriteLine($"NavigateBack exception: {ex.Message}");
             }
-
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
