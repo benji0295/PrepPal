@@ -10,6 +10,8 @@ namespace PrepPal.Models
     public class FridgeItem : INotifyPropertyChanged
     {
         public string Name { get; set; }
+        public string StorageLocation { get; set; }
+        public string Aisle { get; set; }
         public DateTime LastBoughtDate { get; set; }
         public bool IsExpired { get; set; }
         private bool _isUsed;

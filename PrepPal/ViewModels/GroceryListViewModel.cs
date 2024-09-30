@@ -13,6 +13,8 @@ namespace PrepPal.ViewModels
 {
     public class GroceryListViewModel : INotifyPropertyChanged
     {
+        public ObservableCollection<Grouping<string, GroceryItem>> GroupedGroceryItems { get; set; }
+        
         private ObservableCollection<GroceryItem> _groceryItems;
         private readonly FridgeListViewModel _fridgeListViewModel;
         public ICommand DeleteItemCommand { get; set; }
@@ -25,6 +27,7 @@ namespace PrepPal.ViewModels
             {
                 _groceryItems = value;
                 OnPropertyChanged(nameof(GroceryItems));
+                GroupItems();
             }
         }
 
@@ -35,13 +38,19 @@ namespace PrepPal.ViewModels
             
             GroceryItems = new ObservableCollection<GroceryItem>()
             {
-                new GroceryItem { Name = "Apples", IsBought = false },
-                new GroceryItem { Name = "Bananas", IsBought = false },
-                new GroceryItem { Name = "Carrots", IsBought = false },
+                new GroceryItem { Name = "Apples", IsBought = false, Aisle = "Produce", StorageLocation = "Fridge" },
+                new GroceryItem { Name = "Bananas", IsBought = false, Aisle = "Produce", StorageLocation = "Counter" },
+                new GroceryItem { Name = "Carrots", IsBought = false, Aisle = "Produce", StorageLocation = "Fridge" },
+                new GroceryItem { Name = "Chicken Broth", IsBought = false, Aisle = "Canned Goods", StorageLocation = "Pantry"},
+                new GroceryItem { Name = "Flour", IsBought = false, Aisle = "Baking", StorageLocation = "Pantry"},
+                new GroceryItem { Name = "Frozen Pizza", IsBought = false, Aisle = "Frozen", StorageLocation = "Freezer"},
+                new GroceryItem { Name = "Oregano", IsBought = false, Aisle = "Spices", StorageLocation = "Pantry"}
             };
 
             DeleteItemCommand = new Command<GroceryItem>(DeleteItem);
             AddToFridgeCommand = new Command(AddGroceriesToFridge);
+            
+            GroupItems();
         }
         public void AddItemToGroceryList(string itemName)
         {
@@ -82,6 +91,16 @@ namespace PrepPal.ViewModels
                     });
                 }
             }
+        }
+        private void GroupItems()
+        {
+            var grouped = GroceryItems
+                .GroupBy(g => g.Aisle) // Group by Aisle
+                .Select(g => new Grouping<string, GroceryItem>(g.Key, g.ToList()))
+                .ToList();
+
+            GroupedGroceryItems = new ObservableCollection<Grouping<string, GroceryItem>>(grouped);
+            OnPropertyChanged(nameof(GroupedGroceryItems));
         }
 
         private void DeleteItem(GroceryItem item)

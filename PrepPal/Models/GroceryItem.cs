@@ -6,6 +6,8 @@ namespace PrepPal.Models
     public class GroceryItem : INotifyPropertyChanged
     {
         public string Name { get; set; }
+        public string StorageLocation { get; set; }
+        public string Aisle { get; set; }
 
         private bool _isBought;
         public bool IsBought

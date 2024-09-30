@@ -28,7 +28,16 @@
     
     <ScrollView>
         <VerticalStackLayout>
-            <CollectionView ItemsSource="{Binding FridgeItems}">
+            <CollectionView ItemsSource="{Binding GroupedFridgeItems}" IsGrouped="True">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Key}" 
+                               FontAttributes="Bold"
+                               FontSize="Large"
+                               Padding="10"
+                               BackgroundColor="LightGray" />
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <ContentView>
