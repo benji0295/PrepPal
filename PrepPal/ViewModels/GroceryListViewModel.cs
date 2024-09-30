@@ -54,12 +54,10 @@ namespace PrepPal.ViewModels
         }
         public void AddItemToGroceryList(string itemName)
         {
-            // Check if the item is already in the grocery list
             var groceryItem = GroceryItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
 
             if (groceryItem != null)
             {
-                // If item exists in the grocery list, just update the IsInGroceryList property
                 var fridgeItem = _fridgeListViewModel.FridgeItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
                 if (fridgeItem != null)
                 {
@@ -69,7 +67,6 @@ namespace PrepPal.ViewModels
             }
             else
             {
-                // If item doesn't exist in the grocery list, create a new one
                 var fridgeItem = _fridgeListViewModel.FridgeItems.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
                 if (fridgeItem != null)
                 {
@@ -78,7 +75,7 @@ namespace PrepPal.ViewModels
                         Name = itemName,
                         IsBought = false,
                         IsInGroceryList = true,
-                        LastBoughtDate = fridgeItem.LastBoughtDate // Set the date
+                        LastBoughtDate = fridgeItem.LastBoughtDate 
                     });
                 }
                 else
@@ -95,7 +92,7 @@ namespace PrepPal.ViewModels
         private void GroupItems()
         {
             var grouped = GroceryItems
-                .GroupBy(g => g.Aisle) // Group by Aisle
+                .GroupBy(g => g.Aisle) 
                 .Select(g => new Grouping<string, GroceryItem>(g.Key, g.ToList()))
                 .ToList();
 
@@ -117,21 +114,47 @@ namespace PrepPal.ViewModels
 
             foreach (var item in boughtItems)
             {
+                var fridgeGroup = _fridgeListViewModel.GroupedFridgeItems.FirstOrDefault(g => g.Key == item.StorageLocation);
+
                 var fridgeItem = _fridgeListViewModel.FridgeItems.FirstOrDefault(f => f.Name == item.Name);
 
                 if (fridgeItem == null)
                 {
-                    _fridgeListViewModel.FridgeItems.Add(new FridgeItem { Name = item.Name, LastBoughtDate = DateTime.Now, IsUsed = false });
+                    var newFridgeItem = new FridgeItem
+                    {
+                        Name = item.Name,
+                        LastBoughtDate = DateTime.Now,
+                        IsUsed = false,
+                        StorageLocation = item.StorageLocation
+                    };
+                    if (fridgeGroup == null)
+                    {
+                        fridgeGroup = new Grouping<string, FridgeItem>(item.StorageLocation, new List<FridgeItem> { newFridgeItem });
+                        _fridgeListViewModel.GroupedFridgeItems.Add(fridgeGroup);
+                    }
+                    else
+                    {
+                        fridgeGroup.Add(newFridgeItem);
+                    }
+                    _fridgeListViewModel.FridgeItems.Add(newFridgeItem);
                 }
                 else
                 {
-                    // Update the LastBoughtDate if the item is already in the fridge
                     fridgeItem.LastBoughtDate = DateTime.Now;
                 }
+            }
 
-                // Remove the item from the grocery list
+            foreach (var item in boughtItems)
+            {
                 GroceryItems.Remove(item);
             }
+            
+            GroupItems();
+            
+            _fridgeListViewModel.OnPropertyChanged(nameof(_fridgeListViewModel.FridgeItems));
+            _fridgeListViewModel.OnPropertyChanged(nameof(_fridgeListViewModel.GroupedFridgeItems));
+            OnPropertyChanged(nameof(GroceryItems));
+            OnPropertyChanged(nameof(GroupedGroceryItems));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

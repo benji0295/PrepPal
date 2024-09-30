@@ -80,8 +80,7 @@
                     TextColor="White"
                     HorizontalOptions="Center"
                     Margin="10,20,10,10"
-                    Command="{Binding AddToFridgeCommand}"
-                    CommandParameter="{Binding .}" />
+                    Command="{Binding AddToFridgeCommand}" />
             
         </VerticalStackLayout>
     </ScrollView>

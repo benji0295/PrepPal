@@ -12,7 +12,7 @@ public partial class GroceryListPage : ContentPage
 	{
 		InitializeComponent();
 		
-		BindingContext = App.GroceryListViewModel;
+		BindingContext = new GroceryListViewModel(App.FridgeListViewModel);
 	}
 
 	private async void OnDeleteButtonClicked(object sender, EventArgs e)
