@@ -18,13 +18,15 @@ public partial class FridgeListPage : ContentPage
     {
         var action = await DisplayActionSheet("Option", "Cancel", null, "Clear Fridge",
             "Clear Selected Items");
+        var viewModel = BindingContext as FridgeListViewModel;
+        
         switch (action)
         {
             case "Clear Fridge":
-                OnClearListClicked();
+                viewModel?.ClearListCommand.Execute(null);
                 break;
             case "Clear Selected Items":
-                OnDeleteSelectedClicked();
+                viewModel?.DeleteSelectedCommand.Execute(null);
                 break;
         }
     }

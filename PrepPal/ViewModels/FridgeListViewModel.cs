@@ -28,6 +28,8 @@ namespace PrepPal.ViewModels
             }
         }
         public ICommand DeleteItemCommand { get; set; }
+        public ICommand ClearListCommand { get; }
+        public ICommand DeleteSelectedCommand { get; }
 
         public FridgeListViewModel()
         {
@@ -44,6 +46,8 @@ namespace PrepPal.ViewModels
             };
 
             DeleteItemCommand = new Command<FridgeItem>(DeleteItem);
+            ClearListCommand = new Command(ClearList);
+            DeleteSelectedCommand = new Command(DeleteSelectedItems);
             GroupItems();
         }
 
@@ -57,6 +61,23 @@ namespace PrepPal.ViewModels
             GroupedFridgeItems = new ObservableCollection<Grouping<string, FridgeItem>>(grouped);
             OnPropertyChanged(nameof(GroupedFridgeItems));
         }
+
+        private void ClearList()
+        {
+            FridgeItems.Clear();
+            GroupItems();
+        }
+
+        private void DeleteSelectedItems()
+        {
+            var itemsToRemove = FridgeItems.Where(item => item.IsUsed).ToList();
+
+            foreach (var item in itemsToRemove)
+            {
+                FridgeItems.Remove(item);
+            }
+            GroupItems();
+        }
         
         private void DeleteItem(FridgeItem item)
         {
@@ -64,6 +85,7 @@ namespace PrepPal.ViewModels
             {
                 FridgeItems.Remove(item);
             }
+            GroupItems();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
