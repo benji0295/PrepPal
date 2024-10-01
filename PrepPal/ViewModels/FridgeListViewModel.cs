@@ -50,7 +50,7 @@ namespace PrepPal.ViewModels
                 new FridgeItem { Name = "Ketchup", LastBoughtDate = DateTime.Now.AddDays(-20), IsUsed = false, Aisle = "Condiments", StorageLocation = "Fridge"},
                 new FridgeItem { Name = "Frozen Peas", LastBoughtDate = DateTime.Now.AddDays(-5), IsUsed = false, Aisle = "Frozen", StorageLocation = "Freezer"},
                 new FridgeItem { Name = "Spaghetti", LastBoughtDate = DateTime.Now.AddDays(-5), IsUsed = false, Aisle = "Pasta", StorageLocation = "Pantry"},
-                new FridgeItem { Name = "Peanut Butter", LastBoughtDate = DateTime.Now.AddDays(-3), IsUsed = false, Aisle = "Condiments", StorageLocation = "Pantry"},
+                new FridgeItem { Name = "Peanut Butter", LastBoughtDate = DateTime.Now.AddDays(-37), IsUsed = false, Aisle = "Condiments", StorageLocation = "Pantry"},
             };
 
             DeleteItemCommand = new Command<FridgeItem>(DeleteItem);
@@ -85,18 +85,38 @@ namespace PrepPal.ViewModels
         private void GroupByDateBought()
         {
             var grouped = FridgeItems
-                .GroupBy(f => f.LastBoughtDate.ToString("MM/dd/yyyy")) // Group by date string
-                .Select(g => new Grouping<string, FridgeItem>(g.Key, g.ToList()))
+                .GroupBy(f => GetDateRange(f.LastBoughtDate))
+                .Select(g => new Grouping<string, FridgeItem>(
+                    g.Key, 
+                    g.OrderByDescending(f => f.LastBoughtDate).ToList()))
                 .ToList();
 
             GroupedFridgeItems = new ObservableCollection<Grouping<string, FridgeItem>>(grouped);
             OnPropertyChanged(nameof(GroupedFridgeItems));
         }
 
+        private string GetDateRange(DateTime date)
+        {
+            var daysAgo = (DateTime.Now - date).TotalDays;
+
+            if (daysAgo <= 14)
+            {
+                return "Bought within last 2 weeks";
+            }
+            else if (daysAgo <= 30)
+            {
+                return "Bought within last month";
+            }
+            else
+            {
+                return "Bought over a month ago";
+            }
+        }
+
         private void GroupItems()
         {
             var grouped = FridgeItems
-                .GroupBy(f => f.StorageLocation) // Group by storage location
+                .GroupBy(f => f.StorageLocation) 
                 .Select(g => new Grouping<string, FridgeItem>(g.Key, g.ToList()))
                 .ToList();
 
