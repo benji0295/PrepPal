@@ -57,12 +57,28 @@ public partial class FridgeListPage : ContentPage
 
     private async Task OnAddItemClicked()
     {
-        string result = await DisplayPromptAsync("Add Item", "Enter the name of the item:");
+        string itemName = await DisplayPromptAsync("Add Item", "Enter the name of the item:");
 
-        if (!string.IsNullOrWhiteSpace(result))
+        if (!string.IsNullOrWhiteSpace(itemName))
         {
-            var viewModel = BindingContext as FridgeListViewModel;
-            viewModel?.FridgeItems.Add(new FridgeItem { Name = result, LastBoughtDate = DateTime.Now, IsUsed = false });
+            // Ask for the storage location
+            string storageLocation = await DisplayPromptAsync("Storage Location", "Enter the storage location:");
+
+            if (!string.IsNullOrWhiteSpace(storageLocation))
+            {
+                var viewModel = BindingContext as FridgeListViewModel;
+                viewModel?.FridgeItems.Add(new FridgeItem 
+                { 
+                    Name = itemName, 
+                    LastBoughtDate = DateTime.Now, 
+                    IsUsed = false, 
+                    StorageLocation = storageLocation 
+                });
+                
+                viewModel?.GroupItems();  
+                viewModel?.OnPropertyChanged(nameof(viewModel.FridgeItems));
+                viewModel?.OnPropertyChanged(nameof(viewModel.GroupedFridgeItems));
+            }
         }
     }
 
@@ -73,6 +89,10 @@ public partial class FridgeListPage : ContentPage
         {
             var viewModel = BindingContext as FridgeListViewModel;
             viewModel?.FridgeItems.Clear();
+            
+            viewModel?.GroupItems();  
+            viewModel?.OnPropertyChanged(nameof(viewModel.FridgeItems));
+            viewModel?.OnPropertyChanged(nameof(viewModel.GroupedFridgeItems));
         }
     }
     private async Task OnDeleteSelectedClicked()
@@ -86,7 +106,12 @@ public partial class FridgeListPage : ContentPage
             foreach (var item in itemsToRemove)
             {
                 viewModel?.FridgeItems.Remove(item);
+                
+                viewModel?.GroupItems();  
+                viewModel?.OnPropertyChanged(nameof(viewModel.FridgeItems));
+                viewModel?.OnPropertyChanged(nameof(viewModel.GroupedFridgeItems));
             }
         }
+        
     }
 }

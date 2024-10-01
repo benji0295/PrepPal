@@ -113,7 +113,7 @@ namespace PrepPal.ViewModels
             }
         }
 
-        private void GroupItems()
+        public void GroupItems()
         {
             var grouped = FridgeItems
                 .GroupBy(f => f.StorageLocation) 
