@@ -15,10 +15,15 @@
                 <Label Text="{Binding Name}" 
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand" />
-                <Image Source="edit_icon.png" 
-                             Width="5"
-                             Height="5"
-                             VerticalOptions="Center" />
+                <Image Source="edit_icon.png"
+                       Width="5"
+                       Height="5"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                       <Image.GestureRecognizers>
+                              <TapGestureRecognizer Command="{Binding EditRecipeNameCommand}" />
+                       </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" VerticalOptions="Center"
@@ -29,10 +34,15 @@
                 <Label Text="{Binding Category}" 
                        VerticalOptions="Center"
                        HorizontalOptions="StartAndExpand" />
-                <Image Source="edit_icon.png" 
+                <Image Source="edit_icon.png"
                        Width="5"
                        Height="5"
-                       VerticalOptions="Center" />
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                       <Image.GestureRecognizers>
+                              <TapGestureRecognizer Command="{Binding EditRecipeCategoryCommand}" />
+                       </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" VerticalOptions="Center"
@@ -142,6 +152,28 @@
                              </DataTemplate>
                       </CollectionView.ItemTemplate>
                </CollectionView>
+               
+               <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                      <Label Text="Recipe Image" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,10" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                      <Image Source="edit_icon.png" 
+                             Width="5"
+                             Height="5"
+                             VerticalOptions="Center" />
+               </StackLayout>
+               
+               <StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Center">
+                      <Image Source="{Binding ImageURL}" 
+                             HeightRequest="100" 
+                             WidthRequest="100"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Center" />
+               </StackLayout>
+               
+               <Button Text="Update Recipe"
+                       BackgroundColor="Black"
+                       Margin="0, 20, 0 , 20"
+                       HorizontalOptions="Center" />
+               
                
                 
         </VerticalStackLayout>
