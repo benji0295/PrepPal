@@ -14,12 +14,20 @@
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="filter_icon.png"
+                     Order="Secondary"
+                     Priority="0"
+                     Clicked="OnFilterButtonClicked" />
         <ToolbarItem x:Name="AddToolbarItem"
                      IconImageSource="add_icon.png"
-                     Clicked="OnAddButtonClicked" />
+                     Clicked="OnAddButtonClicked"
+                     Order="Primary"
+                     Priority="1" />
         <ToolbarItem x:Name="DeleteToolbarItem"
                      IconImageSource="delete_icon.png"
-                     Clicked="OnDeleteButtonClicked" />
+                     Clicked="OnDeleteButtonClicked"
+                     Order="Primary"
+                     Priority="2" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.BindingContext>

@@ -8,10 +8,29 @@ namespace PrepPal.Views;
 
 public partial class FridgeListPage : ContentPage
 {
+    private FridgeListViewModel _viewModel;
+    
 	public FridgeListPage()
 	{
 		InitializeComponent();
-        BindingContext = App.FridgeListViewModel;
+        _viewModel = new FridgeListViewModel();
+        BindingContext = _viewModel;
+    }
+
+    private async void OnFilterButtonClicked(object sender, EventArgs e)
+    {
+        var action = await DisplayActionSheet("Filter By", "Cancel", null, "Storage Location", "Date Bought");
+            
+        if (action == "Storage Location")
+        {
+            _viewModel.CurrentFilter = FilterType.ByStorageLocation;
+        }
+        else if (action == "Date Bought")
+        {
+            _viewModel.CurrentFilter = FilterType.ByDateBought;
+        }
+
+        _viewModel.ApplyFilter();
     }
     
     private async void OnDeleteButtonClicked(object sender, EventArgs e)

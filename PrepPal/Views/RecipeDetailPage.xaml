@@ -12,7 +12,8 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="InfoToolbarItem"
-                     IconImageSource="info_icon.png" />
+                     IconImageSource="edit_icon.png"
+                     Clicked="OnRecipeInfoClicked" />
         <ToolbarItem x:Name="FavoriteToolbarItem" 
                      IconImageSource="heart_icon.png" 
                      Clicked="OnFavoriteClicked" />

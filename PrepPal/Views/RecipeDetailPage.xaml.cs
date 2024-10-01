@@ -97,6 +97,10 @@ public partial class RecipeDetailPage : ContentPage
             instruction.IsCompleted = false;
         }
     }
+    async void OnRecipeInfoClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new UpdateRecipePage { BindingContext = BindingContext });
+    }
 
     private void UpdateFavoriteIcon()
     {

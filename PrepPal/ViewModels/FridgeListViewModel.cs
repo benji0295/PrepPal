@@ -12,6 +12,12 @@ using PrepPal.Models;
 
 namespace PrepPal.ViewModels
 {
+    public enum FilterType
+    {
+        ByStorageLocation,
+        ByDateBought
+    }
+    
     public class FridgeListViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<FridgeItem> _fridgeItems;
@@ -27,6 +33,8 @@ namespace PrepPal.ViewModels
                 GroupItems();
             }
         }
+
+        public FilterType CurrentFilter { get; set; } = FilterType.ByStorageLocation;
         public ICommand DeleteItemCommand { get; set; }
         public ICommand ClearListCommand { get; }
         public ICommand DeleteSelectedCommand { get; }
@@ -49,6 +57,40 @@ namespace PrepPal.ViewModels
             ClearListCommand = new Command(ClearList);
             DeleteSelectedCommand = new Command(DeleteSelectedItems);
             GroupItems();
+        }
+
+        public void ApplyFilter()
+        {
+            switch (CurrentFilter)
+            {
+                case FilterType.ByStorageLocation:
+                    GroupByStorageLocation();
+                    break;
+                case FilterType.ByDateBought:
+                    GroupByDateBought();
+                    break;
+            }
+        }
+
+        private void GroupByStorageLocation()
+        {
+            var grouped = FridgeItems
+                .GroupBy(f => f.StorageLocation)
+                .Select(g => new Grouping<string, FridgeItem>(g.Key, g.ToList()))
+                .ToList();
+
+            GroupedFridgeItems = new ObservableCollection<Grouping<string, FridgeItem>>(grouped);
+            OnPropertyChanged(nameof(GroupedFridgeItems));
+        }
+        private void GroupByDateBought()
+        {
+            var grouped = FridgeItems
+                .GroupBy(f => f.LastBoughtDate.ToString("MM/dd/yyyy")) // Group by date string
+                .Select(g => new Grouping<string, FridgeItem>(g.Key, g.ToList()))
+                .ToList();
+
+            GroupedFridgeItems = new ObservableCollection<Grouping<string, FridgeItem>>(grouped);
+            OnPropertyChanged(nameof(GroupedFridgeItems));
         }
 
         private void GroupItems()

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrepPal.Views.UpdateRecipePage"
+             BackgroundColor="#F0F0F0"
+             Title="Edit Recipe" >
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center"
+                         Padding="0,0,0,20" >
+                <Label Text="Recipe Name: " 
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+                <Label Text="{Binding Name}" 
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand" />
+                <Image Source="edit_icon.png" 
+                             Width="5"
+                             Height="5"
+                             VerticalOptions="Center" />
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center"
+                         Padding="0,0,0,20">
+                <Label Text="Category: " 
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+                <Label Text="{Binding Category}" 
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand" />
+                <Image Source="edit_icon.png" 
+                       Width="5"
+                       Height="5"
+                       VerticalOptions="Center" />
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center"
+                         Padding="0,0,0,20">
+                <Label Text="Source: " 
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+                <Label Text="{Binding Source}" 
+                       VerticalOptions="Center"
+                       HorizontalOptions="StartAndExpand" />
+                <Image Source="edit_icon.png" 
+                       Width="5"
+                       Height="5"
+                       VerticalOptions="Center" />
+            </StackLayout>
+               
+               <StackLayout Orientation="Horizontal" VerticalOptions="Center"
+                            Padding="0,0,0,20">
+                      <Label Text="Source URL: " 
+                             FontAttributes="Bold"
+                             VerticalOptions="Center" />
+                      <Label Text="{Binding SourceURL}" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="StartAndExpand" />
+                      <Image Source="edit_icon.png" 
+                             Width="5"
+                             Height="5"
+                             VerticalOptions="Center" />
+               </StackLayout>
+               
+               <StackLayout Orientation="Horizontal" VerticalOptions="Center"
+                            Padding="0,0,0,20">
+                      <Label Text="Prep Time: " 
+                             FontAttributes="Bold"
+                             VerticalOptions="Center" />
+                      <Label Text="{Binding PrepTime}" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="StartAndExpand" />
+                      <Image Source="edit_icon.png" 
+                             Width="5"
+                             Height="5"
+                             VerticalOptions="Center" />
+               </StackLayout>
+               
+               <StackLayout Orientation="Horizontal" VerticalOptions="Center"
+                            Padding="0,0,0,20">
+                      <Label Text="Cook Time: " 
+                             FontAttributes="Bold"
+                             VerticalOptions="Center" />
+                      <Label Text="{Binding CookTime}" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="StartAndExpand" />
+                      <Image Source="edit_icon.png" 
+                             Width="5"
+                             Height="5"
+                             VerticalOptions="Center" />
+               </StackLayout>
+               
+               <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                      <Label Text="Ingredients" FontSize="Medium" FontAttributes="Bold" Padding="0,0,0,10" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                      <Image Source="edit_icon.png" 
+                             Width="5"
+                             Height="5"
+                             VerticalOptions="Center" />
+               </StackLayout>
+                   <CollectionView ItemsSource="{Binding RecipeIngredients}">
+                       <CollectionView.ItemTemplate>
+                           <DataTemplate>
+                               <StackLayout Orientation="Horizontal" Padding="0,0,0,5">
+                                   <Label VerticalOptions="Center">
+                                       <Label.FormattedText>
+                                           <FormattedString>
+                                               <Span Text="{Binding Quantity}" />
+                                               <Span Text=" " />
+                                               <Span Text="{Binding Unit}" />
+                                               <Span Text=" " />
+                                               <Span Text="{Binding IngredientName}" />
+                                           </FormattedString>
+                                       </Label.FormattedText>
+                                   </Label>
+                               </StackLayout>
+                           </DataTemplate>
+                       </CollectionView.ItemTemplate>
+                   </CollectionView>
+               
+               <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                      <Label Text="Instructions" FontSize="Medium" FontAttributes="Bold" Padding="0,20,0,10" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                      <Image Source="edit_icon.png" 
+                             Width="5"
+                             Height="5"
+                             VerticalOptions="Center" />
+               </StackLayout>
+               <CollectionView ItemsSource="{Binding Instructions}">
+                      <CollectionView.ItemTemplate>
+                             <DataTemplate>
+                                    <StackLayout Orientation="Horizontal" Padding="0,0,0,10">
+                                           <Label VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                                  <Label.FormattedText>
+                                                         <FormattedString>
+                                                                <Span Text="{Binding StepNumber}" />
+                                                                <Span Text=". " />
+                                                                <Span Text="{Binding Description}" />
+                                                         </FormattedString>
+                                                  </Label.FormattedText>
+                                           </Label>
+                                    </StackLayout>
+                             </DataTemplate>
+                      </CollectionView.ItemTemplate>
+               </CollectionView>
+               
+                
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
