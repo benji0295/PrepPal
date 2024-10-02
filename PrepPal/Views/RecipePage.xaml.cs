@@ -1,7 +1,7 @@
 using PrepPal.ViewModels;
 using PrepPal.Models;
 using PrepPal.Views;
-using PrepPal.Contexts;
+using PrepPal.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace PrepPal.Views;

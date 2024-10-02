@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using PrepPal.Models;
-using PrepPal.Contexts;
+using PrepPal.Data;
 using PrepPal.Views;
 
 namespace PrepPal.ViewModels

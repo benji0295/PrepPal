@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using PrepPal.Contexts;
+using PrepPal.Data;
 
 namespace PrepPal
 {

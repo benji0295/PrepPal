@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PrepPal.Models;
 
-namespace PrepPal.Contexts;
+namespace PrepPal.Data;
 
 public class PrepPalDbContext : DbContext
 {

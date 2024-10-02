@@ -1,4 +1,4 @@
-using PrepPal.Contexts;
+using PrepPal.Data;
 using PrepPal.Models;
 using Microsoft.EntityFrameworkCore;
 
