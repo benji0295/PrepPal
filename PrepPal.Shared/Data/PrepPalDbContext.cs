@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PrepPal.Models;
+using PrepPal.Data.CompiledModels;
 
 namespace PrepPal.Data;
 
@@ -16,5 +17,9 @@ public class PrepPalDbContext : DbContext
 
     public PrepPalDbContext(DbContextOptions<PrepPalDbContext> options) : base(options)
     {
+    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
     }
 }
