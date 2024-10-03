@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using PrepPal.ViewModels;
+using PrepPal.Views;
 using PrepPal.Data;
+using PrepPal.Data.CompiledModels;
 
 namespace PrepPal
 {
@@ -17,12 +20,32 @@ namespace PrepPal
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             
-            // Connection string for PostgreSQL
             var connectionString = "Host=localhost;Database=preppaldb;Username=bensmith;Password=bensmith";
 
-            // Register the DbContext with PostgreSQL
             builder.Services.AddDbContext<PrepPalDbContext>(options =>
-                options.UseNpgsql(connectionString));
+            {
+                // Register the context with the PostgreSQL provider and the shared model
+                options.UseNpgsql(connectionString)
+                    .UseModel(PrepPalDbContextModel.Instance);
+            });
+            
+            // Add other ViewModels and services
+            builder.Services.AddTransient<RecipeViewModel>();
+            builder.Services.AddSingleton<GroceryListViewModel>();
+            builder.Services.AddTransient<FridgeListViewModel>();
+            builder.Services.AddTransient<EditRecipeViewModel>();
+            builder.Services.AddTransient<FavoriteRecipesViewModel>();
+
+            // Register Pages for DI
+            builder.Services.AddTransient<RecipePage>();
+            builder.Services.AddTransient<RecipeDetailPage>();
+            builder.Services.AddTransient<AddRecipePage>();
+            builder.Services.AddTransient<FavoriteRecipePage>();
+            builder.Services.AddTransient<GroceryListPage>();
+            builder.Services.AddTransient<FridgeListPage>();
+
+            // Register the AppShell
+            builder.Services.AddSingleton<AppShell>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
