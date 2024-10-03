@@ -12,6 +12,8 @@ public class RecipeIngredient : INotifyPropertyChanged
     public int IngredientId { get; set; }
     public decimal Quantity { get; set; }
     public string Unit { get; set; }
+    public string Aisle { get; set; }
+    public string StorageLocation { get; set; }
     public string IngredientName { get; set; }
     
     public bool IsSelected
