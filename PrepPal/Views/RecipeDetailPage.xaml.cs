@@ -1,9 +1,3 @@
-using System.Windows.Input;
-using PrepPal.Models;
-using PrepPal.ViewModels;
-using PrepPal.Views;
-using Microsoft.Maui.Controls;
-
 namespace PrepPal.Views;
 
 public partial class RecipeDetailPage : ContentPage
@@ -46,17 +40,30 @@ public partial class RecipeDetailPage : ContentPage
         }
     }
 
-    private void OnAddIngredientsToGroceryListClicked(object sender, EventArgs e)
+    private async void OnAddIngredientsToGroceryListClicked(object sender, EventArgs e)
     {
         foreach (var ingredient in SelectedRecipe.RecipeIngredients)
         {
-            if (!_groceryListViewModel.GroceryItems.Any((item => item.Name == ingredient.IngredientName)))
+            var existingItem = _groceryListViewModel.GroceryItems
+                .FirstOrDefault(item => item.Name.Equals(ingredient.IngredientName, StringComparison.OrdinalIgnoreCase));
+            
+            if (existingItem == null)
             {
-                _groceryListViewModel.GroceryItems.Add(new GroceryItem { Name = ingredient.IngredientName, IsBought = false });
+                var newItem = new GroceryItem 
+                { 
+                    Name = ingredient.IngredientName, 
+                    Aisle = ingredient.Aisle ?? "Other", 
+                    StorageLocation = ingredient.StorageLocation ?? "Pantry", 
+                    IsBought = false 
+                };
+                
+                Console.WriteLine($"Adding ingredient: {newItem.Name}, Aisle: {newItem.Aisle}, Storage: {newItem.StorageLocation}");
+
+                _groceryListViewModel.GroupItems();
+                
+                await DisplayAlert("Success", "Ingredients added to your grocery list.", "OK");
             }
         }
-
-        DisplayAlert("Success", "Ingredients added to your grocery list.", "OK");
     }
 
     private void OnFavoriteClicked(object sender, EventArgs e)

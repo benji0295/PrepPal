@@ -1,9 +1,3 @@
-using PrepPal.Models;
-using PrepPal.ViewModels;
-using System;
-using System.Linq;
-using Microsoft.Maui.Controls;
-
 namespace PrepPal.Views;
 
 public partial class FridgeListPage : ContentPage
@@ -14,7 +8,7 @@ public partial class FridgeListPage : ContentPage
 	{
 		InitializeComponent();
         _viewModel = new FridgeListViewModel();
-        BindingContext = _viewModel;
+        BindingContext = App.FridgeListViewModel;
     }
 
     private async void OnFilterButtonClicked(object sender, EventArgs e)
