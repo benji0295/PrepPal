@@ -2,11 +2,16 @@ namespace PrepPal.Views;
 
 public partial class GroceryListPage : ContentPage
 {
+	private GroceryListViewModel _viewModel;
+	
 	public GroceryListPage()
 	{
 		InitializeComponent();
+
+		_viewModel = App.GroceryListViewModel;
+		BindingContext = _viewModel;
 		
-		BindingContext = new GroceryListViewModel(App.FridgeListViewModel);
+		// BindingContext = new GroceryListViewModel(App.FridgeListViewModel);
 	}
 	private async void OnAddButtonClicked(object sender, EventArgs e)
 	{
