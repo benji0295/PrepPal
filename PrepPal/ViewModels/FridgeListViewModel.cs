@@ -52,34 +52,57 @@
             switch (CurrentFilter)
             {
                 case FilterType.ByStorageLocation:
+                    Console.WriteLine("Grouping by Storage Location.");
                     GroupByStorageLocation();
                     break;
                 case FilterType.ByDateBought:
+                    Console.WriteLine("Grouping by Date Bought.");
                     GroupByDateBought();
                     break;
             }
+            Console.WriteLine("Filter applied. Triggering UI update.");
+            OnPropertyChanged(nameof(GroupedFridgeItems));
         }
 
         private void GroupByStorageLocation()
         {
+            Console.WriteLine("Grouping by Storage Location.");
             var grouped = FridgeItems
                 .GroupBy(f => f.StorageLocation)
                 .Select(g => new Grouping<string, FridgeItem>(g.Key, g.ToList()))
                 .ToList();
+            
+            Console.WriteLine($"Grouped by Storage Location. Groups: {grouped.Count}");
+            foreach (var group in grouped)
+            {
+                Console.WriteLine($"Group: {group.Key}, Items: {group.Count()}");
+            }
 
             GroupedFridgeItems = new ObservableCollection<Grouping<string, FridgeItem>>(grouped);
+            
+            Console.WriteLine("GroupedFridgeItems updated. Notifying UI.");
             OnPropertyChanged(nameof(GroupedFridgeItems));
         }
-        private void GroupByDateBought()
+        public void GroupByDateBought()
         {
+            Console.WriteLine("Grouping by Date Bought.");
+            
             var grouped = FridgeItems
                 .GroupBy(f => GetDateRange(f.LastBoughtDate))
                 .Select(g => new Grouping<string, FridgeItem>(
                     g.Key, 
                     g.OrderByDescending(f => f.LastBoughtDate).ToList()))
                 .ToList();
+            
+            Console.WriteLine($"Grouped by Date Bought. Groups: {grouped.Count}");
+            foreach (var group in grouped)
+            {
+                Console.WriteLine($"Group: {group.Key}, Items: {group.Count()}");
+            }
 
             GroupedFridgeItems = new ObservableCollection<Grouping<string, FridgeItem>>(grouped);
+            
+            Console.WriteLine("GroupedFridgeItems updated. Notifying UI.");
             OnPropertyChanged(nameof(GroupedFridgeItems));
         }
 

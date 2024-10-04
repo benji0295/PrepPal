@@ -29,10 +29,6 @@
                      Order="Primary"
                      Priority="2" />
     </ContentPage.ToolbarItems>
-
-    <ContentPage.BindingContext>
-        <viewModels:FridgeListViewModel />
-    </ContentPage.BindingContext>
     
     <ScrollView>
         <VerticalStackLayout>
@@ -85,6 +81,13 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+                
+            <Button Text="Add Used Items to Grocery List"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    Margin="10,20,10,10" />
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -7,8 +7,8 @@ public partial class FridgeListPage : ContentPage
 	public FridgeListPage()
 	{
 		InitializeComponent();
-        _viewModel = new FridgeListViewModel();
-        BindingContext = App.FridgeListViewModel;
+        _viewModel = App.FridgeListViewModel;
+        BindingContext = _viewModel;
     }
 
     private async void OnFilterButtonClicked(object sender, EventArgs e)
@@ -17,14 +17,22 @@ public partial class FridgeListPage : ContentPage
             
         if (action == "Storage Location")
         {
+            Console.WriteLine("Filter by Storage Location selected.");
             _viewModel.CurrentFilter = FilterType.ByStorageLocation;
         }
         else if (action == "Date Bought")
         {
+            Console.WriteLine("Filter by Date Bought selected.");
             _viewModel.CurrentFilter = FilterType.ByDateBought;
         }
-
+        
+        Console.WriteLine($"Current filter set to: {_viewModel.CurrentFilter}");
+        _viewModel.OnPropertyChanged(nameof(_viewModel.CurrentFilter));
+        
+        Console.WriteLine("Applying filter to the items.");
         _viewModel.ApplyFilter();
+        
+        Console.WriteLine("Filter application complete.");
     }
     
     private async void OnDeleteButtonClicked(object sender, EventArgs e)
