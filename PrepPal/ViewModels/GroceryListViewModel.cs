@@ -91,6 +91,8 @@
 
         public void GroupItems()
         {
+            if (GroceryItems == null || !GroceryItems.Any()) return;
+            
             var grouped = GroceryItems
                 .GroupBy(g => g.Aisle)
                 .Select(g => new Grouping<string, GroceryItem>(g.Key, g.ToList()))
@@ -130,6 +132,11 @@
         private void AddGroceriesToFridge()
         {
             var boughtItems = GroceryItems.Where(item => item.IsBought).ToList();
+            
+            if (boughtItems.Count == 0)
+            {
+                return;
+            }
 
             foreach (var item in boughtItems)
             {
@@ -158,15 +165,23 @@
                 GroceryItems.Remove(item);
             }
             
-            _fridgeListViewModel.GroupItems();
-            
             GroupItems();
+            _fridgeListViewModel.GroupItems();
             
             OnPropertyChanged(nameof(GroceryItems));
             OnPropertyChanged(nameof(GroupedGroceryItems));
             
             _fridgeListViewModel.OnPropertyChanged(nameof(_fridgeListViewModel.FridgeItems));
             _fridgeListViewModel.OnPropertyChanged(nameof(_fridgeListViewModel.GroupedFridgeItems));
+            
+            if (GroceryItems.Count == 0)
+            {
+                GroupedGroceryItems = null;
+                OnPropertyChanged(nameof(GroupedGroceryItems));
+                
+                GroupedGroceryItems = new ObservableCollection<Grouping<string, GroceryItem>>();
+                OnPropertyChanged(nameof(GroupedGroceryItems));
+            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

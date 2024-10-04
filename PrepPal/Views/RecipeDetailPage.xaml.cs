@@ -51,19 +51,19 @@ public partial class RecipeDetailPage : ContentPage
             {
                 var newItem = new GroceryItem 
                 { 
-                    Name = ingredient.IngredientName, 
+                    Name = $"{ingredient.Quantity} {ingredient.Unit}, {ingredient.IngredientName}", 
                     Aisle = ingredient.Aisle ?? "Other", 
-                    StorageLocation = ingredient.StorageLocation ?? "Pantry", 
+                    StorageLocation = ingredient.StorageLocation ?? "Other", 
                     IsBought = false 
                 };
-                
-                Console.WriteLine($"Adding ingredient: {newItem.Name}, Aisle: {newItem.Aisle}, Storage: {newItem.StorageLocation}");
 
-                _groceryListViewModel.GroupItems();
-                
-                await DisplayAlert("Success", "Ingredients added to your grocery list.", "OK");
+                _groceryListViewModel.GroceryItems.Add(newItem);
             }
         }
+        _groceryListViewModel.GroupItems();
+        _groceryListViewModel.OnPropertyChanged(nameof(_groceryListViewModel.GroceryItems));
+        
+        await DisplayAlert("Success", "Ingredients added to your grocery list.", "OK");
     }
 
     private void OnFavoriteClicked(object sender, EventArgs e)
