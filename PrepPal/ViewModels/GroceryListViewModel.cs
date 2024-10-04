@@ -147,7 +147,7 @@
                 {
                     var newFridgeItem = new FridgeItem
                     {
-                        Name = item.Name,
+                        Name = item.Name.Split(' ')[2],
                         LastBoughtDate = DateTime.Now,
                         IsUsed = false,
                         StorageLocation = item.StorageLocation

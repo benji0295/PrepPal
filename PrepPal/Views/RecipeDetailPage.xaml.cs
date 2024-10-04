@@ -51,7 +51,7 @@ public partial class RecipeDetailPage : ContentPage
             {
                 var newItem = new GroceryItem 
                 { 
-                    Name = $"{ingredient.Quantity} {ingredient.Unit}, {ingredient.IngredientName}", 
+                    Name = $"{ingredient.Quantity} {ingredient.Unit} {ingredient.IngredientName}",
                     Aisle = ingredient.Aisle ?? "Other", 
                     StorageLocation = ingredient.StorageLocation ?? "Other", 
                     IsBought = false 
