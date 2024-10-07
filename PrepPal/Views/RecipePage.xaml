@@ -28,26 +28,27 @@
                     <Frame BorderColor="Black"
                            BackgroundColor="#F9F6EE"
                            CornerRadius="15"
-                           Padding="1"
-                           Margin="1"
+                           Padding="0"
+                           Margin="0"
                            HasShadow="False"
                            HeightRequest="225"
                            WidthRequest="150" 
                            HorizontalOptions="Center"
-                           VerticalOptions="Center">
+                           VerticalOptions="Start">
                         <StackLayout HorizontalOptions="Center" 
                                      VerticalOptions="Start"
-                                     Spacing="10">
-                            <Frame Padding="0" HasShadow="False" BorderColor="Transparent" CornerRadius="15">
+                                     Spacing="5">
+                            <Frame Padding="5" HasShadow="False" BorderColor="Transparent" CornerRadius="15">
                                 <Image Source="{Binding ImageURL}" 
                                        WidthRequest="150" 
                                        HeightRequest="100" 
                                        Aspect="AspectFill"/>
                             </Frame>
                             <Label Text="{Binding Name}" 
-                                   FontSize="Medium" 
+                                   FontSize="Small"
                                    FontAttributes="Bold" 
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
                             <Label Text="{Binding Category}" 
                                    FontSize="Small" 
                                    HorizontalOptions="Center" />
