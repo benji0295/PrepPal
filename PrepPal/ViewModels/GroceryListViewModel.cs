@@ -132,7 +132,7 @@
         private void AddGroceriesToFridge()
         {
             var boughtItems = GroceryItems.Where(item => item.IsBought).ToList();
-            
+
             if (boughtItems.Count == 0)
             {
                 return;
@@ -145,25 +145,14 @@
 
                 if (fridgeItem == null)
                 {
-                    string fridgeItemName;
+                    var mainIngredientName = ExtractMainIngredient(item.Name);
 
-                    var nameParts = item.Name.Split(' ');
-                    
-                    if (nameParts.Length > 0 && char.IsDigit(nameParts[0][0]))
-                    {
-                        fridgeItemName = string.Join(' ', nameParts.Skip(2));
-                    }
-                    else
-                    {
-                        fridgeItemName = item.Name;
-                    }
-                    
                     var newFridgeItem = new FridgeItem
                     {
-                        Name = fridgeItemName,
+                        Name = mainIngredientName,
                         LastBoughtDate = DateTime.Now,
                         IsUsed = false,
-                        StorageLocation = item.StorageLocation
+                        StorageLocation = item.StorageLocation ?? "Other"
                     };
                     _fridgeListViewModel.FridgeItems.Add(newFridgeItem);
                 }
@@ -172,30 +161,65 @@
                     fridgeItem.LastBoughtDate = DateTime.Now;
                 }
             }
-            
+
             foreach (var item in boughtItems)
             {
                 GroceryItems.Remove(item);
             }
-            
+
             GroupItems();
             _fridgeListViewModel.GroupItems();
-            
+
             OnPropertyChanged(nameof(GroceryItems));
             OnPropertyChanged(nameof(GroupedGroceryItems));
-            
+
             _fridgeListViewModel.OnPropertyChanged(nameof(_fridgeListViewModel.FridgeItems));
             _fridgeListViewModel.OnPropertyChanged(nameof(_fridgeListViewModel.GroupedFridgeItems));
-            
-            if (GroceryItems.Count == 0)
-            {
-                GroupedGroceryItems = null;
-                OnPropertyChanged(nameof(GroupedGroceryItems));
-                
-                GroupedGroceryItems = new ObservableCollection<Grouping<string, GroceryItem>>();
-                OnPropertyChanged(nameof(GroupedGroceryItems));
-            }
         }
+
+        private string ExtractMainIngredient(string fullIngredient)
+        {
+            var descriptors = new List<string> { "to taste", "for garnish" };
+            
+            foreach (var descriptor in descriptors)
+            {
+                if (fullIngredient.Contains(descriptor))
+                {
+                    fullIngredient = fullIngredient.Replace(descriptor, "").Trim();
+                }
+            }
+            
+            var parts = fullIngredient.Split(' ');
+            
+            var startIndex = 0;
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (!IsNumeric(parts[i]) && !IsCommonUnit(parts[i]))
+                {
+                    startIndex = i;
+                    break;
+                }
+            }
+            
+            var mainIngredient = string.Join(" ", parts.Skip(startIndex));
+            
+            return mainIngredient.Contains(",") 
+                ? mainIngredient.Split(',')[0].Trim() 
+                : mainIngredient;
+        }
+
+        private bool IsNumeric(string value)
+        {
+            return decimal.TryParse(value, out _);
+        }
+
+        private bool IsCommonUnit(string value)
+        {
+            var units = new List<string> { "cup", "cups", "tsp", "tbsp", "oz", "g", "lb", "pound", "head" ,"teaspoon", "tablespoon", "ml", "liters", "grams", "kilogram", "kg", "pcs", "cloves" };
+            return units.Contains(value.ToLower());
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
