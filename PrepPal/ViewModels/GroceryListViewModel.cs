@@ -145,9 +145,22 @@
 
                 if (fridgeItem == null)
                 {
+                    string fridgeItemName;
+
+                    var nameParts = item.Name.Split(' ');
+                    
+                    if (nameParts.Length > 0 && char.IsDigit(nameParts[0][0]))
+                    {
+                        fridgeItemName = string.Join(' ', nameParts.Skip(2));
+                    }
+                    else
+                    {
+                        fridgeItemName = item.Name;
+                    }
+                    
                     var newFridgeItem = new FridgeItem
                     {
-                        Name = item.Name.Split(' ')[2],
+                        Name = fridgeItemName,
                         LastBoughtDate = DateTime.Now,
                         IsUsed = false,
                         StorageLocation = item.StorageLocation
