@@ -38,6 +38,29 @@
                     </OnIdiom>
                 </Image.WidthRequest>
             </Image>
+            
+            <!-- Recipe Source and URL combined on the same line -->
+            <HorizontalStackLayout Padding="0,10,0,5" Spacing="5" VerticalOptions="Center">
+                <Label FontSize="Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Source: " FontAttributes="Bold"/>
+                            <Span Text="{Binding Source}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <!-- Recipe Source URL -->
+                <Label Text="{Binding ShortenedSourceUrl}" 
+                       TextColor="Blue" 
+                       TextDecorations="Underline"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenSourceUrlCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+            
             <!-- Recipe Category -->
             <Label FontSize="Medium" Padding="0,10,0,5">
                 <Label.FormattedText>

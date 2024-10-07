@@ -20,6 +20,7 @@ global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Maui.Graphics;
 global using Microsoft.Maui.Storage;
+global using Microsoft.Maui.ApplicationModel;
 
 global using PrepPal.ViewModels;
 global using PrepPal.Models;

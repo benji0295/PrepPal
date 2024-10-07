@@ -35,6 +35,18 @@ namespace PrepPal.Models
         public List<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
         public List<Instruction> Instructions { get; set; } = new List<Instruction>();
         
+        public string ShortenedSourceUrl
+        {
+            get
+            {
+                if (Uri.TryCreate(SourceURL, UriKind.Absolute, out Uri uri))
+                {
+                    return uri.Host;
+                }
+                return string.Empty;
+            }
+        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

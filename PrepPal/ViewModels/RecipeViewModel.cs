@@ -37,6 +37,7 @@
         public ICommand SwitchToAllRecipesCommand { get; }
         public ICommand SwitchToFavoriteRecipesCommand { get; }
         public ICommand NavigateBackCommand { get; }
+        public ICommand OpenSourceUrlCommand { get; }
 
         public Recipe SelectedRecipe
         {
@@ -61,6 +62,7 @@
             SwitchToAllRecipesCommand = new Command(SwitchToAllRecipes);
             SwitchToFavoriteRecipesCommand = new Command(SwitchToFavoriteRecipes);
             NavigateBackCommand = new Command(NavigateBack);
+            OpenSourceUrlCommand = new Command(OpenSourceUrl);
 
             Recipes = new ObservableCollection<Recipe>();
             AllRecipes = new ObservableCollection<Recipe>();
@@ -404,6 +406,21 @@
             {
                 SelectedRecipe.Servings--;
                 OnPropertyChanged(nameof(SelectedRecipe));
+            }
+        }
+        private void OpenSourceUrl()
+        {
+            if (!string.IsNullOrEmpty(SelectedRecipe?.SourceURL))
+            {
+                try
+                {
+                    Uri uri = new Uri(SelectedRecipe.SourceURL);
+                    Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error opening URL: {ex.Message}");
+                }
             }
         }
 
