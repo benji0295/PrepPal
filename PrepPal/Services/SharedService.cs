@@ -44,11 +44,13 @@ namespace PrepPal.Services
         {
             foreach (var item in boughtItems)
             {
-                if (!FridgeItems.Any(i => i.Name == item.Name))
+                var mainIngredientName = ExtractMainIngredient(item.Name);
+                
+                if (!FridgeItems.Any(i => i.Name == mainIngredientName))
                 {
                     FridgeItems.Add(new FridgeItem
                     {
-                        Name = item.Name,
+                        Name = mainIngredientName,
                         LastBoughtDate = DateTime.Now,
                         IsUsed = false,
                         StorageLocation = item.StorageLocation
@@ -64,6 +66,48 @@ namespace PrepPal.Services
             
             OnFridgeItemsChanged?.Invoke();
             OnGroceryItemsChanged?.Invoke();
+        }
+        private string ExtractMainIngredient(string fullIngredient)
+        {
+            var descriptors = new List<string> { "to taste", "for garnish" };
+            
+            foreach (var descriptor in descriptors)
+            {
+                if (fullIngredient.Contains(descriptor))
+                {
+                    fullIngredient = fullIngredient.Replace(descriptor, "").Trim();
+                }
+            }
+            
+            var parts = fullIngredient.Split(' ');
+            
+            var startIndex = 0;
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (!IsNumeric(parts[i]) && !IsCommonUnit(parts[i]))
+                {
+                    startIndex = i;
+                    break;
+                }
+            }
+            
+            var mainIngredient = string.Join(" ", parts.Skip(startIndex));
+            
+            return mainIngredient.Contains(",") 
+                ? mainIngredient.Split(',')[0].Trim() 
+                : mainIngredient;
+        }
+
+        private bool IsNumeric(string value)
+        {
+            return decimal.TryParse(value, out _);
+        }
+
+        private bool IsCommonUnit(string value)
+        {
+            var units = new List<string> { "cup", "cups", "tsp", "tbsp", "oz", "g", "lb", "pound", "head" ,"teaspoon", "tablespoon", "ml", "liters", "grams", "kilogram", "kg", "pcs", "cloves" };
+            return units.Contains(value.ToLower());
         }
     }
 }
