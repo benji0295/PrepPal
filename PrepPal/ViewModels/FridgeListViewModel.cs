@@ -1,4 +1,6 @@
-﻿namespace PrepPal.ViewModels
+﻿using PrepPal.Services;
+
+namespace PrepPal.ViewModels
 {
     public enum FilterType
     {
@@ -8,20 +10,10 @@
     
     public class FridgeListViewModel : INotifyPropertyChanged
     {
-        private GroceryListViewModel _groceryListViewModel;
-        private ObservableCollection<FridgeItem> _fridgeItems;
+        private SharedService _sharedService;
+        
+        public ObservableCollection<FridgeItem> FridgeItems => _sharedService.FridgeItems;
         public ObservableCollection<Grouping<string, FridgeItem>> GroupedFridgeItems { get; set; }
-
-        public ObservableCollection<FridgeItem> FridgeItems
-        {
-            get => _fridgeItems;
-            set
-            {
-                _fridgeItems = value;
-                OnPropertyChanged(nameof(FridgeItems));
-                GroupItems();
-            }
-        }
 
         public FilterType CurrentFilter { get; set; } = FilterType.ByStorageLocation;
         public ICommand DeleteItemCommand { get; set; }
@@ -29,21 +21,56 @@
         public ICommand DeleteSelectedCommand { get; }
         public ICommand AddUsedToGroceryCommand { get; }
 
-        public FridgeListViewModel(GroceryListViewModel groceryListViewModel)
+        public FridgeListViewModel(SharedService sharedService)
         {
-            _groceryListViewModel = groceryListViewModel;
+            _sharedService = sharedService;
             
-            FridgeItems = new ObservableCollection<FridgeItem>()
+            _sharedService.OnFridgeItemsChanged += () =>
             {
-                new FridgeItem { Name = "Milk", LastBoughtDate = DateTime.Now.AddDays(-3), IsUsed = false, Aisle = "Dairy", StorageLocation = "Fridge"},
-                new FridgeItem { Name = "Eggs", LastBoughtDate = DateTime.Now.AddDays(-10), IsUsed = false, Aisle = "Dairy", StorageLocation = "Fridge"},
-                new FridgeItem { Name = "Apples", LastBoughtDate = DateTime.Now, IsUsed = false, Aisle = "Produce", StorageLocation = "Fridge"},
-                new FridgeItem { Name = "Ice Cream", LastBoughtDate = DateTime.Now.AddDays(-14), IsUsed = false, Aisle = "Frozen", StorageLocation = "Freezer"},
-                new FridgeItem { Name = "Ketchup", LastBoughtDate = DateTime.Now.AddDays(-20), IsUsed = false, Aisle = "Condiments", StorageLocation = "Fridge"},
-                new FridgeItem { Name = "Frozen Peas", LastBoughtDate = DateTime.Now.AddDays(-5), IsUsed = false, Aisle = "Frozen", StorageLocation = "Freezer"},
-                new FridgeItem { Name = "Spaghetti", LastBoughtDate = DateTime.Now.AddDays(-5), IsUsed = false, Aisle = "Pasta", StorageLocation = "Pantry"},
-                new FridgeItem { Name = "Peanut Butter", LastBoughtDate = DateTime.Now.AddDays(-37), IsUsed = false, Aisle = "Condiments", StorageLocation = "Pantry"},
+                OnPropertyChanged(nameof(FridgeItems));
+                GroupItems();
             };
+            
+            _sharedService.FridgeItems.Add(new FridgeItem
+            {
+                Name = "Milk", LastBoughtDate = DateTime.Now.AddDays(-3), IsUsed = false, Aisle = "Dairy",
+                StorageLocation = "Fridge"
+            });
+            _sharedService.FridgeItems.Add(new FridgeItem
+                {
+                    Name = "Eggs", LastBoughtDate = DateTime.Now.AddDays(-10), IsUsed = false, Aisle = "Dairy",
+                    StorageLocation = "Fridge"
+                });
+            _sharedService.FridgeItems.Add(new FridgeItem
+                {
+                    Name = "Apples", LastBoughtDate = DateTime.Now, IsUsed = false, Aisle = "Produce",
+                    StorageLocation = "Fridge"
+                });
+            _sharedService.FridgeItems.Add(new FridgeItem
+                {
+                    Name = "Ice Cream", LastBoughtDate = DateTime.Now.AddDays(-14), IsUsed = false, Aisle = "Frozen",
+                    StorageLocation = "Freezer"
+                });
+            _sharedService.FridgeItems.Add(new FridgeItem
+                {
+                    Name = "Ketchup", LastBoughtDate = DateTime.Now.AddDays(-20), IsUsed = false, Aisle = "Condiments",
+                    StorageLocation = "Fridge"
+                });
+            _sharedService.FridgeItems.Add(new FridgeItem
+                {
+                    Name = "Frozen Peas", LastBoughtDate = DateTime.Now.AddDays(-5), IsUsed = false, Aisle = "Frozen",
+                    StorageLocation = "Freezer"
+                });
+            _sharedService.FridgeItems.Add(new FridgeItem
+                {
+                    Name = "Spaghetti", LastBoughtDate = DateTime.Now.AddDays(-5), IsUsed = false, Aisle = "Pasta",
+                    StorageLocation = "Pantry"
+                });
+            _sharedService.FridgeItems.Add(new FridgeItem
+                {
+                    Name = "Peanut Butter", LastBoughtDate = DateTime.Now.AddDays(-37), IsUsed = false,
+                    Aisle = "Condiments", StorageLocation = "Pantry"
+                });
 
             DeleteItemCommand = new Command<FridgeItem>(DeleteItem);
             ClearListCommand = new Command(ClearList);
@@ -54,40 +81,19 @@
         }
         private void AddUsedItemsToGroceryList()
         {
-            if (FridgeItems == null || _groceryListViewModel?.GroceryItems == null)
-            {
-                return; 
-            }
-            
             var usedItems = FridgeItems.Where(item => item.IsUsed).ToList();
 
-            if (!usedItems.Any())
+            if (usedItems.Any())
             {
-                return;
+                _sharedService.AddUsedItemsToGroceryList(usedItems);
+                
+                // Group items again after removal
+                GroupItems();
+                
+                // Notify the UI of changes
+                OnPropertyChanged(nameof(FridgeItems));
+                OnPropertyChanged(nameof(GroupedFridgeItems));
             }
-
-            foreach (var item in usedItems)
-            {
-                if (!_groceryListViewModel.GroceryItems.Any(i => i.Name == item.Name))
-                {
-                    _groceryListViewModel.GroceryItems.Add(new GroceryItem
-                    {
-                        Name = item.Name,
-                        IsBought = false,
-                        Aisle = item.Aisle,
-                        StorageLocation = item.StorageLocation
-                    });
-                }
-                FridgeItems.Remove(item);
-            }
-            GroupItems();
-            _groceryListViewModel.GroupItems();
-            
-            _groceryListViewModel.OnPropertyChanged(nameof(_groceryListViewModel.GroceryItems));
-            _groceryListViewModel.OnPropertyChanged(nameof(_groceryListViewModel.GroupedGroceryItems));
-            
-            OnPropertyChanged(nameof(FridgeItems));
-            OnPropertyChanged(nameof(GroupedFridgeItems));
         }
 
 
