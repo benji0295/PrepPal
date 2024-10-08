@@ -8,6 +8,7 @@
     
     public class FridgeListViewModel : INotifyPropertyChanged
     {
+        private GroceryListViewModel _groceryListViewModel;
         private ObservableCollection<FridgeItem> _fridgeItems;
         public ObservableCollection<Grouping<string, FridgeItem>> GroupedFridgeItems { get; set; }
 
@@ -26,9 +27,12 @@
         public ICommand DeleteItemCommand { get; set; }
         public ICommand ClearListCommand { get; }
         public ICommand DeleteSelectedCommand { get; }
+        public ICommand AddUsedToGroceryCommand { get; }
 
-        public FridgeListViewModel()
+        public FridgeListViewModel(GroceryListViewModel groceryListViewModel)
         {
+            _groceryListViewModel = groceryListViewModel;
+            
             FridgeItems = new ObservableCollection<FridgeItem>()
             {
                 new FridgeItem { Name = "Milk", LastBoughtDate = DateTime.Now.AddDays(-3), IsUsed = false, Aisle = "Dairy", StorageLocation = "Fridge"},
@@ -44,8 +48,49 @@
             DeleteItemCommand = new Command<FridgeItem>(DeleteItem);
             ClearListCommand = new Command(ClearList);
             DeleteSelectedCommand = new Command(DeleteSelectedItems);
+            AddUsedToGroceryCommand = new Command(AddUsedItemsToGroceryList);
+            
             GroupItems();
         }
+        private void AddUsedItemsToGroceryList()
+        {
+            if (FridgeItems == null || _groceryListViewModel?.GroceryItems == null)
+            {
+                return; 
+            }
+            
+            var usedItems = FridgeItems.Where(item => item.IsUsed).ToList();
+
+            if (!usedItems.Any())
+            {
+                return;
+            }
+
+            foreach (var item in usedItems)
+            {
+                if (!_groceryListViewModel.GroceryItems.Any(i => i.Name == item.Name))
+                {
+                    _groceryListViewModel.GroceryItems.Add(new GroceryItem
+                    {
+                        Name = item.Name,
+                        IsBought = false,
+                        Aisle = item.Aisle,
+                        StorageLocation = item.StorageLocation
+                    });
+                }
+                FridgeItems.Remove(item);
+            }
+            GroupItems();
+            _groceryListViewModel.GroupItems();
+            
+            _groceryListViewModel.OnPropertyChanged(nameof(_groceryListViewModel.GroceryItems));
+            _groceryListViewModel.OnPropertyChanged(nameof(_groceryListViewModel.GroupedGroceryItems));
+            
+            OnPropertyChanged(nameof(FridgeItems));
+            OnPropertyChanged(nameof(GroupedFridgeItems));
+        }
+
+
 
         public void ApplyFilter()
         {

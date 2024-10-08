@@ -27,3 +27,5 @@ global using PrepPal.Models;
 global using PrepPal.Views;
 global using PrepPal.Data;
 global using PrepPal.Data.CompiledModels;
+
+global using Npgsql;

@@ -86,7 +86,8 @@
                     BackgroundColor="Black"
                     TextColor="White"
                     HorizontalOptions="Center"
-                    Margin="10,20,10,10" />
+                    Margin="10,20,10,10"
+                    Command="{Binding AddUsedToGroceryCommand}" />
             
         </VerticalStackLayout>
     </ScrollView>

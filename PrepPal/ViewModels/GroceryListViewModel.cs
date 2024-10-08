@@ -5,7 +5,7 @@
         public ObservableCollection<Grouping<string, GroceryItem>> GroupedGroceryItems { get; set; }
 
         private ObservableCollection<GroceryItem> _groceryItems;
-        private readonly FridgeListViewModel _fridgeListViewModel;
+        private FridgeListViewModel _fridgeListViewModel;
         public ICommand DeleteItemCommand { get; set; }
         public ICommand AddToFridgeCommand { get; }
         public ICommand ClearListCommand { get; }
@@ -46,6 +46,10 @@
             DeleteSelectedCommand = new Command(DeleteSelectedItems);
 
             GroupItems();
+        }
+        public void SetFridgeListViewModel(FridgeListViewModel fridgeListViewModel)
+        {
+            _fridgeListViewModel = fridgeListViewModel;
         }
 
         public void AddItemToGroceryList(string itemName)

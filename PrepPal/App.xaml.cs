@@ -24,7 +24,8 @@ namespace PrepPal
                 Console.WriteLine($"Error during initialization: {ex.Message}");
             }
             
-            FridgeListViewModel = new FridgeListViewModel();
+            GroceryListViewModel = new GroceryListViewModel(null);
+            FridgeListViewModel = new FridgeListViewModel(GroceryListViewModel);
             GroceryListViewModel = new GroceryListViewModel(FridgeListViewModel);
             FavoriteRecipesViewModel = new FavoriteRecipesViewModel();
             
