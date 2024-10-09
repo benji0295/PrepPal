@@ -371,7 +371,6 @@
         private void SwitchToAllRecipes()
         {
             IsAllRecipesSelected = true;
-            
             ApplyFilter();
         }
 
