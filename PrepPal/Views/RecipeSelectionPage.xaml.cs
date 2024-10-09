@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using PrepPal.Data;
-using PrepPal.Models;
-using PrepPal.ViewModels;
-
 namespace PrepPal.Views;
 
 [QueryProperty(nameof(Day), "day")]

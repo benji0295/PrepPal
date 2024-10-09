@@ -48,16 +48,19 @@
                            Padding="5"
                            Margin="5"
                            HasShadow="False"
-                           HeightRequest="200"
+                           HeightRequest="225"
                            WidthRequest="150">
                         <StackLayout>
                             <Image Source="{Binding ImageURL}" 
-                                   WidthRequest="150" 
-                                   HeightRequest="100"
+                                   WidthRequest="175" 
+                                   HeightRequest="100" 
                                    Aspect="AspectFill" />
                             <Label Text="{Binding Name}" 
                                    FontSize="Medium" 
-                                   FontAttributes="Bold" 
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   VerticalOptions="Center"
                                    HorizontalOptions="Center" />
                             <Label Text="{Binding Category}" 
                                    FontSize="Small" 

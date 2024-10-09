@@ -322,21 +322,6 @@
                     Recipes.Add(recipe);
                     AllRecipes.Add(recipe);
                 }
-
-                var databaseRecipes = await _dbContext.Recipes
-                    .Include(r => r.RecipeIngredients)
-                    .Include(r => r.Instructions)
-                    .ToListAsync();
-                
-                Console.WriteLine($"Database recipes count: {databaseRecipes.Count}");
-
-                foreach (var recipe in databaseRecipes)
-                {
-                    Console.WriteLine($"Recipe: {recipe.Name}");
-                    Recipes.Add(recipe);
-                    AllRecipes.Add(recipe);
-                }
-                
                 ApplyFilter();
             }
             catch (Exception ex)
@@ -358,7 +343,7 @@
             }
             else
             {
-                foreach (var recipe in AllRecipes.Where(r => r.IsFavorite))
+                foreach (var recipe in Recipes.Where(r => r.IsFavorite))
                 {
                     FilteredRecipes.Add(recipe);
                 }
@@ -376,8 +361,11 @@
             if (recipe != null)
             {
                 recipe.IsFavorite = !recipe.IsFavorite;
-                OnPropertyChanged(nameof(Recipes));
+                
                 ApplyFilter();
+                
+                OnPropertyChanged(nameof(Recipes));
+                OnPropertyChanged(nameof(FavoriteRecipes));
             }
         }
         private void SwitchToAllRecipes()

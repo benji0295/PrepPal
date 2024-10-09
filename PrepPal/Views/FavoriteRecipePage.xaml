@@ -42,7 +42,9 @@
                                 <Label Text="{Binding Name}" 
                                        FontSize="Medium" 
                                        FontAttributes="Bold" 
-                                       HorizontalOptions="Center" />
+                                       HorizontalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
                                 <Label Text="{Binding Category}" 
                                        FontSize="Small" 
                                        HorizontalOptions="Center" />
