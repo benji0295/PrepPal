@@ -1,6 +1,3 @@
-using PrepPal.Views;
-using Microsoft.Maui.Controls;
-
 namespace PrepPal.Views;
 
 [QueryProperty(nameof(RecipeName), "recipe")]
@@ -29,7 +26,7 @@ public partial class MealPlanPage : ContentPage
 			ClearRecipeSelection();
 		}
 	}
-	
+
 	
 	private async void OnAddMealClicked(object sender, EventArgs e)
 	{
@@ -54,6 +51,13 @@ public partial class MealPlanPage : ContentPage
 	{
 		try
 		{
+			var targetStack = GetDayStack(day);
+			
+			if (targetStack != null && targetStack.Children.Any(c => ((Label)((HorizontalStackLayout)((SwipeView)c).Content).Children[1]).Text == recipeName))
+			{
+				return; 
+			}
+			
 			var swipeView = new SwipeView
 			{
 				HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -108,33 +112,7 @@ public partial class MealPlanPage : ContentPage
 
 			swipeView.Content = contentLayout;
 
-			switch (day)
-			{
-				case "Monday":
-					MondayStack?.Children.Add(swipeView);
-					break;
-				case "Tuesday":
-					TuesdayStack?.Children.Add(swipeView);
-					break;
-				case "Wednesday":
-					WednesdayStack?.Children.Add(swipeView);
-					break;
-				case "Thursday":
-					ThursdayStack?.Children.Add(swipeView);
-					break;
-				case "Friday":
-					FridayStack?.Children.Add(swipeView);
-					break;
-				case "Saturday":
-					SaturdayStack?.Children.Add(swipeView);
-					break;
-				case "Sunday":
-					SundayStack?.Children.Add(swipeView);
-					break;
-				default:
-					Console.WriteLine("Unknown day selected.");
-					break;
-			}
+			targetStack?.Children.Add(swipeView);
 		}
 		catch (Exception ex)
 		{
@@ -142,6 +120,21 @@ public partial class MealPlanPage : ContentPage
 			DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
 		}
 	}
+	private VerticalStackLayout GetDayStack(string day)
+	{
+		return day switch
+		{
+			"Monday" => MondayStack,
+			"Tuesday" => TuesdayStack,
+			"Wednesday" => WednesdayStack,
+			"Thursday" => ThursdayStack,
+			"Friday" => FridayStack,
+			"Saturday" => SaturdayStack,
+			"Sunday" => SundayStack,
+			_ => null,
+		};
+	}
+	
 	private void RemoveRecipeFromMealPlan(View recipeView, string day)
 	{
 		switch (day)
