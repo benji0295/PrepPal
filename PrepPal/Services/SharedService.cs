@@ -18,6 +18,8 @@ namespace PrepPal.Services
         {
             foreach (var item in usedItems)
             {
+                item.IsUsed = false;
+                
                 if (!GroceryItems.Any(i => i.Name == item.Name))
                 {
                     GroceryItems.Add(new GroceryItem
@@ -44,6 +46,8 @@ namespace PrepPal.Services
         {
             foreach (var item in boughtItems)
             {
+                item.IsBought = false;
+                
                 var mainIngredientName = ExtractMainIngredient(item.Name);
                 
                 if (!FridgeItems.Any(i => i.Name == mainIngredientName))
