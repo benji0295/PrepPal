@@ -1,22 +1,18 @@
+using PrepPal.Repositories;
+
 namespace PrepPal.Views;
 
 [QueryProperty(nameof(Day), "day")]
 public partial class RecipeSelectionPage : ContentPage
 {
     public string Day { get; set; }
-    private readonly PrepPalDbContext _dbContext;
+    private RecipeRepository _recipeRepository;
 
     public RecipeSelectionPage()
     {
         InitializeComponent();
-
-        var options = new DbContextOptionsBuilder<PrepPalDbContext>()
-            .UseNpgsql("DataSource=app.db")
-            .Options;
-
-        _dbContext = new PrepPalDbContext(options);
         
-        BindingContext = new RecipeViewModel(_dbContext);
+        BindingContext = new RecipeViewModel(_recipeRepository);
     }
     protected override void OnAppearing()
     {
@@ -32,11 +28,11 @@ public partial class RecipeSelectionPage : ContentPage
         recipeCollectionView.SelectedItem = null;
     }
     
-    public RecipeSelectionPage(PrepPalDbContext dbContext)
+    public RecipeSelectionPage(RecipeRepository recipeRepository)
     {
         InitializeComponent();
-        _dbContext = dbContext;
-        BindingContext = new RecipeViewModel(_dbContext);
+        _recipeRepository = recipeRepository;
+        BindingContext = new RecipeViewModel(recipeRepository);
     }
 
     private async void OnRecipeSelected(object sender, SelectionChangedEventArgs e)

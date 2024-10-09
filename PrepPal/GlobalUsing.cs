@@ -21,6 +21,7 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Maui.Graphics;
 global using Microsoft.Maui.Storage;
 global using Microsoft.Maui.ApplicationModel;
+global using Microsoft.Extensions.Configuration;
 
 global using PrepPal.ViewModels;
 global using PrepPal.Models;
@@ -28,5 +29,6 @@ global using PrepPal.Views;
 global using PrepPal.Data;
 global using PrepPal.Data.CompiledModels;
 global using PrepPal.Services;
+global using PrepPal.Repositories;
 
 global using Npgsql;

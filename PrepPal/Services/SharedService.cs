@@ -2,16 +2,42 @@ namespace PrepPal.Services
 {
     public class SharedService
     {
+        private readonly RecipeRepository _recipeRepository;
+        
         public ObservableCollection<GroceryItem> GroceryItems { get; set; }
         public ObservableCollection<FridgeItem> FridgeItems { get; set; }
         
         public event Action OnFridgeItemsChanged;
         public event Action OnGroceryItemsChanged;
 
-        public SharedService()
+        public SharedService(RecipeRepository recipeRepository)
         {
+            _recipeRepository = recipeRepository;
+            
             GroceryItems = new ObservableCollection<GroceryItem>();
             FridgeItems = new ObservableCollection<FridgeItem>();
+            
+            LoadFridgeItems();
+            LoadGroceryItems();
+        }
+        private async void LoadFridgeItems()
+        {
+            var fridgeItems = await _recipeRepository.GetFridgeItemsAsync();
+            foreach (var item in fridgeItems)
+            {
+                FridgeItems.Add(item);
+            }
+            OnFridgeItemsChanged?.Invoke();
+        }
+
+        private async void LoadGroceryItems()
+        {
+            var groceryItems = await _recipeRepository.GetGroceryItemsAsync();
+            foreach (var item in groceryItems)
+            {
+                GroceryItems.Add(item);
+            }
+            OnGroceryItemsChanged?.Invoke();
         }
 
         public void AddUsedItemsToGroceryList(List<FridgeItem> usedItems)

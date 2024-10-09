@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace PrepPal.Models
 {
     public class FridgeItem : INotifyPropertyChanged
     {
+        [Key]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string StorageLocation { get; set; }
         public string Aisle { get; set; }

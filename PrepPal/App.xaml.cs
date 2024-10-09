@@ -5,16 +5,16 @@
         public static GroceryListViewModel GroceryListViewModel { get; private set; }
         public static FridgeListViewModel FridgeListViewModel { get; private set; }
         public static FavoriteRecipesViewModel FavoriteRecipesViewModel { get; private set; }
-        private static SharedService _sharedService;
+        public static IServiceProvider Services { get; private set; }
         
-        private static NpgsqlConnection _connection;
         public App()
         {
             InitializeComponent();
 
             try
             {
-                InitializeDatabaseConnection();
+                Services = MauiProgram.CreateMauiApp().Services;
+             
             }
             catch (Exception ex)
             {
@@ -22,32 +22,19 @@
                 Console.WriteLine($"Error during initialization: {ex.Message}");
             }
             
-            _sharedService = new SharedService();
+            var recipePage = App.Services.GetRequiredService<RecipePage>();
+            Routing.RegisterRoute(nameof(RecipePage), typeof(RecipePage));
             
-            FridgeListViewModel = new FridgeListViewModel(_sharedService);
-            GroceryListViewModel = new GroceryListViewModel(_sharedService);
-            FavoriteRecipesViewModel = new FavoriteRecipesViewModel();
-            
-            MainPage = new AppShell();
-        }
-        private void InitializeDatabaseConnection()
-        {
-            string connectionString = "Host=localhost;Database=preppaldb;Username=bensmith;Password=bensmith";
-            _connection = new NpgsqlConnection(connectionString);
-            try
-            {
-                _connection.Open();
-                Console.WriteLine("Database connection established.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error connecting to the database: {ex.Message}");
-            }
-        }
+            var groceryListViewModel = Services.GetService<GroceryListViewModel>();
+            var fridgeListViewModel = Services.GetService<FridgeListViewModel>();
+            var favoriteRecipesViewModel = Services.GetService<FavoriteRecipesViewModel>();
 
-        public static NpgsqlConnection GetDatabaseConnection()
+            
+            MainPage = Services.GetService<AppShell>();
+        }
+        public static T GetViewModel<T>() where T : class
         {
-            return _connection;
+            return Services.GetService<T>();
         }
     }
 }

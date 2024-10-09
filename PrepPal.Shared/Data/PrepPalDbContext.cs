@@ -14,6 +14,8 @@ public class PrepPalDbContext : DbContext
     public DbSet<StorageLocation> StorageLocations { get; set; }
     public DbSet<UnitOfMeasure> UnitsOfMeasure { get; set; }
     public DbSet<RecipeCategory> RecipeCategories { get; set; }
+    public DbSet<FridgeItem> FridgeItems { get; set; }
+    public DbSet<GroceryItem> GroceryItems { get; set; }
 
     public PrepPalDbContext(DbContextOptions<PrepPalDbContext> options) : base(options)
     {
@@ -21,8 +23,5 @@ public class PrepPalDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PrepPalDbContext).Assembly);
-
     }
 }

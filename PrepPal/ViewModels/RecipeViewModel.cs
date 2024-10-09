@@ -3,7 +3,7 @@
     public class RecipeViewModel : INotifyPropertyChanged
     {
         private Recipe _selectedRecipe;
-        private readonly PrepPalDbContext _dbContext;
+        private RecipeRepository _recipeRepository;
         private bool _isAllRecipesSelected = true;
         
         // Observable collections for the RecipeSelectionPage
@@ -52,9 +52,9 @@
                 }
             }
         }
-        public RecipeViewModel(PrepPalDbContext dbContext)
+        public RecipeViewModel(RecipeRepository recipeRepository)
         {
-            _dbContext = dbContext;
+            _recipeRepository = recipeRepository ?? throw new ArgumentNullException(nameof(recipeRepository), "RecipeRepository cannot be null.");
             
             ToggleFavoriteCommand = new Command<Recipe>(ToggleFavorite);
             IncreaseServingsCommand = new Command(IncreaseServings);
@@ -68,7 +68,8 @@
             AllRecipes = new ObservableCollection<Recipe>();
             FilteredRecipes = new ObservableCollection<Recipe>();
             
-            LoadRecipes();
+            LoadRecipesAsync();
+            //LoadRecipes();
         }
 
         private async void LoadRecipes()
@@ -329,7 +330,32 @@
                 Console.WriteLine($"Error loading recipes: {ex.Message}");
             }
         }
-        
+        private async void LoadRecipesAsync()
+        {
+            try
+            {
+                if (_recipeRepository == null)
+                {
+                    Console.WriteLine("Error: _recipeRepository is null.");
+                    return;
+                }
+                
+                var recipes = await _recipeRepository.GetAllRecipesAsync();
+                
+                if (recipes == null || !recipes.Any())
+                {
+                    Console.WriteLine("Error: No recipes loaded from the database.");
+                    return;
+                }
+                
+                Recipes = new ObservableCollection<Recipe>(recipes);
+                OnPropertyChanged(nameof(Recipes));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading recipes: {ex.Message}");
+            }
+        }
         private void ApplyFilter()
         {
             FilteredRecipes.Clear();
@@ -350,7 +376,6 @@
             }
             OnPropertyChanged(nameof(FilteredRecipes));
         }
-
         public void UpdatedFilteredRecipes()
         {
             ApplyFilter();
@@ -361,6 +386,7 @@
             if (recipe != null)
             {
                 recipe.IsFavorite = !recipe.IsFavorite;
+                _recipeRepository.UpdateRecipeAsync(recipe);
                 
                 ApplyFilter();
                 

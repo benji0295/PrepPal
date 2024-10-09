@@ -20,14 +20,16 @@ namespace PrepPal
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             
-            var connectionString = "Host=localhost;Database=preppaldb;Username=bensmith;Password=bensmith";
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+            
+            var connectionString = config.GetConnectionString("DefaultConnection");
 
             builder.Services.AddDbContext<PrepPalDbContext>(options =>
-            {
-                // Register the context with the PostgreSQL provider and the shared model
                 options.UseNpgsql(connectionString)
-                    .UseModel(PrepPalDbContextModel.Instance);
-            });
+                    .UseModel(PrepPalDbContextModel.Instance)
+                    .LogTo(Console.WriteLine, LogLevel.Information));
             
             // Add other ViewModels and services
             builder.Services.AddTransient<RecipeViewModel>();
@@ -43,6 +45,9 @@ namespace PrepPal
             builder.Services.AddTransient<FavoriteRecipePage>();
             builder.Services.AddTransient<GroceryListPage>();
             builder.Services.AddTransient<FridgeListPage>();
+            builder.Services.AddSingleton<SharedService>();
+            
+            builder.Services.AddScoped<RecipeRepository>();
 
             // Register the AppShell
             builder.Services.AddSingleton<AppShell>();

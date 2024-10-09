@@ -6,25 +6,24 @@ namespace PrepPal.ViewModels;
 
 public class FavoriteRecipesViewModel : INotifyPropertyChanged
 {
-    private static FavoriteRecipesViewModel _instance;
-
-    public static FavoriteRecipesViewModel Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new FavoriteRecipesViewModel();
-            }
-
-            return _instance;
-        }
-    }
+    private readonly RecipeRepository _recipeRepository;
+    
     public ObservableCollection<Recipe> FavoriteRecipes { get; set; }
 
-    public FavoriteRecipesViewModel()
+    public FavoriteRecipesViewModel(RecipeRepository recipeRepository)
     {
+        _recipeRepository = recipeRepository;
         FavoriteRecipes = new ObservableCollection<Recipe>();
+        LoadFavoriteRecipesAsync();
+    }
+    private async void LoadFavoriteRecipesAsync()
+    {
+        var recipes = await _recipeRepository.GetFavoriteRecipesAsync();
+        foreach (var recipe in recipes)
+        {
+            FavoriteRecipes.Add(recipe);
+        }
+        OnPropertyChanged(nameof(FavoriteRecipes));
     }
     public void AddToFavorites(Recipe recipe)
     {

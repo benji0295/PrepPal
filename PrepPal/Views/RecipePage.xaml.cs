@@ -3,26 +3,20 @@ using PrepPal.Models;
 using PrepPal.Views;
 using PrepPal.Data;
 using Microsoft.EntityFrameworkCore;
+using PrepPal.Repositories;
 
 namespace PrepPal.Views;
 
 public partial class RecipePage : ContentPage
 {
 	private GroceryListViewModel _groceryListViewModel;
-	private RecipeViewModel _recipeViewModel;
+	private RecipeRepository _recipeRepository;
 	
-	public RecipePage()
+	public RecipePage(RecipeViewModel viewModel)
 	{
 		InitializeComponent();
-
-		// Use the same PostgreSQL configuration
-		var options = new DbContextOptionsBuilder<PrepPalDbContext>()
-			.UseNpgsql("Host=localhost;Database=preppaldb;Username=bensmith;Password=bensmith")
-			.Options;
-
-		var dbContext = new PrepPalDbContext(options);
 		
-		BindingContext = new RecipeViewModel(dbContext); 
+		BindingContext = viewModel; 
 	}
     private async void OnRecipeSelected(object sender, SelectionChangedEventArgs e)
     {
