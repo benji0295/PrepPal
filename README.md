@@ -2,10 +2,7 @@ PrepPal App Documentation
 
 Overview
 
-PrepPal is a .NET MAUI-based application designed to help users track their recipes, create a meal plan, manage grocery lists, and monitor fridge items. 
-The app uses a MVVM (Model-View-ViewModel) architecture to separate concerns between the user interface and the business logic. 
-Users can add, view, and delete recipes, add ingredients to their grocery list, and mark fridge items as used. 
-The app utilizes ObservableCollection to automatically notify and update the UI when data changes.
+PrepPal is a meal planning and grocery tracking application built using .NET MAUI with an MVVM architecture. The app allows users to manage recipes, create meal plans, track fridge items, and organize grocery lists. PrepPal is connected to a PostgreSQL database using Entity Framework Core.
 
 Features
 
